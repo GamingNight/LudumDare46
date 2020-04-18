@@ -24,6 +24,8 @@ public class GameManager : MonoBehaviour {
     public RoudState roudState;
     public GameObject organContainer;
 
+    public MenuNavig MenuNavig;
+
     void Awake() {
         if (INSTANCE == null) {
             INSTANCE = this;
@@ -66,7 +68,7 @@ public class GameManager : MonoBehaviour {
         Debug.Log( dataSave + " - " + power + " = " + ResourcesD.count);
         if (!res) {
             // TODO
-            Debug.Log("END OF THE GAME");
+            MenuNavig.endMenu();
         }
     }
 
