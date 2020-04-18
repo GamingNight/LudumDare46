@@ -17,17 +17,23 @@ public class LineDrawer : MonoBehaviour
     }
 
 
-    void OnTriggerEnter(Collider other)
+    void OnTriggerStay(Collider other)
     {
 
         if (other.gameObject.tag == "Organ")
         {
-            Debug.Log("Triggé");
+            lineRend.enabled = true;
+            lineRend.startColor = Color.black;
+            lineRend.endColor = Color.black;
             lineRend.SetPosition(0, transform.position);
             lineRend.SetPosition(1, other.gameObject.transform.position);
-        } else {
-
         }
+    }
 
+    void OnTriggerExit(Collider other) {
+
+        if(other.gameObject.tag == "Organ") {
+            lineRend.enabled = false;
+        }
     }
 }
