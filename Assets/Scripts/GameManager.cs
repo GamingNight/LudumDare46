@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour {
     public int roundCount;
     public GameObject organContainer;
 
-    public MenuNavig MenuNavig;
+    public MenuNavig menuNavig;
 
     void Awake() {
         if (INSTANCE == null) {
@@ -39,26 +39,24 @@ public class GameManager : MonoBehaviour {
         Debug.Log(dataSave + " - " + power + " = " + ResourcesD.count);
         if (!res) {
             // TODO
-            MenuNavig.endMenu();
+            menuNavig.endMenu();
         }
     }
 
     public void LaunchPreparation() {
-
+        roundCount += 1;
     }
 
     public void LaunchReward() {
+        foreach (Organ org in organContainer.GetComponentsInChildren<Organ>()) {
 
+            org.OnReward();
+        }
     }
 
     public void GoToNextTurn() {
         LaunchAttack();
         LaunchReward();
-        foreach (Organ org in organContainer.GetComponentsInChildren<Organ>()) {
-
-            org.OnReward();
-        }
-        roundCount += 1;
         LaunchPreparation();
     }
 }
