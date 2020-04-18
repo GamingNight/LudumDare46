@@ -13,10 +13,12 @@ public class GameManager : MonoBehaviour {
         PREPARATION, ATTACK
     }
 
-    private Resources resourcesA = new Resources(0, Resources.ResourcesType.A);
-    private Resources resourcesB = new Resources(0, Resources.ResourcesType.B);
-    private Resources resourcesC = new Resources(0, Resources.ResourcesType.C);
-    private Resources resourcesD = new Resources(0, Resources.ResourcesType.D);
+    private Resources[] resources_list = new Resources[4];
+    private Resources ResourcesA = new Resources(0, Resources.ResourcesType.A);
+    private Resources ResourcesB = new Resources(0, Resources.ResourcesType.B);
+    private Resources ResourcesC = new Resources(0, Resources.ResourcesType.C);
+    private Resources ResourcesD = new Resources(0, Resources.ResourcesType.D);
+    private Attackers attackersD = new Attackers(Resources.ResourcesType.D);
     
     public int roundCount;
     public RoudState roudState;
@@ -30,30 +32,46 @@ public class GameManager : MonoBehaviour {
     void Start() {
         roundCount = 0;
         roudState = RoudState.PREPARATION;
+        // FakeSenarioTV();
     }
 
     public void SwitchState() {
-    	if (roudState == RoudState.PREPARATION) {
-    		roudState = RoudState.ATTACK;
-    		return;
-    	}
-    	roudState = RoudState.PREPARATION;
-    	roundCount += 1;
+        if (roudState == RoudState.PREPARATION) {
+            roudState = RoudState.ATTACK;
+            LaunchAtack();
+        }
+        else {
+            roudState = RoudState.PREPARATION;
+            roundCount += 1;
+            LaunchPreparation();
+        }
     }
 
-    public Resources GetResourcesA() {
-    	return resourcesA;
+    public void LaunchAtack()
+    {
+        int power = attackersD.GetPower(roundCount);
+
+        bool res = ResourcesD.Use(power);
+        if (!res) {
+            // TODO
+            Debug.Log("END OF THE GAME");
+        }
     }
 
-    public Resources GetResourcesB() {
-    	return resourcesB;
+    public void LaunchPreparation()
+    {
+    	// TODO update Resources
     }
 
-    public Resources GetResourcesC() {
-    	return resourcesC;
-    }
-
-    public Resources GetResourcesD() {
-    	return resourcesD;
+    public void FakeSenarioTV()
+    {
+		ResourcesD.count = 10;
+		while (true) {
+			SwitchState();
+            int res = ResourcesD.count;
+            if (roundCount > 100) {
+                return;
+            }
+		}
     }
 }
