@@ -1,18 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.UI;
 
-public class Organ : MonoBehaviour
-{
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+public class Organ : MonoBehaviour {
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public string organName;
+    public bool unlockedAtStart = true;
+    public Sprite hudImage;
+    public Sprite hudImageSelected;
 }

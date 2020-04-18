@@ -10,8 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 6460248508842597896}
   - component: {fileID: 6460248508842597897}
+  - component: {fileID: 7525060405282846836}
   m_Layer: 0
-  m_Name: Organ
+  m_Name: OrganZiziBleu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -71,7 +72,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 334011a680c4f7442b1236d432f987f6, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 0.37501884, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -81,3 +82,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &7525060405282846836
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6460248508842597902}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06f6a12155bd26d49abc7350900cbdbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  organName: Zizi Bleu
+  unlockedAtStart: 1
+  hudImage: {fileID: 21300000, guid: fb90f710b0ccd1040a1de0059c27c1ce, type: 3}
+  hudImageSelected: {fileID: 21300000, guid: 31411e25dc700414997a465309bc61a2, type: 3}
