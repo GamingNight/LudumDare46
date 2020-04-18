@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -72,8 +73,30 @@ public class OrganSettlementManager : MonoBehaviour {
             icon.GetComponent<OrganSettlementIcon>().deselected = organ.hudImage;
             icon.GetComponent<OrganSettlementIcon>().selected = organ.hudImageSelected;
             RectTransform rectTransform = (RectTransform)icon.transform;
-            rectTransform.position = new Vector3(mouseWorldPosition.x + Mathf.Cos(angle), mouseWorldPosition.y + Mathf.Sin(angle), 0);
+            rectTransform.position = new Vector3(mouseWorldPosition.x, mouseWorldPosition.y, 0);
+            rectTransform.localScale = new Vector2(0, 0);
+            StartCoroutine(GrowIconCoroutine(rectTransform, mouseWorldPosition, angle));
             iconMap.Add(icon.GetComponent<OrganSettlementIcon>(), organ);
+        }
+    }
+
+    private IEnumerator GrowIconCoroutine(RectTransform iconTransform, Vector3 mouseWorldPosition, float angle) {
+
+        float initX = mouseWorldPosition.x;
+        float initY = mouseWorldPosition.y;
+        float targetX = mouseWorldPosition.x + Mathf.Cos(angle);
+        float targetY = mouseWorldPosition.y + Mathf.Sin(angle);
+        float step = 0.05f;
+        float totalTime = 0.25f;
+        float currentTime = 0;
+        while (currentTime < totalTime) {
+            float xPos = Mathf.Lerp(initX, targetX, currentTime / totalTime);
+            float yPos = Mathf.Lerp(initY, targetY, currentTime / totalTime);
+            iconTransform.position = new Vector3(xPos, yPos, 0);
+            float scaleLerp = Mathf.Lerp(0, 1, currentTime / totalTime);
+            iconTransform.localScale = new Vector2(scaleLerp, scaleLerp);
+            yield return new WaitForSeconds(step);
+            currentTime += step;
         }
     }
 
