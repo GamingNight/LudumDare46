@@ -43,9 +43,7 @@ public class Organ : MonoBehaviour {
         }
     }
 
-    public void OnSwitchState() {
-        if ( GameManager.GetInstance().roudState == GameManager.RoudState.REWARD) {
-            // TODO Make reward according to the type
-        }
+    public void OnReward() {
+        // TODO Make reward according to the type
     }
 }
