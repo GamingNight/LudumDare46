@@ -44,6 +44,6 @@ public class Organ : MonoBehaviour {
     }
 
     public void OnReward() {
-        // TODO Make reward according to the type
+        GameManager.GetInstance().GetResources(resourcesType).Add(1);
     }
 }

@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour {
     private Resources ResourcesA = new Resources(0, Resources.ResourcesType.A);
     private Resources ResourcesB = new Resources(0, Resources.ResourcesType.B);
     private Resources ResourcesC = new Resources(0, Resources.ResourcesType.C);
-    private Resources ResourcesD = new Resources(0, Resources.ResourcesType.D);
+    private Resources ResourcesD = new Resources(100, Resources.ResourcesType.D);
     private Attackers attackersD = new Attackers(Resources.ResourcesType.D);
 
     public int roundCount;
@@ -36,9 +36,9 @@ public class GameManager : MonoBehaviour {
         int power = attackersD.GetPower(roundCount);
 
         bool res = ResourcesD.Use(power);
-        Debug.Log(dataSave + " - " + power + " = " + ResourcesD.count);
+        Debug.Log("A = " + ResourcesA.count + " B = " + ResourcesB.count +" C = " + ResourcesC.count +" D = " + dataSave + " - " + power + " = " + ResourcesD.count);
+
         if (!res) {
-            // TODO
             menuNavig.endMenu();
         }
     }
@@ -49,7 +49,6 @@ public class GameManager : MonoBehaviour {
 
     public void LaunchReward() {
         foreach (Organ org in organContainer.GetComponentsInChildren<Organ>()) {
-
             org.OnReward();
         }
     }
@@ -58,5 +57,19 @@ public class GameManager : MonoBehaviour {
         LaunchAttack();
         LaunchReward();
         LaunchPreparation();
+    }
+
+    public Resources GetResources(Resources.ResourcesType type) {
+        Resources resources = ResourcesD;
+        if (type == Resources.ResourcesType.A) {
+            resources = ResourcesA;
+        }
+        else if (type == Resources.ResourcesType.B) {
+            resources = ResourcesB;
+        }
+        else if (type == Resources.ResourcesType.C) {
+            resources = ResourcesC;
+        }
+        return resources;
     }
 }
