@@ -7,6 +7,7 @@ public class Organ : MonoBehaviour {
     public Sprite hudImage;
     public Sprite hudImageSelected;
     public Color forbiddenColor;
+    public Resources.ResourcesType resourcesType;
 
     private Color initColor;
     private bool collideWithOtherOrgan;
