@@ -35,16 +35,15 @@ public class OrganSettlementManager : MonoBehaviour {
                 ShowOrganSettlementIcons(mouseWorldPosition);
                 mode = Mode.MENU;
             } else if (mode == Mode.MENU) {
-                GameObject selectedIcon = GetSelectedIcon();
-                if (selectedIcon == null) {
-                    List<GameObject> iconList = new List<OrganSettlementIcon>(iconMap.Keys);
-                    for (int i = 0; i < iconList.Count; i++) {
-                        Destroy(iconList[i]);
-                    }
-                    iconMap.Clear();
-                } else {
-                    InstantiateOrgan(mouseWorldPosition, iconMap[selectedIcon]);
+                OrganSettlementIcon selectedIcon = GetSelectedIcon();
+                if (selectedIcon != null) {
+                    InstantiateOrgan(new Vector3(mouseWorldPosition.x, mouseWorldPosition.y, 0), iconMap[selectedIcon]);
                 }
+                List<OrganSettlementIcon> iconList = new List<OrganSettlementIcon>(iconMap.Keys);
+                for (int i = 0; i < iconList.Count; i++) {
+                    Destroy(iconList[i].gameObject);
+                }
+                iconMap.Clear();
                 mode = Mode.IDLE;
             }
         }
@@ -74,13 +73,13 @@ public class OrganSettlementManager : MonoBehaviour {
             icon.GetComponent<OrganSettlementIcon>().selected = organ.hudImageSelected;
             RectTransform rectTransform = (RectTransform)icon.transform;
             rectTransform.position = new Vector3(mouseWorldPosition.x + Mathf.Cos(angle), mouseWorldPosition.y + Mathf.Sin(angle), 0);
-            iconMap.Add(icon, organ.gameObject);
+            iconMap.Add(icon.GetComponent<OrganSettlementIcon>(), organ);
         }
     }
 
 
-    public void InstantiateOrgan(Vector3 position, int organPrefabIndex) {
-        GameObject organ = Instantiate<GameObject>(organPrefabs[organPrefabIndex]);
+    public void InstantiateOrgan(Vector3 position, Organ organPrefab) {
+        GameObject organ = Instantiate<GameObject>(organPrefab.gameObject);
         organ.transform.position = position;
     }
 
@@ -96,15 +95,13 @@ public class OrganSettlementManager : MonoBehaviour {
         }
     }
 
-    private GameObject GetSelectedIcon() {
-        GameObject selected = null;
-        if (icons == null) {
-            selected = null;
-        }
+    private OrganSettlementIcon GetSelectedIcon() {
 
+        OrganSettlementIcon selected = null;
         bool found = false;
         int i = 0;
-        while (!found && i < icons.Length) {
+        List<OrganSettlementIcon> icons = new List<OrganSettlementIcon>(iconMap.Keys);
+        while (!found && i < icons.Count) {
             if (icons[i].GetComponent<OrganSettlementIcon>().IsSelected) {
                 selected = icons[i];
                 found = true;
