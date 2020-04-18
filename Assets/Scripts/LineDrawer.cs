@@ -7,24 +7,31 @@ public class LineDrawer : MonoBehaviour
 {
 
     private LineRenderer lineRend;
-    private Transform otherBuilding;
-
 
 
     void Start()
     {
 
         lineRend = GetComponent<LineRenderer>();
-        otherBuilding = GameObject.FindGameObjectWithTag("Building").transform;
 
     }
 
 
-    void Update()
+    void OnTriggerStay(Collider other)
     {
 
-        lineRend.SetPosition(0, transform.position);
-        lineRend.SetPosition(1, otherBuilding.transform.position);
+        if (other.gameObject.tag == "Organ")
+        {
+            lineRend.enabled = true;
+            lineRend.SetPosition(0, transform.position);
+            lineRend.SetPosition(1, other.gameObject.transform.position);
+        }
+    }
 
+    void OnTriggerExit(Collider other) {
+
+        if(other.gameObject.tag == "Organ") {
+            lineRend.enabled = false;
+        }
     }
 }

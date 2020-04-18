@@ -101,6 +101,7 @@ MonoBehaviour:
   hudImage: {fileID: 21300000, guid: fb90f710b0ccd1040a1de0059c27c1ce, type: 3}
   hudImageSelected: {fileID: 21300000, guid: 31411e25dc700414997a465309bc61a2, type: 3}
   forbiddenColor: {r: 0, g: 0, b: 0, a: 0.53333336}
+  resourcesType: 1
 --- !u!135 &5302413290310903351
 SphereCollider:
   m_ObjectHideFlags: 0

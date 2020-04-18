@@ -7,6 +7,7 @@ public class Organ : MonoBehaviour {
     public Sprite hudImage;
     public Sprite hudImageSelected;
     public Color forbiddenColor;
+    public Resources.ResourcesType resourcesType;
 
     private Color initColor;
     private bool collideWithOtherOrgan;
@@ -39,6 +40,12 @@ public class Organ : MonoBehaviour {
     void OnTriggerExit(Collider other) {
         if (other.gameObject.tag == "Organ") {
             collideWithOtherOrgan = false;
+        }
+    }
+
+    public void OnSwitchState() {
+        if ( GameManager.GetInstance().roudState == GameManager.RoudState.REWARD) {
+            // TODO Make reward according to the type
         }
     }
 }
