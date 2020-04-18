@@ -41,4 +41,10 @@ public class Organ : MonoBehaviour {
             collideWithOtherOrgan = false;
         }
     }
+
+    public void OnSwitchState() {
+        if ( GameManager.GetInstance().roudState == GameManager.RoudState.REWARD) {
+            // TODO Make reward according to the type
+        }
+    }
 }

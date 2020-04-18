@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour {
     }
 
     public enum RoudState {
-        PREPARATION, ATTACK
+        PREPARATION, ATTACK, REWARD
     }
 
     private Resources[] resources_list = new Resources[4];
@@ -22,6 +22,7 @@ public class GameManager : MonoBehaviour {
     
     public int roundCount;
     public RoudState roudState;
+    public GameObject organContainer;
 
     void Awake() {
         if (INSTANCE == null) {
@@ -40,10 +41,19 @@ public class GameManager : MonoBehaviour {
             roudState = RoudState.ATTACK;
             LaunchAttack();
         }
-        else {
-            roudState = RoudState.PREPARATION;
+        else if (roudState == RoudState.ATTACK) {
+            roudState = RoudState.REWARD;
             roundCount += 1;
             LaunchPreparation();
+        }
+        else {
+            roudState = RoudState.ATTACK;
+            LaunchReward();
+        }
+
+        foreach (Organ org in organContainer.GetComponentsInChildren<Organ>()) {
+
+            org.OnSwitchState();
         }
     }
 
@@ -53,7 +63,7 @@ public class GameManager : MonoBehaviour {
         int power = attackersD.GetPower(roundCount);
 
         bool res = ResourcesD.Use(power);
-        // Debug.Log( dataSave + " - " + power + " = " + ResourcesD.count);
+        Debug.Log( dataSave + " - " + power + " = " + ResourcesD.count);
         if (!res) {
             // TODO
             Debug.Log("END OF THE GAME");
@@ -62,7 +72,12 @@ public class GameManager : MonoBehaviour {
 
     public void LaunchPreparation()
     {
-    	// TODO update Resources
+
+    }
+
+    public void LaunchReward()
+    {
+
     }
 
     public void FakeSenarioTV()
