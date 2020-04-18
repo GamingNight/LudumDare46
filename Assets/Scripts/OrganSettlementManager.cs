@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class OrganSettlementManager : MonoBehaviour {
 
     public enum Mode {
-        IDLE, MENU, SETTLEMENT
+        IDLE, MENU, SETTLEMENT, DISABLED
     }
 
     public GameObject[] organPrefabs;
@@ -16,6 +16,7 @@ public class OrganSettlementManager : MonoBehaviour {
 
     private bool[] unlockedOrganTable;
     private Mode mode;
+    private Mode previousMode;
     private Dictionary<OrganSettlementIcon, Organ> iconMap;
     private List<GameObject> organObjectList;
 
@@ -155,5 +156,14 @@ public class OrganSettlementManager : MonoBehaviour {
             i++;
         }
         return selected;
+    }
+
+    public void DisableMouse() {
+        previousMode = mode;
+        mode = Mode.DISABLED;
+    }
+
+    public void EnableMouse() {
+        mode = previousMode;
     }
 }
