@@ -51,6 +51,7 @@ public class LineDrawer : MonoBehaviour {
             if (LineRelation.FindRelation(gameObject, other.gameObject) == null) {
                 GameObject newLineRendererObject = Instantiate<GameObject>(lineRendrerPrefab);
                 newLineRendererObject.transform.SetParent(gameObject.transform);
+                newLineRendererObject.transform.position = gameObject.transform.position;
                 LineRenderer newLineRenderer = newLineRendererObject.GetComponent<LineRenderer>();
                 newLineRenderer.SetPosition(0, transform.position);
                 newLineRenderer.SetPosition(1, other.gameObject.transform.position);
