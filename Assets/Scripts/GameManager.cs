@@ -38,7 +38,7 @@ public class GameManager : MonoBehaviour {
     public void SwitchState() {
         if (roudState == RoudState.PREPARATION) {
             roudState = RoudState.ATTACK;
-            LaunchAtack();
+            LaunchAttack();
         }
         else {
             roudState = RoudState.PREPARATION;
@@ -47,11 +47,13 @@ public class GameManager : MonoBehaviour {
         }
     }
 
-    public void LaunchAtack()
+    public void LaunchAttack()
     {
+        int dataSave = ResourcesD.count;
         int power = attackersD.GetPower(roundCount);
 
         bool res = ResourcesD.Use(power);
+        // Debug.Log( dataSave + " - " + power + " = " + ResourcesD.count);
         if (!res) {
             // TODO
             Debug.Log("END OF THE GAME");
@@ -68,8 +70,10 @@ public class GameManager : MonoBehaviour {
 		ResourcesD.count = 10;
 		while (true) {
 			SwitchState();
-            int res = ResourcesD.count;
+            if ((roudState == RoudState.PREPARATION))
+                ResourcesD.Add(1);
             if (roundCount > 100) {
+                Debug.Log("END OF LOOP");
                 return;
             }
 		}
