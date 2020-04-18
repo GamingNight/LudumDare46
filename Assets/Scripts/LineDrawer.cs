@@ -23,8 +23,6 @@ public class LineDrawer : MonoBehaviour
         if (other.gameObject.tag == "Organ")
         {
             lineRend.enabled = true;
-            lineRend.startColor = Color.black;
-            lineRend.endColor = Color.black;
             lineRend.SetPosition(0, transform.position);
             lineRend.SetPosition(1, other.gameObject.transform.position);
         }
