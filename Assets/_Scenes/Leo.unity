@@ -277,7 +277,7 @@ PrefabInstance:
     - target: {fileID: 8045408162216531858, guid: d0ceda2418ab5824caafc276f1cfaec5,
         type: 3}
       propertyPath: m_Name
-      value: BlueBuilding (1)
+      value: BlueOrgan (1)
       objectReference: {fileID: 0}
     - target: {fileID: 8045408162216531859, guid: d0ceda2418ab5824caafc276f1cfaec5,
         type: 3}
@@ -919,7 +919,7 @@ PrefabInstance:
     - target: {fileID: 8045408162216531858, guid: d0ceda2418ab5824caafc276f1cfaec5,
         type: 3}
       propertyPath: m_Name
-      value: BlueBuilding
+      value: BlueOrgan
       objectReference: {fileID: 0}
     - target: {fileID: 8045408162216531859, guid: d0ceda2418ab5824caafc276f1cfaec5,
         type: 3}
