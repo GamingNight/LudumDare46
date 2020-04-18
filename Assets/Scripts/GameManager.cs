@@ -9,13 +9,8 @@ public class GameManager : MonoBehaviour {
         return INSTANCE;
     }
 
-    private Resources[] resources_list = new Resources[4];
-    private Resources ResourcesA = new Resources(0, Resources.ResourcesType.A);
-    private Resources ResourcesB = new Resources(0, Resources.ResourcesType.B);
-    private Resources ResourcesC = new Resources(0, Resources.ResourcesType.C);
-    private Resources ResourcesD = new Resources(100, Resources.ResourcesType.D);
+    private ResourceConf resourcesConf = new ResourceConf();
     private Attackers attackersD = new Attackers(Resources.ResourcesType.D);
-
     public int roundCount;
     public GameObject organContainer;
 
@@ -29,16 +24,17 @@ public class GameManager : MonoBehaviour {
 
     void Start() {
         roundCount = 0;
+        resourcesConf.A.Set(10, Resources.ResourcesType.A);
+        resourcesConf.B.Set(10, Resources.ResourcesType.B);
+        resourcesConf.C.Set(0, Resources.ResourcesType.C);
+        resourcesConf.D.Set(100, Resources.ResourcesType.D);
     }
 
     public void LaunchAttack() {
-        int dataSave = ResourcesD.count;
         int power = attackersD.GetPower(roundCount);
+        Debug.Log("A = " + resourcesConf.A.count + " B = " + resourcesConf.B.count +" C = " + resourcesConf.C.count +" D = " + resourcesConf.D.count + " Attack = " + power);
 
-        bool res = ResourcesD.Use(power);
-        Debug.Log("A = " + ResourcesA.count + " B = " + ResourcesB.count +" C = " + ResourcesC.count +" D = " + dataSave + " - " + power + " = " + ResourcesD.count);
-
-        if (!res) {
+        if (power > resourcesConf.D.count) {
             menuNavig.endMenu();
         }
     }
@@ -60,15 +56,15 @@ public class GameManager : MonoBehaviour {
     }
 
     public Resources GetResources(Resources.ResourcesType type) {
-        Resources resources = ResourcesD;
+        Resources resources = resourcesConf.D;
         if (type == Resources.ResourcesType.A) {
-            resources = ResourcesA;
+            resources = resourcesConf.A;
         }
         else if (type == Resources.ResourcesType.B) {
-            resources = ResourcesB;
+            resources = resourcesConf.B;
         }
         else if (type == Resources.ResourcesType.C) {
-            resources = ResourcesC;
+            resources = resourcesConf.C;
         }
         return resources;
     }

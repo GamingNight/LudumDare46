@@ -2,7 +2,6 @@
 
 public class Resources {
 
-
     public enum ResourcesType {
         A, B, C, D
     }
@@ -11,6 +10,11 @@ public class Resources {
     public int count = 0;
 
     public Resources(int countValue, ResourcesType typeValue) {
+        count = countValue;
+        type = typeValue;
+    }
+
+    public void Set(int countValue, ResourcesType typeValue) {
         count = countValue;
         type = typeValue;
     }
@@ -27,3 +31,10 @@ public class Resources {
         return true;
     }
 }
+
+public class ResourceConf {
+    public Resources A = new Resources(0, Resources.ResourcesType.A);
+    public Resources B = new Resources(0, Resources.ResourcesType.B);
+    public Resources C = new Resources(0, Resources.ResourcesType.C);
+    public Resources D = new Resources(0, Resources.ResourcesType.D);
+    }
