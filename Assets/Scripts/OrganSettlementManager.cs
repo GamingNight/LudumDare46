@@ -6,16 +6,18 @@ using UnityEngine.UI;
 public class OrganSettlementManager : MonoBehaviour {
 
     public enum Mode {
-        IDLE, MENU
+        IDLE, MENU, SETTLEMENT
     }
 
     public GameObject[] organPrefabs;
     public GameObject iconPrefab;
     public GameObject canvas;
+    public GameObject organContainer;
 
     private bool[] unlockedOrganTable;
     private Mode mode;
     private Dictionary<OrganSettlementIcon, Organ> iconMap;
+    private List<GameObject> organObjectList;
 
     void Start() {
         unlockedOrganTable = new bool[organPrefabs.Length];
@@ -24,28 +26,58 @@ public class OrganSettlementManager : MonoBehaviour {
         }
         mode = Mode.IDLE;
         iconMap = new Dictionary<OrganSettlementIcon, Organ>();
+        organObjectList = new List<GameObject>();
+    }
+
+    public void UnlockOrgan(string organName) {
+        bool found = false;
+        int i = 0;
+        while (!found && i < organPrefabs.Length) {
+            if (organPrefabs[i].GetComponent<Organ>().organName == organName) {
+                unlockedOrganTable[i] = true;
+                found = true;
+            }
+            i++;
+        }
     }
 
     void Update() {
 
         bool mouseButtonUp = Input.GetMouseButtonUp(0);
         if (mouseButtonUp) {
-            Vector3 mouseScreenPosition = Input.mousePosition;
-            Vector3 mouseWorldPosition = Camera.main.ScreenToWorldPoint(mouseScreenPosition);
+            Vector3 mouseWorldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             if (mode == Mode.IDLE) {
                 ShowOrganSettlementIcons(mouseWorldPosition);
                 mode = Mode.MENU;
             } else if (mode == Mode.MENU) {
                 OrganSettlementIcon selectedIcon = GetSelectedIcon();
                 if (selectedIcon != null) {
-                    InstantiateOrgan(new Vector3(mouseWorldPosition.x, mouseWorldPosition.y, 0), iconMap[selectedIcon]);
+                    organObjectList.Add(InstantiateOrgan(new Vector3(mouseWorldPosition.x, mouseWorldPosition.y, 0), iconMap[selectedIcon]));
+                    mode = Mode.SETTLEMENT;
+                } else {
+                    mode = Mode.IDLE;
                 }
                 List<OrganSettlementIcon> iconList = new List<OrganSettlementIcon>(iconMap.Keys);
                 for (int i = 0; i < iconList.Count; i++) {
                     Destroy(iconList[i].gameObject);
                 }
                 iconMap.Clear();
-                mode = Mode.IDLE;
+            } else if (mode == Mode.SETTLEMENT) {
+                if (!organObjectList[organObjectList.Count - 1].GetComponent<Organ>().CollideWithOtherOrgan) {
+                    organObjectList[organObjectList.Count - 1].GetComponent<SpriteRenderer>().sortingOrder = 0;
+                    mode = Mode.IDLE;
+                }
+            }
+        }
+
+        if (mode == Mode.SETTLEMENT) {
+            Vector3 mouseWorldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            GameObject lastOrganInstantiated = organObjectList[organObjectList.Count - 1];
+            lastOrganInstantiated.transform.position = new Vector3(mouseWorldPosition.x, mouseWorldPosition.y, 0);
+            if (lastOrganInstantiated.GetComponent<Organ>().CollideWithOtherOrgan) {
+                lastOrganInstantiated.GetComponent<Organ>().SetToForbiddenColor();
+            } else {
+                lastOrganInstantiated.GetComponent<Organ>().RevertColor();
             }
         }
     }
@@ -101,21 +133,12 @@ public class OrganSettlementManager : MonoBehaviour {
     }
 
 
-    public void InstantiateOrgan(Vector3 position, Organ organPrefab) {
+    public GameObject InstantiateOrgan(Vector3 position, Organ organPrefab) {
         GameObject organ = Instantiate<GameObject>(organPrefab.gameObject);
+        organ.transform.SetParent(organContainer.transform);
         organ.transform.position = position;
-    }
-
-    public void UnlockOrgan(string organName) {
-        bool found = false;
-        int i = 0;
-        while (!found && i < organPrefabs.Length) {
-            if (organPrefabs[i].GetComponent<Organ>().organName == organName) {
-                unlockedOrganTable[i] = true;
-                found = true;
-            }
-            i++;
-        }
+        organ.GetComponent<SpriteRenderer>().sortingOrder = 1;
+        return organ;
     }
 
     private OrganSettlementIcon GetSelectedIcon() {

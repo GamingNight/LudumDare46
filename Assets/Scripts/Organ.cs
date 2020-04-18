@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
 
 public class Organ : MonoBehaviour {
 
@@ -7,4 +6,39 @@ public class Organ : MonoBehaviour {
     public bool unlockedAtStart = true;
     public Sprite hudImage;
     public Sprite hudImageSelected;
+    public Color forbiddenColor;
+
+    private Color initColor;
+    private bool collideWithOtherOrgan;
+    public bool CollideWithOtherOrgan { get { return collideWithOtherOrgan; } }
+
+    private bool startHasBeenCalled = false;
+
+    void Start() {
+        startHasBeenCalled = true;
+        initColor = GetComponent<SpriteRenderer>().color;
+        collideWithOtherOrgan = false;
+    }
+
+    public void SetToForbiddenColor() {
+        GetComponent<SpriteRenderer>().color = forbiddenColor;
+    }
+
+    public void RevertColor() {
+        if (startHasBeenCalled) {
+            GetComponent<SpriteRenderer>().color = initColor;
+        }
+    }
+
+    void OnTriggerStay(Collider other) {
+        if (other.gameObject.tag == "Organ") {
+            collideWithOtherOrgan = true;
+        }
+    }
+
+    void OnTriggerExit(Collider other) {
+        if (other.gameObject.tag == "Organ") {
+            collideWithOtherOrgan = false;
+        }
+    }
 }
