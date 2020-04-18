@@ -46,14 +46,19 @@ public class OrganSettlementManager : MonoBehaviour {
 
         bool mouseButtonUp = Input.GetMouseButtonUp(0);
         if (mouseButtonUp) {
-            Vector3 mouseWorldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Vector3 mouseWorldPosition = Vector3.zero;
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+            if (Physics.Raycast(ray, out hit)) {
+                mouseWorldPosition = hit.point;
+            }
             if (mode == Mode.IDLE) {
                 ShowOrganSettlementIcons(mouseWorldPosition);
                 mode = Mode.MENU;
             } else if (mode == Mode.MENU) {
                 OrganSettlementIcon selectedIcon = GetSelectedIcon();
                 if (selectedIcon != null) {
-                    organObjectList.Add(InstantiateOrgan(new Vector3(mouseWorldPosition.x, mouseWorldPosition.y, 0), iconMap[selectedIcon]));
+                    organObjectList.Add(InstantiateOrgan(new Vector3(mouseWorldPosition.x, 0.1f, mouseWorldPosition.z), iconMap[selectedIcon]));
                     mode = Mode.SETTLEMENT;
                 } else {
                     mode = Mode.IDLE;
@@ -65,16 +70,22 @@ public class OrganSettlementManager : MonoBehaviour {
                 iconMap.Clear();
             } else if (mode == Mode.SETTLEMENT) {
                 if (!organObjectList[organObjectList.Count - 1].GetComponent<Organ>().CollideWithOtherOrgan) {
-                    organObjectList[organObjectList.Count - 1].GetComponent<SpriteRenderer>().sortingOrder = 0;
+                    SetSpriteSortingLayerName(organObjectList[organObjectList.Count - 1], "Default");
                     mode = Mode.IDLE;
                 }
             }
         }
 
         if (mode == Mode.SETTLEMENT) {
-            Vector3 mouseWorldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Vector3 mouseWorldPosition = Vector3.zero;
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+            if (Physics.Raycast(ray, out hit)) {
+                mouseWorldPosition = hit.point;
+            }
             GameObject lastOrganInstantiated = organObjectList[organObjectList.Count - 1];
-            lastOrganInstantiated.transform.position = new Vector3(mouseWorldPosition.x, mouseWorldPosition.y, 0);
+            lastOrganInstantiated.transform.position = new Vector3(mouseWorldPosition.x, 0.1f, mouseWorldPosition.z);
+            lastOrganInstantiated.transform.eulerAngles = new Vector3(90, 0, 0);
             if (lastOrganInstantiated.GetComponent<Organ>().CollideWithOtherOrgan) {
                 lastOrganInstantiated.GetComponent<Organ>().SetToForbiddenColor();
             } else {
@@ -106,7 +117,8 @@ public class OrganSettlementManager : MonoBehaviour {
             icon.GetComponent<OrganSettlementIcon>().deselected = organ.hudImage;
             icon.GetComponent<OrganSettlementIcon>().selected = organ.hudImageSelected;
             RectTransform rectTransform = (RectTransform)icon.transform;
-            rectTransform.position = new Vector3(mouseWorldPosition.x, mouseWorldPosition.y, 0);
+            rectTransform.position = new Vector3(mouseWorldPosition.x, 0.1f, mouseWorldPosition.z);
+            rectTransform.eulerAngles = new Vector3(90f, 0, 0);
             rectTransform.localScale = new Vector2(0, 0);
             StartCoroutine(GrowIconCoroutine(rectTransform, mouseWorldPosition, angle));
             iconMap.Add(icon.GetComponent<OrganSettlementIcon>(), organ);
@@ -116,16 +128,16 @@ public class OrganSettlementManager : MonoBehaviour {
     private IEnumerator GrowIconCoroutine(RectTransform iconTransform, Vector3 mouseWorldPosition, float angle) {
 
         float initX = mouseWorldPosition.x;
-        float initY = mouseWorldPosition.y;
+        float initZ = mouseWorldPosition.z;
         float targetX = mouseWorldPosition.x + Mathf.Cos(angle);
-        float targetY = mouseWorldPosition.y + Mathf.Sin(angle);
+        float targetZ = mouseWorldPosition.z + Mathf.Sin(angle);
         float step = 0.05f;
         float totalTime = 0.25f;
         float currentTime = 0;
         while (currentTime < totalTime) {
             float xPos = Mathf.Lerp(initX, targetX, currentTime / totalTime);
-            float yPos = Mathf.Lerp(initY, targetY, currentTime / totalTime);
-            iconTransform.position = new Vector3(xPos, yPos, 0);
+            float zPos = Mathf.Lerp(initZ, targetZ, currentTime / totalTime);
+            iconTransform.position = new Vector3(xPos, 0.1f, zPos);
             float scaleLerp = Mathf.Lerp(0, 1, currentTime / totalTime);
             iconTransform.localScale = new Vector2(scaleLerp, scaleLerp);
             yield return new WaitForSeconds(step);
@@ -134,12 +146,23 @@ public class OrganSettlementManager : MonoBehaviour {
     }
 
 
-    public GameObject InstantiateOrgan(Vector3 position, Organ organPrefab) {
+    private GameObject InstantiateOrgan(Vector3 position, Organ organPrefab) {
         GameObject organ = Instantiate<GameObject>(organPrefab.gameObject);
         organ.transform.SetParent(organContainer.transform);
         organ.transform.position = position;
-        organ.GetComponent<SpriteRenderer>().sortingOrder = 1;
+        SetSpriteSortingLayerName(organ, "OrganToBeSettled");
         return organ;
+    }
+
+    private void SetSpriteSortingLayerName(GameObject organ, string name) {
+
+        if (organ.GetComponent<SpriteRenderer>() != null) {
+            organ.GetComponent<SpriteRenderer>().sortingLayerName = name;
+        } else {
+            foreach (SpriteRenderer renderer in organ.GetComponentsInChildren<SpriteRenderer>()) {
+                renderer.sortingLayerName = name;
+            }
+        }
     }
 
     private OrganSettlementIcon GetSelectedIcon() {
