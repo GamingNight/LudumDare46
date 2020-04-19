@@ -517,6 +517,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7709016186301583371, guid: 83d1d7e9bb2d82543b3ff6c8fa375f2c,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: StartGame
+      objectReference: {fileID: 0}
     - target: {fileID: 7709016186946698758, guid: 83d1d7e9bb2d82543b3ff6c8fa375f2c,
         type: 3}
       propertyPath: cursor
