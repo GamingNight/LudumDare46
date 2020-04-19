@@ -26,6 +26,13 @@ public class CursorManager : MonoBehaviour {
         animator = GetComponent<Animator>();
     }
 
+    void OnDisable() {
+        Cursor.visible = true;
+        if (staticCursor != null) {
+            Destroy(staticCursor);
+        }
+    }
+
     void Update() {
         Cursor.visible = false;
         Vector3 mouseWorldPosition = Vector3.zero;

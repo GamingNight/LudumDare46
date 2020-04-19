@@ -1,44 +1,44 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class MenuNavig : MonoBehaviour
-{
+public class MenuNavig : MonoBehaviour {
     public GameObject welcomeText;
     public GameObject startButton;
     public GameObject restartButton;
     public GameObject gameoverText;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-    public void Quit()
-    {
-        Debug.Log("pommier");
+
+    public GameObject gameManager;
+    public GameObject organContainer;
+    public GameObject cursor;
+    public GameObject hud;
+
+    public void Quit() {
         Application.Quit();
     }
-    public void start()
-    {
+
+    public void StartGame() {
+        SetMainGameActive(true);
         gameObject.SetActive(false);
     }
-    public void welcomeMenu()
-    {
+
+    public void WelcomeMenu() {
         startButton.SetActive(true);
         restartButton.SetActive(false);
         gameoverText.SetActive(false);
         welcomeText.SetActive(true);
     }
-    public void endMenu()
-    {
+
+    public void EndMenu() {
+        SetMainGameActive(false);
         startButton.SetActive(false);
         restartButton.SetActive(true);
         gameoverText.SetActive(true);
         welcomeText.SetActive(false);
     }
-    // Update is called once per frame
-    void Update()
-    {
-        
+
+    private void SetMainGameActive(bool b) {
+        cursor.SetActive(b);
+        organContainer.SetActive(b);
+        hud.SetActive(b);
+        gameManager.SetActive(b);
     }
 }

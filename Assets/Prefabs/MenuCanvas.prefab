@@ -325,7 +325,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 7709016186946698758}
-        m_MethodName: welcomeMenu
+        m_MethodName: WelcomeMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -682,7 +682,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 7709016186946698758}
-        m_MethodName: start
+        m_MethodName: StartGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -883,6 +883,10 @@ MonoBehaviour:
   startButton: {fileID: 7709016186609310979}
   restartButton: {fileID: 7709016186301583369}
   gameoverText: {fileID: 7709016186475133051}
+  gameManager: {fileID: 0}
+  organContainer: {fileID: 0}
+  cursor: {fileID: 0}
+  hud: {fileID: 0}
 --- !u!1 &7709016187192569149
 GameObject:
   m_ObjectHideFlags: 0
@@ -1205,3 +1209,7 @@ MonoBehaviour:
   startButton: {fileID: 0}
   restartButton: {fileID: 0}
   gameoverText: {fileID: 0}
+  gameManager: {fileID: 0}
+  organContainer: {fileID: 0}
+  cursor: {fileID: 0}
+  hud: {fileID: 0}
