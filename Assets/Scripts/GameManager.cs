@@ -67,7 +67,7 @@ public class GameManager : MonoBehaviour {
         if (attackersD.GetPower(roundCount) > resourcesConf.D.count) {
             Debug.Log("perdu au tour " + roundCount);
             menuCanvas.SetActive(true);
-            menuNavig.endMenu();
+            menuNavig.EndMenu();
         }
     }
 

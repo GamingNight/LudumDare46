@@ -454,6 +454,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 958567010}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &958567013
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 958567011}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13363ebd1f16f5d4d858680a7e22f558, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1365890468
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -461,16 +473,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 7709016186301583371, guid: 83d1d7e9bb2d82543b3ff6c8fa375f2c,
+    - target: {fileID: 7709016186946698758, guid: 83d1d7e9bb2d82543b3ff6c8fa375f2c,
         type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: WelcomeMenu
-      objectReference: {fileID: 0}
-    - target: {fileID: 7709016186609310981, guid: 83d1d7e9bb2d82543b3ff6c8fa375f2c,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: StartGame
-      objectReference: {fileID: 0}
+      propertyPath: gameManager
+      value: 
+      objectReference: {fileID: 899559116}
     - target: {fileID: 7709016186946698758, guid: 83d1d7e9bb2d82543b3ff6c8fa375f2c,
         type: 3}
       propertyPath: organContainer
@@ -486,20 +493,10 @@ PrefabInstance:
       propertyPath: hud
       value: 
       objectReference: {fileID: 1708139292}
-    - target: {fileID: 7709016186946698758, guid: 83d1d7e9bb2d82543b3ff6c8fa375f2c,
-        type: 3}
-      propertyPath: gameManager
-      value: 
-      objectReference: {fileID: 899559116}
     - target: {fileID: 7709016186946698759, guid: 83d1d7e9bb2d82543b3ff6c8fa375f2c,
         type: 3}
       propertyPath: m_Name
       value: MenuCanvas
-      objectReference: {fileID: 0}
-    - target: {fileID: 7709016186946698759, guid: 83d1d7e9bb2d82543b3ff6c8fa375f2c,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7709016186946698762, guid: 83d1d7e9bb2d82543b3ff6c8fa375f2c,
         type: 3}
