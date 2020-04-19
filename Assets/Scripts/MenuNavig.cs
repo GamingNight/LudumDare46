@@ -16,6 +16,7 @@ public class MenuNavig : MonoBehaviour {
 
     public void StartGame() {
         SetMainGameActive(true);
+        ResetGame();
         gameObject.SetActive(false);
     }
 
@@ -38,5 +39,13 @@ public class MenuNavig : MonoBehaviour {
         cursor.SetActive(b);
         gameManager.SetActive(b);
         organContainer.SetActive(b);
+    }
+
+    private void ResetGame() {
+
+        cursor.GetComponent<CursorManager>().Init();
+        gameManager.GetComponent<OrganSettlementManager>().Init();
+        gameManager.GetComponent<GameManager>().Reset();
+        LineDrawer.ClearRelations();
     }
 }

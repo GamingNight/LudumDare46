@@ -109,12 +109,6 @@ public class Organ : MonoBehaviour {
         isSelected = false;
     }
 
-    void BuyDef() {
-        if (GameManager.GetInstance().Buy(Resources.ResourcesType.D)) {
-            GameManager.GetInstance().Add(Resources.ResourcesType.D);
-        }
-    }
-
     void BuyBoost() {
         if (GameManager.GetInstance().BuyBoost()) {
             rewardx2 = true;
@@ -127,10 +121,6 @@ public class Organ : MonoBehaviour {
         {
 
             float scrollWheel = Input.GetAxis("Mouse ScrollWheel");
-            bool scrollup = (scrollWheel > 0f);
-            if (scrollup) {
-                BuyDef();
-            }
             bool scrolldown = (scrollWheel < 0f);
             if (scrolldown & !rewardx2) {
                 BuyBoost();
