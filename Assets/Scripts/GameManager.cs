@@ -43,7 +43,9 @@ public class GameManager : MonoBehaviour {
     }
 
     public void LaunchAttack() {
+        Debug.Log("attack");
         if (attackersD.GetPower(roundCount) > resourcesConf.D.count) {
+            Debug.Log("perdu au tour " + roundCount);
             menuNavig.endMenu();
         }
     }
@@ -63,6 +65,7 @@ public class GameManager : MonoBehaviour {
         LaunchReward();
         LaunchPreparation();
         DebugDisplay();
+        Debug.Log("tour " + roundCount);
     }
 
     public Resources GetResources(Resources.ResourcesType type) {

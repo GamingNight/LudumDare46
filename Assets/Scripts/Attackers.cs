@@ -16,8 +16,6 @@ public class Attackers {
                                          //      int res = (int) Random.Range(min, max);
         float res = 2.0f * 1.0f * 0.1f * (turn + 1.0f) * (turn + 2.0f) / 2.0f;
         int intres = (int)res + 1;
-        Debug.Log(intres);
-        Debug.Log("attack");
         return intres;
     }
 }
