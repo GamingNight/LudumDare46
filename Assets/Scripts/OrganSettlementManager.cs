@@ -58,7 +58,7 @@ public class OrganSettlementManager : MonoBehaviour {
                 }
             } else if (mode == Mode.MENU) {
                 OrganSettlementIcon selectedIcon = GetSelectedIcon();
-                if (selectedIcon != null) {
+                if (selectedIcon != null && GameManager.GetInstance().Buy(iconMap[selectedIcon].resourcesType)) {
                     organObjectList.Add(InstantiateOrgan(new Vector3(mouseWorldPosition.x, 0.1f, mouseWorldPosition.z), iconMap[selectedIcon]));
                     mode = Mode.SETTLEMENT;
                 } else {
@@ -132,29 +132,32 @@ public class OrganSettlementManager : MonoBehaviour {
     private void ShowOrganSettlementIcons(Vector3 mouseWorldPosition) {
         GameObject[] unlockedOrganPrefabs = GetUnlockedOrganPrefabs();
         iconMap.Clear();
+        float startAngle = Mathf.PI;
+        float stepAngle = Mathf.PI / 2f;
+        float radius = 1.5f;
         for (int i = 0; i < unlockedOrganPrefabs.Length; i++) {
             Organ organ = unlockedOrganPrefabs[i].GetComponent<Organ>();
-            float angle = i * (2 * Mathf.PI / unlockedOrganPrefabs.Length);
+            //float angle = i * (2 * Mathf.PI / unlockedOrganPrefabs.Length);
+            float angle = startAngle - (i * stepAngle);
             GameObject icon = Instantiate<GameObject>(iconPrefab);
             icon.transform.SetParent(canvas.transform, false);
             icon.GetComponent<Image>().sprite = organ.hudImage;
-            icon.GetComponent<OrganSettlementIcon>().deselected = organ.hudImage;
-            icon.GetComponent<OrganSettlementIcon>().selected = organ.hudImageSelected;
+            icon.GetComponent<OrganSettlementIcon>().UpdateSprites(organ.hudImage, organ.hudImageSelected);
             RectTransform rectTransform = (RectTransform)icon.transform;
             rectTransform.position = new Vector3(mouseWorldPosition.x, 0.1f, mouseWorldPosition.z);
             rectTransform.eulerAngles = new Vector3(90f, 0, 0);
             rectTransform.localScale = new Vector2(0, 0);
-            growIconCoroutine = StartCoroutine(GrowIconCoroutine(rectTransform, mouseWorldPosition, angle));
+            growIconCoroutine = StartCoroutine(GrowIconCoroutine(rectTransform, mouseWorldPosition, angle, radius));
             iconMap.Add(icon.GetComponent<OrganSettlementIcon>(), organ);
         }
     }
 
-    private IEnumerator GrowIconCoroutine(RectTransform iconTransform, Vector3 mouseWorldPosition, float angle) {
+    private IEnumerator GrowIconCoroutine(RectTransform iconTransform, Vector3 mouseWorldPosition, float angle, float radius) {
 
         float initX = mouseWorldPosition.x;
         float initZ = mouseWorldPosition.z;
-        float targetX = mouseWorldPosition.x + Mathf.Cos(angle);
-        float targetZ = mouseWorldPosition.z + Mathf.Sin(angle);
+        float targetX = mouseWorldPosition.x + (radius * Mathf.Cos(angle));
+        float targetZ = mouseWorldPosition.z + (radius * Mathf.Sin(angle));
         float step = 0.05f;
         float totalTime = 0.25f;
         float currentTime = 0;
