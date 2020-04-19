@@ -650,6 +650,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2684fab155cbde244ad4f1edad2de3ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  defLevel: {fileID: 8461407969026735789}
+  aCount: {fileID: 1196578555340655931}
+  aProd: {fileID: 5895808070821246137}
+  bCount: {fileID: 282541369242756421}
+  bProd: {fileID: 6769090733986794553}
+  cCount: {fileID: 2160708895597052124}
+  cProd: {fileID: 7153652072012121005}
 --- !u!1 &7521563249922758652
 GameObject:
   m_ObjectHideFlags: 0
