@@ -24,15 +24,17 @@ public class GameManager : MonoBehaviour {
 
     void Start() {
         roundCount = 0;
-        resourcesConf.A.Set(10, Resources.ResourcesType.A);
+        resourcesConf.A.Set(3, Resources.ResourcesType.A);
         resourcesConf.B.Set(10, Resources.ResourcesType.B);
         resourcesConf.C.Set(10, Resources.ResourcesType.C);
-        resourcesConf.D.Set(100, Resources.ResourcesType.D);
+        resourcesConf.D.Set(1, Resources.ResourcesType.D);
     }
 
     public bool Buy(Resources.ResourcesType type) {
         ResourceCollectionCost collec = new ResourceCollectionCost(type);
-        return resourcesConf.Buy(collec);
+        bool toto = resourcesConf.Buy(collec);
+        DebugDisplay();
+        return toto;
     }
 
     public void Add(Resources.ResourcesType type) {

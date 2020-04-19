@@ -102,7 +102,7 @@ public class ResourceCollectionCost : ResourceCollection {
     public ResourceCollectionCost(Resources.ResourcesType type) {
 
         if (type == Resources.ResourcesType.A) {
-            A.count = 2;
+            A.count = 3;
             B.count = 0;
             C.count = 0;
             D.count = 0;
