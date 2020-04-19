@@ -22,13 +22,25 @@ public class OrganSettlementManager : MonoBehaviour {
     private List<GameObject> organObjectList;
 
     void Start() {
+        Init();
+    }
+
+    public void Init() {
+
         unlockedOrganTable = new bool[organPrefabs.Length];
         for (int i = 0; i < organPrefabs.Length; i++) {
             unlockedOrganTable[i] = organPrefabs[i].GetComponent<Organ>().unlockedAtStart;
         }
         mode = Mode.IDLE;
         iconMap = new Dictionary<OrganSettlementIcon, Organ>();
-        organObjectList = new List<GameObject>();
+        if (organObjectList == null) {
+            organObjectList = new List<GameObject>();
+        } else {
+            foreach (GameObject organ in organObjectList) {
+                Destroy(organ);
+            }
+            organObjectList.Clear();
+        }
     }
 
     public void UnlockOrgan(string organName) {
