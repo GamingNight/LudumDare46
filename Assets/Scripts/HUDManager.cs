@@ -25,6 +25,15 @@ public class HUDManager : MonoBehaviour
         UpdateData();
     }
 
+    private void SetProdValue(GameObject obj, Resources.ResourcesType type) {
+    	int aProdValue = GameManager.GetInstance().GetSimulation(type).count;
+    	string aProdString= "";
+    	if (aProdValue > 0) {
+    		aProdString = "+" + aProdValue.ToString();
+    	}
+    	obj.GetComponent<Text>().text = aProdString;
+    }
+
     private void UpdateData() {
     	int defLevelValue = GameManager.GetInstance().GetResources(Resources.ResourcesType.D).count;
     	defLevel.GetComponent<Text>().text = defLevelValue.ToString();
@@ -34,5 +43,9 @@ public class HUDManager : MonoBehaviour
     	bCount.GetComponent<Text>().text = bCountValue.ToString();
     	int cCountValue = GameManager.GetInstance().GetResources(Resources.ResourcesType.C).count;
     	cCount.GetComponent<Text>().text = cCountValue.ToString();
+
+    	SetProdValue(aProd, Resources.ResourcesType.A);
+    	SetProdValue(bProd, Resources.ResourcesType.B);
+    	SetProdValue(cProd, Resources.ResourcesType.C);
     }
 }

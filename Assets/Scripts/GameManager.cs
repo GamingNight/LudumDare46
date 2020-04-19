@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour {
     }
 
     private ResourceCollection resourcesConf = new ResourceCollection();
+    private ResourceCollection resourcesSimu = new ResourceCollection();
     private Attackers attackersD = new Attackers(Resources.ResourcesType.D);
     public int roundCount;
     public GameObject organContainer;
@@ -29,6 +30,14 @@ public class GameManager : MonoBehaviour {
         resourcesConf.B.Set(10, Resources.ResourcesType.B);
         resourcesConf.C.Set(10, Resources.ResourcesType.C);
         resourcesConf.D.Set(10, Resources.ResourcesType.D);
+        UpdateSimulation();
+    }
+
+    void ResetSimulation() {
+        resourcesSimu.A.Set(0, Resources.ResourcesType.A);
+        resourcesSimu.B.Set(0, Resources.ResourcesType.B);
+        resourcesSimu.C.Set(0, Resources.ResourcesType.C);
+        resourcesSimu.D.Set(0, Resources.ResourcesType.D);
     }
 
     public bool Buy(Resources.ResourcesType type) {
@@ -48,6 +57,11 @@ public class GameManager : MonoBehaviour {
         resourcesConf.Add(collec);
     }
 
+    public void SimulationAdd(Resources.ResourcesType type) {
+        ResourceCollectionReward collec = new ResourceCollectionReward(type);
+        resourcesSimu.Add(collec);
+    }
+
     public void LaunchAttack() {
         Debug.Log("attack");
         if (attackersD.GetPower(roundCount) > resourcesConf.D.count) {
@@ -62,8 +76,13 @@ public class GameManager : MonoBehaviour {
     }
 
     public void LaunchReward() {
+        resourcesConf.Add(resourcesSimu);
+    }
+
+    public void UpdateSimulation() {
+        ResetSimulation();
         foreach (Organ org in organContainer.GetComponentsInChildren<Organ>()) {
-            org.OnReward();
+            org.OnSimulateReward();
         }
     }
 
@@ -71,22 +90,20 @@ public class GameManager : MonoBehaviour {
         LaunchAttack();
         LaunchReward();
         LaunchPreparation();
+        foreach (Organ org in organContainer.GetComponentsInChildren<Organ>()) {
+            org.OnGoToNextTurn();
+        }
+        UpdateSimulation();
         DebugDisplay();
         Debug.Log("tour " + roundCount);
     }
 
     public Resources GetResources(Resources.ResourcesType type) {
-        Resources resources = resourcesConf.D;
-        if (type == Resources.ResourcesType.A) {
-            resources = resourcesConf.A;
-        }
-        else if (type == Resources.ResourcesType.B) {
-            resources = resourcesConf.B;
-        }
-        else if (type == Resources.ResourcesType.C) {
-            resources = resourcesConf.C;
-        }
-        return resources;
+        return resourcesConf.GetResources(type);
+    }
+
+    public Resources GetSimulation(Resources.ResourcesType type) {
+        return resourcesSimu.GetResources(type);
     }
 
 

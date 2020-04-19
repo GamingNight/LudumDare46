@@ -41,6 +41,7 @@ public class Organ : MonoBehaviour {
 
         animator = GetComponent<Animator>();
         isSelected = false;
+        GameManager.GetInstance().UpdateSimulation();
     }
 
     public void SetToForbiddenColor() {
@@ -79,12 +80,15 @@ public class Organ : MonoBehaviour {
         }
     }
 
-    public void OnReward() {
+    public void OnSimulateReward() {
         if (rewardx2) {
-            GameManager.GetInstance().Add(resourcesType);
-            rewardx2 = false;
+            GameManager.GetInstance().SimulationAdd(resourcesType);
         }
-        GameManager.GetInstance().Add(resourcesType);
+        GameManager.GetInstance().SimulationAdd(resourcesType);
+    }
+
+    public void OnGoToNextTurn() {
+        rewardx2 = false;
     }
 
     void OnMouseEnter() {
@@ -114,6 +118,7 @@ public class Organ : MonoBehaviour {
     void BuyBoost() {
         if (GameManager.GetInstance().BuyBoost()) {
             rewardx2 = true;
+            GameManager.GetInstance().UpdateSimulation();
         }
     }
 
