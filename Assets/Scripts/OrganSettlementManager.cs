@@ -58,17 +58,24 @@ public class OrganSettlementManager : MonoBehaviour {
                 }
             } else if (mode == Mode.MENU) {
                 OrganSettlementIcon selectedIcon = GetSelectedIcon();
-                if (selectedIcon != null && GameManager.GetInstance().Buy(iconMap[selectedIcon].resourcesType)) {
-                    organObjectList.Add(InstantiateOrgan(new Vector3(mouseWorldPosition.x, 0.1f, mouseWorldPosition.z), iconMap[selectedIcon]));
-                    mode = Mode.SETTLEMENT;
+                bool removeMenu = true;
+                if (selectedIcon != null) {
+                    if (GameManager.GetInstance().Buy(iconMap[selectedIcon].resourcesType)) {
+                        organObjectList.Add(InstantiateOrgan(new Vector3(mouseWorldPosition.x, 0.1f, mouseWorldPosition.z), iconMap[selectedIcon]));
+                        mode = Mode.SETTLEMENT;
+                    } else {
+                        removeMenu = false;
+                    }
                 } else {
                     mode = Mode.IDLE;
                 }
-                List<OrganSettlementIcon> iconList = new List<OrganSettlementIcon>(iconMap.Keys);
-                for (int i = 0; i < iconList.Count; i++) {
-                    Destroy(iconList[i].gameObject);
+                if (removeMenu) {
+                    List<OrganSettlementIcon> iconList = new List<OrganSettlementIcon>(iconMap.Keys);
+                    for (int i = 0; i < iconList.Count; i++) {
+                        Destroy(iconList[i].gameObject);
+                    }
+                    iconMap.Clear();
                 }
-                iconMap.Clear();
             } else if (mode == Mode.SETTLEMENT) {
                 if (!organObjectList[organObjectList.Count - 1].GetComponent<Organ>().CollideWithOtherOrgan) {
                     SetSpriteSortingLayerName(organObjectList[organObjectList.Count - 1], "Default");

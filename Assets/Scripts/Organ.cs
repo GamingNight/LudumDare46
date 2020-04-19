@@ -23,6 +23,11 @@ public class Organ : MonoBehaviour {
     private bool rewardDAlreadyDone = false;
     private bool rewardx2 = false;
 
+    private Animator animator;
+
+    private bool isSelected;
+    public bool IsSelected { get { return isSelected; } }
+
     void Start() {
         startHasBeenCalled = true;
         if (GetComponent<SpriteRenderer>() != null) {
@@ -34,6 +39,9 @@ public class Organ : MonoBehaviour {
             }
         }
         collideWithOtherOrgan = false;
+
+        animator = GetComponent<Animator>();
+        isSelected = false;
     }
 
     public void SetToForbiddenColor() {
@@ -79,7 +87,7 @@ public class Organ : MonoBehaviour {
         }
 
         if (resourcesType == Resources.ResourcesType.D) {
-            
+
             rewardDAlreadyDone = true;
         }
         if (rewardx2) {
@@ -87,5 +95,21 @@ public class Organ : MonoBehaviour {
             rewardx2 = false;
         }
         GameManager.GetInstance().Add(resourcesType);
+    }
+
+    void OnMouseEnter() {
+
+        if (animator != null) {
+            animator.SetBool("selected", true);
+        }
+        isSelected = true;
+    }
+
+    void OnMouseExit() {
+
+        if (animator != null) {
+            animator.SetBool("selected", false);
+        }
+        isSelected = false;
     }
 }
