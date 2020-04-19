@@ -109,7 +109,7 @@ GameObject:
   - component: {fileID: 4307803360738457423}
   - component: {fileID: 8944102027909106955}
   - component: {fileID: 7069176270684860330}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: linedrawer
   m_TagString: Untagged
   m_Icon: {fileID: 0}

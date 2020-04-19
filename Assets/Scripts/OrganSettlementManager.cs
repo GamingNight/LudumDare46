@@ -52,8 +52,10 @@ public class OrganSettlementManager : MonoBehaviour {
                 StopCoroutine(growIconCoroutine);
             }
             if (mode == Mode.IDLE) {
-                ShowOrganSettlementIcons(mouseWorldPosition);
-                mode = Mode.MENU;
+                if (MouseIsOverTheGround()) {
+                    ShowOrganSettlementIcons(mouseWorldPosition);
+                    mode = Mode.MENU;
+                }
             } else if (mode == Mode.MENU) {
                 OrganSettlementIcon selectedIcon = GetSelectedIcon();
                 if (selectedIcon != null) {
@@ -86,6 +88,23 @@ public class OrganSettlementManager : MonoBehaviour {
                 lastOrganInstantiated.GetComponent<Organ>().RevertColor();
             }
         }
+    }
+
+    //Return true if the mouse is over the ground, false if it is over another object (excluding UI elements)
+    private bool MouseIsOverTheGround() {
+
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        float minDistance = float.MaxValue; ;
+        string minDistanceTag = "";
+        int mask = ~LayerMask.GetMask("Ignore Raycast");
+        foreach (RaycastHit hit in Physics.RaycastAll(ray, float.MaxValue, mask)) {
+            if (hit.distance < minDistance) {
+                minDistance = hit.distance;
+                minDistanceTag = hit.transform.tag;
+            }
+        }
+
+        return minDistanceTag == "Ground";
     }
 
     private Vector3 GetMouseWorldPosition() {
@@ -142,9 +161,11 @@ public class OrganSettlementManager : MonoBehaviour {
         while (currentTime < totalTime) {
             float xPos = Mathf.Lerp(initX, targetX, currentTime / totalTime);
             float zPos = Mathf.Lerp(initZ, targetZ, currentTime / totalTime);
-            iconTransform.position = new Vector3(xPos, 0.1f, zPos);
             float scaleLerp = Mathf.Lerp(0, 1, currentTime / totalTime);
-            iconTransform.localScale = new Vector2(scaleLerp, scaleLerp);
+            if (iconTransform != null) {
+                iconTransform.position = new Vector3(xPos, 0.1f, zPos);
+                iconTransform.localScale = new Vector2(scaleLerp, scaleLerp);
+            }
             yield return new WaitForSeconds(step);
             currentTime += step;
         }
