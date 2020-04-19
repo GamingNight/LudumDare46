@@ -6,9 +6,10 @@ public class MenuNavig : MonoBehaviour {
     public GameObject restartButton;
     public GameObject gameoverText;
 
+    public GameObject cursor;
     public GameObject gameManager;
     public GameObject organContainer;
-    public GameObject cursor;
+    public GameObject hud;
 
     public void Quit() {
         Application.Quit();
@@ -35,8 +36,9 @@ public class MenuNavig : MonoBehaviour {
     }
 
     private void SetMainGameActive(bool b) {
-        CursorManager.GetInstance().gameObject.SetActive(b);
-        OrganContainer.GetInstance().gameObject.SetActive(b);
-        GameManager.GetInstance().gameObject.SetActive(b);
+        cursor.SetActive(b);
+        gameManager.SetActive(b);
+        organContainer.SetActive(b);
+        hud.SetActive(b);
     }
 }
