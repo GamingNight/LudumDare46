@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour {
     public GameObject organContainer;
 
     public MenuNavig menuNavig;
+    public GameObject menuCanvas;
 
     void Awake() {
         if (INSTANCE == null) {
@@ -46,6 +47,7 @@ public class GameManager : MonoBehaviour {
         Debug.Log("attack");
         if (attackersD.GetPower(roundCount) > resourcesConf.D.count) {
             Debug.Log("perdu au tour " + roundCount);
+            menuCanvas.SetActive(true);
             menuNavig.endMenu();
         }
     }
