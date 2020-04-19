@@ -20,7 +20,6 @@ public class Organ : MonoBehaviour {
     public bool CollideWithOtherOrgan { get { return collideWithOtherOrgan; } }
 
     private bool startHasBeenCalled = false;
-    private bool rewardDAlreadyDone = false;
     private bool rewardx2 = false;
 
     private Animator animator;
@@ -81,15 +80,6 @@ public class Organ : MonoBehaviour {
     }
 
     public void OnReward() {
-        // make the reward only tje first time for resourceD
-        if (rewardDAlreadyDone) {
-            return;
-        }
-
-        if (resourcesType == Resources.ResourcesType.D) {
-
-            rewardDAlreadyDone = true;
-        }
         if (rewardx2) {
             GameManager.GetInstance().Add(resourcesType);
             rewardx2 = false;
@@ -112,4 +102,31 @@ public class Organ : MonoBehaviour {
         }
         isSelected = false;
     }
+
+    void BuyDef() {
+        if (GameManager.GetInstance().Buy(Resources.ResourcesType.D)) {
+            GameManager.GetInstance().Add(Resources.ResourcesType.D);
+        }
+    }
+
+    void BuyBoost() {
+        if (GameManager.GetInstance().BuyBoost()) {
+            rewardx2 = true;
+        }
+    }
+
+    void Update() {
+        if (isSelected & (resourcesType == Resources.ResourcesType.A))
+        {
+            // Defence
+            if (Input.GetKeyDown(KeyCode.D)) {
+                BuyDef();
+            }
+            // Boost
+            if (Input.GetKeyDown(KeyCode.B) & !rewardx2) {
+                BuyBoost();
+            }
+        }
+    }
+
 }

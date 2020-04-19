@@ -18,6 +18,6 @@ public class TextFooter : MonoBehaviour {
         int c = GameManager.GetInstance().GetResources(Resources.ResourcesType.C).count;
         int d = GameManager.GetInstance().GetResources(Resources.ResourcesType.D).count;
         Text t = GetComponent<Text>();
-        t.text = "A = " + a + " B = " + b + " C = " + c + " D = " + d;
+        t.text = "A " + a.ToString() + " B " + b.ToString() + " C " + c.ToString() + " D " + d.ToString();
     }
 }

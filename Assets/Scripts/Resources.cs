@@ -123,10 +123,19 @@ public class ResourceCollectionCost : ResourceCollection {
         }
 
         if (type == Resources.ResourcesType.D) {
-            A.count = 0;
+            A.count = 1;
             B.count = 0;
             C.count = 0;
-            D.count = 1;
+            D.count = 0;
         }
+    }
+}
+
+public class ResourceCollectionBoostCost : ResourceCollection {
+    public ResourceCollectionBoostCost() {
+        A.count = 0;
+        B.count = 1;
+        C.count = 0;
+        D.count = 0;
     }
 }
