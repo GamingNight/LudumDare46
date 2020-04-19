@@ -54,6 +54,7 @@ public class OrganSettlementManager : MonoBehaviour {
             if (mode == Mode.IDLE) {
                 if (MouseIsOverTheGround()) {
                     ShowOrganSettlementIcons(mouseWorldPosition);
+                    CursorManager.GetInstance().TriggerSelectionMenuCursor();
                     mode = Mode.MENU;
                 }
             } else if (mode == Mode.MENU) {
@@ -62,11 +63,13 @@ public class OrganSettlementManager : MonoBehaviour {
                 if (selectedIcon != null) {
                     if (GameManager.GetInstance().Buy(iconMap[selectedIcon].resourcesType)) {
                         organObjectList.Add(InstantiateOrgan(new Vector3(mouseWorldPosition.x, 0.1f, mouseWorldPosition.z), iconMap[selectedIcon]));
+                        CursorManager.GetInstance().DestroyStaticCursor();
                         mode = Mode.SETTLEMENT;
                     } else {
                         removeMenu = false;
                     }
                 } else {
+                    CursorManager.GetInstance().TriggerNavigationCursor();
                     mode = Mode.IDLE;
                 }
                 if (removeMenu) {
@@ -79,6 +82,7 @@ public class OrganSettlementManager : MonoBehaviour {
             } else if (mode == Mode.SETTLEMENT) {
                 if (!organObjectList[organObjectList.Count - 1].GetComponent<Organ>().CollideWithOtherOrgan) {
                     SetSpriteSortingLayerName(organObjectList[organObjectList.Count - 1], "Default");
+                    CursorManager.GetInstance().TriggerNavigationCursor();
                     mode = Mode.IDLE;
                 }
             }

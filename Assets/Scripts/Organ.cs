@@ -92,6 +92,7 @@ public class Organ : MonoBehaviour {
         if (animator != null) {
             animator.SetBool("selected", true);
         }
+        CursorManager.GetInstance().TriggerSelectionCursor();
         isSelected = true;
     }
 
@@ -100,6 +101,7 @@ public class Organ : MonoBehaviour {
         if (animator != null) {
             animator.SetBool("selected", false);
         }
+        CursorManager.GetInstance().TriggerNavigationCursor();
         isSelected = false;
     }
 
@@ -116,8 +118,7 @@ public class Organ : MonoBehaviour {
     }
 
     void Update() {
-        if (isSelected & (resourcesType == Resources.ResourcesType.A))
-        {
+        if (isSelected & (resourcesType == Resources.ResourcesType.A)) {
             // Defence
             if (Input.GetKeyDown(KeyCode.D)) {
                 BuyDef();

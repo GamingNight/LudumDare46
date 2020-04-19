@@ -47,3 +47,6 @@ TagManager:
   - name: OrganToBeSettled
     uniqueID: 2213689443
     locked: 0
+  - name: MouseCursor
+    uniqueID: 3432220295
+    locked: 0
