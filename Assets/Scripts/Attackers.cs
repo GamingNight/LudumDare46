@@ -14,8 +14,10 @@ public class Attackers {
                                          //      int min = (int) (result - rand_range);
                                          //      int max = (int) (result + rand_range);
                                          //      int res = (int) Random.Range(min, max);
-        float res = 2.0f * 1.0f * 0.1f * (turn + 1.0f) * (turn + 2.0f) / 2.0f;
-        int intres = (int)res + 1;
+        float res = 0.33f * Mathf.Pow(turn, 2.2f)+Mathf.Pow(2f,turn)*Mathf.Pow(turn/25f,4);
+        Debug.Log("res="+res);
+        int intres = (int)res;
+        //intres = 0;
         return intres;
     }
 }
