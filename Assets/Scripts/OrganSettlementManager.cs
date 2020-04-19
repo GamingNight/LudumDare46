@@ -47,12 +47,7 @@ public class OrganSettlementManager : MonoBehaviour {
 
         bool mouseButtonUp = Input.GetMouseButtonUp(0);
         if (mouseButtonUp) {
-            Vector3 mouseWorldPosition = Vector3.zero;
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-            if (Physics.Raycast(ray, out hit)) {
-                mouseWorldPosition = hit.point;
-            }
+            Vector3 mouseWorldPosition = GetMouseWorldPosition();
             if (growIconCoroutine != null) {
                 StopCoroutine(growIconCoroutine);
             }
@@ -81,12 +76,7 @@ public class OrganSettlementManager : MonoBehaviour {
         }
 
         if (mode == Mode.SETTLEMENT) {
-            Vector3 mouseWorldPosition = Vector3.zero;
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-            if (Physics.Raycast(ray, out hit)) {
-                mouseWorldPosition = hit.point;
-            }
+            Vector3 mouseWorldPosition = GetMouseWorldPosition();
             GameObject lastOrganInstantiated = organObjectList[organObjectList.Count - 1];
             lastOrganInstantiated.transform.position = new Vector3(mouseWorldPosition.x, 0.1f, mouseWorldPosition.z);
             lastOrganInstantiated.transform.eulerAngles = new Vector3(90, 0, 0);
@@ -96,6 +86,17 @@ public class OrganSettlementManager : MonoBehaviour {
                 lastOrganInstantiated.GetComponent<Organ>().RevertColor();
             }
         }
+    }
+
+    private Vector3 GetMouseWorldPosition() {
+        Vector3 mouseWorldPosition = Vector3.zero;
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        foreach (RaycastHit hit in Physics.RaycastAll(ray)) {
+            if (hit.transform.tag == "Ground") {
+                mouseWorldPosition = hit.point;
+            }
+        }
+        return mouseWorldPosition;
     }
 
     private GameObject[] GetUnlockedOrganPrefabs() {
