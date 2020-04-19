@@ -18,6 +18,7 @@ public class OrganSettlementManager : MonoBehaviour {
     private Mode mode;
     private Mode previousMode;
     private Dictionary<OrganSettlementIcon, Organ> iconMap;
+    private Coroutine growIconCoroutine;
     private List<GameObject> organObjectList;
 
     void Start() {
@@ -51,6 +52,9 @@ public class OrganSettlementManager : MonoBehaviour {
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit)) {
                 mouseWorldPosition = hit.point;
+            }
+            if (growIconCoroutine != null) {
+                StopCoroutine(growIconCoroutine);
             }
             if (mode == Mode.IDLE) {
                 ShowOrganSettlementIcons(mouseWorldPosition);
@@ -120,7 +124,7 @@ public class OrganSettlementManager : MonoBehaviour {
             rectTransform.position = new Vector3(mouseWorldPosition.x, 0.1f, mouseWorldPosition.z);
             rectTransform.eulerAngles = new Vector3(90f, 0, 0);
             rectTransform.localScale = new Vector2(0, 0);
-            StartCoroutine(GrowIconCoroutine(rectTransform, mouseWorldPosition, angle));
+            growIconCoroutine = StartCoroutine(GrowIconCoroutine(rectTransform, mouseWorldPosition, angle));
             iconMap.Add(icon.GetComponent<OrganSettlementIcon>(), organ);
         }
     }
