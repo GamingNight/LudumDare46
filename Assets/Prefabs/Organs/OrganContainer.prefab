@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 506370524975028414}
-  - component: {fileID: 958567013}
   m_Layer: 0
   m_Name: OrganContainer
   m_TagString: Untagged
@@ -32,18 +31,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &958567013
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 506370524975028415}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 13363ebd1f16f5d4d858680a7e22f558, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1429939102
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -55,11 +42,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: MainOrgan
-      objectReference: {fileID: 0}
-    - target: {fileID: 8045408162216531858, guid: a72bfc08fe7c7d14db1b2c36e0a746e4,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8045408162216531859, guid: a72bfc08fe7c7d14db1b2c36e0a746e4,
         type: 3}

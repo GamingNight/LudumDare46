@@ -435,8 +435,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: OrganContainer
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 958567013, guid: 151a29f7b35e4f44596f24ab0289370d, type: 3}
+    - target: {fileID: 506370524975028415, guid: 151a29f7b35e4f44596f24ab0289370d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8045408160787919884, guid: 151a29f7b35e4f44596f24ab0289370d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 151a29f7b35e4f44596f24ab0289370d, type: 3}
 --- !u!1 &958567011 stripped
 GameObject:

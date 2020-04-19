@@ -2077,7 +2077,7 @@ GameObject:
   - component: {fileID: 8045408162216531859}
   - component: {fileID: 4763731077681873390}
   - component: {fileID: 2114648146042992708}
-  - component: {fileID: -4607013142331616066}
+  - component: {fileID: 2529212763888158542}
   m_Layer: 0
   m_Name: MainOrgan
   m_TagString: Organ
@@ -2151,7 +2151,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &-4607013142331616066
+--- !u!114 &2529212763888158542
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2160,15 +2160,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 8045408162216531858}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 06f6a12155bd26d49abc7350900cbdbb, type: 3}
+  m_Script: {fileID: 11500000, guid: b2a3e12543b2eac4cbf42aee80f325e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  organName: Blue
-  unlockedAtStart: 1
-  hudImage: {fileID: 21300000, guid: fb90f710b0ccd1040a1de0059c27c1ce, type: 3}
-  hudImageSelected: {fileID: 21300000, guid: 31411e25dc700414997a465309bc61a2, type: 3}
   forbiddenColor: {r: 0, g: 0, b: 0, a: 0.53333336}
-  resourcesType: 1
 --- !u!1 &8083560729023145805
 GameObject:
   m_ObjectHideFlags: 0
