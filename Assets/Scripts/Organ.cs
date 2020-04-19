@@ -118,16 +118,18 @@ public class Organ : MonoBehaviour {
     }
 
     void Update() {
-        if (isSelected & (resourcesType == Resources.ResourcesType.A)) {
-            // Defence
-            if (Input.GetKeyDown(KeyCode.D)) {
+        if (isSelected & (resourcesType == Resources.ResourcesType.A))
+        {
+
+            float scrollWheel = Input.GetAxis("Mouse ScrollWheel");
+            bool scrollup = (scrollWheel > 0f);
+            if (scrollup) {
                 BuyDef();
             }
-            // Boost
-            if (Input.GetKeyDown(KeyCode.B) & !rewardx2) {
+            bool scrolldown = (scrollWheel < 0f);
+            if (scrolldown & !rewardx2) {
                 BuyBoost();
             }
         }
     }
-
 }
