@@ -47,7 +47,7 @@ public class LineDrawer : MonoBehaviour {
 
     void OnTriggerEnter(Collider other) {
 
-        if (other.gameObject.tag == "Organ") {
+        if (other.gameObject.tag == "LineDrawer") {
             if (LineRelation.FindRelation(gameObject, other.gameObject) == null) {
                 GameObject newLineRendererObject = Instantiate<GameObject>(lineRendrerPrefab);
                 newLineRendererObject.transform.SetParent(gameObject.transform);
@@ -62,7 +62,7 @@ public class LineDrawer : MonoBehaviour {
 
     void OnTriggerStay(Collider other) {
 
-        if (other.gameObject.tag == "Organ") {
+        if (other.gameObject.tag == "LineDrawer") {
             LineRelation lineRelation = LineRelation.FindRelation(gameObject, other.gameObject);
             if (lineRelation != null) {
                 lineRelation.lineRenderer.SetPosition(0, transform.position);
@@ -73,7 +73,7 @@ public class LineDrawer : MonoBehaviour {
 
     void OnTriggerExit(Collider other) {
 
-        if (other.gameObject.tag == "Organ") {
+        if (other.gameObject.tag == "LineDrawer") {
             LineRelation lineRelation = LineRelation.FindRelation(gameObject, other.gameObject);
             if (lineRelation != null) {
                 LineRenderer lineRenderer = lineRelation.lineRenderer;

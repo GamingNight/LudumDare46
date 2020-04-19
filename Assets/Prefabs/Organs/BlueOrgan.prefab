@@ -111,7 +111,7 @@ GameObject:
   - component: {fileID: 7069176270684860330}
   m_Layer: 2
   m_Name: linedrawer
-  m_TagString: Untagged
+  m_TagString: LineDrawer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Organ
   - Ground
+  - LineDrawer
   layers:
   - Default
   - TransparentFX
