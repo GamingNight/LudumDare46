@@ -30,6 +30,16 @@ public class GameManager : MonoBehaviour {
         resourcesConf.D.Set(100, Resources.ResourcesType.D);
     }
 
+    public bool Buy(Resources.ResourcesType type) {
+        ResourceCollectionCost collec = new ResourceCollectionCost(type);
+        return resourcesConf.Buy(collec);
+    }
+
+    public void Add(Resources.ResourcesType type) {
+        ResourceCollectionReward collec = new ResourceCollectionReward(type);
+        resourcesConf.Add(collec);
+    }
+
     public void LaunchAttack() {
         if (attackersD.GetPower(roundCount) > resourcesConf.D.count) {
             menuNavig.endMenu();
@@ -67,10 +77,6 @@ public class GameManager : MonoBehaviour {
         return resources;
     }
 
-    public ResourceCollection GetResourcesConf() {
-
-        return resourcesConf;
-    }
 
     private void DebugDisplay() {
         Debug.Log("A = " + resourcesConf.A.count + " B = " + resourcesConf.B.count + " C = " + resourcesConf.C.count + " D = " + resourcesConf.D.count + " Attack = " + attackersD.GetPower(roundCount));

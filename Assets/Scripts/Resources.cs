@@ -56,4 +56,77 @@ public class ResourceCollection {
         }
         return res;
     }
+
+    public void Add(ResourceCollection resource2Add) {
+        A.Add(resource2Add.A.count);
+        B.Add(resource2Add.B.count);
+        C.Add(resource2Add.C.count);
+        D.Add(resource2Add.D.count);
+    }
+}
+
+public class ResourceCollectionReward : ResourceCollection {
+    public ResourceCollectionReward(Resources.ResourcesType type) {
+
+        if (type == Resources.ResourcesType.A) {
+            A.count = 2;
+            B.count = 0;
+            C.count = 0;
+            D.count = 0;
+        }
+
+        if (type == Resources.ResourcesType.B) {
+            A.count = 0;
+            B.count = 1;
+            C.count = 0;
+            D.count = 0;
+        }
+    
+        if (type == Resources.ResourcesType.C) {
+            A.count = 0;
+            B.count = 0;
+            C.count = 1;
+            D.count = 0;
+        }
+
+        if (type == Resources.ResourcesType.D) {
+            A.count = 0;
+            B.count = 0;
+            C.count = 0;
+            D.count = 1;
+        }
+    }
+}
+
+public class ResourceCollectionCost : ResourceCollection {
+    public ResourceCollectionCost(Resources.ResourcesType type) {
+
+        if (type == Resources.ResourcesType.A) {
+            A.count = 2;
+            B.count = 0;
+            C.count = 0;
+            D.count = 0;
+        }
+
+        if (type == Resources.ResourcesType.B) {
+            A.count = 1;
+            B.count = 0;
+            C.count = 0;
+            D.count = 0;
+        }
+    
+        if (type == Resources.ResourcesType.C) {
+            A.count = 1;
+            B.count = 1;
+            C.count = 0;
+            D.count = 0;
+        }
+
+        if (type == Resources.ResourcesType.D) {
+            A.count = 0;
+            B.count = 0;
+            C.count = 0;
+            D.count = 1;
+        }
+    }
 }

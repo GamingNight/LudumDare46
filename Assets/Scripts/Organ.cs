@@ -16,9 +16,6 @@ public class Organ : MonoBehaviour {
 
     private Color initColor;
     private List<Color> initColors;
-    private ResourceCollection resourceCollecCost = new ResourceCollection();
-    private ResourceCollection resourceCollecReward = new ResourceCollection();
-    private Resources resourcesReward = new Resources(0, Resources.ResourcesType.A);
     private bool collideWithOtherOrgan;
     public bool CollideWithOtherOrgan { get { return collideWithOtherOrgan; } }
 
@@ -37,26 +34,6 @@ public class Organ : MonoBehaviour {
             }
         }
         collideWithOtherOrgan = false;
-
-        // Init Cost and reward Configuration
-        if (resourcesType == Resources.ResourcesType.A) {
-            resourceCollecCost.A.count = 1;
-            resourcesReward.Set(2, Resources.ResourcesType.A);
-        } else if (resourcesType == Resources.ResourcesType.B) {
-            resourceCollecCost.A.count = 1;
-            resourcesReward.Set(1, Resources.ResourcesType.B);
-        } else if (resourcesType == Resources.ResourcesType.C) {
-            resourceCollecCost.A.count = 1;
-            resourceCollecCost.B.count = 1;
-            resourcesReward.Set(1, Resources.ResourcesType.C);
-        } else if (resourcesType == Resources.ResourcesType.D) {
-            resourceCollecCost.A.count = 1;
-            resourcesReward.Set(1, Resources.ResourcesType.D);
-        }
-    }
-
-    public bool Buy() {
-        return GameManager.GetInstance().GetResourcesConf().Buy(resourceCollecCost);
     }
 
     public void SetToForbiddenColor() {
@@ -106,9 +83,9 @@ public class Organ : MonoBehaviour {
             rewardDAlreadyDone = true;
         }
         if (rewardx2) {
-            GameManager.GetInstance().GetResources(resourcesReward.type).Add(resourcesReward.count);
+            GameManager.GetInstance().Add(resourcesType);
             rewardx2 = false;
         }
-        GameManager.GetInstance().GetResources(resourcesReward.type).Add(resourcesReward.count);
+        GameManager.GetInstance().Add(resourcesType);
     }
 }
