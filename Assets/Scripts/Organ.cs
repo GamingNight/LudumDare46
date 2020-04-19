@@ -23,6 +23,7 @@ public class Organ : MonoBehaviour {
 
     private bool startHasBeenCalled = false;
     private bool rewardDAlreadyDone = false;
+    private bool rewardAx2 = false;
 
     void Start() {
         startHasBeenCalled = true;
@@ -51,6 +52,13 @@ public class Organ : MonoBehaviour {
             resourceConfCost.A.count = 1;
             resourcesReward.Set(1, Resources.ResourcesType.D);
         }
+    }
+
+    bool Buy(Resources.ResourcesType type) {
+        return GameManager.GetInstance().GetResources(resourceConfCost.A.type).Use(resourceConfCost.A.count) &
+               GameManager.GetInstance().GetResources(resourceConfCost.B.type).Use(resourceConfCost.B.count) &
+               GameManager.GetInstance().GetResources(resourceConfCost.C.type).Use(resourceConfCost.C.count) &
+               GameManager.GetInstance().GetResources(resourceConfCost.D.type).Use(resourceConfCost.D.count);
     }
 
     public void SetToForbiddenColor() {
@@ -90,20 +98,20 @@ public class Organ : MonoBehaviour {
     }
 
     public void OnReward() {
-        if (resourcesType == Resources.ResourcesType.D) {
-            // make the reward only tje first time for resourceD
-            if (rewardDAlreadyDone) {
-                return;
-            }
-
-            rewardDAlreadyDone = true;
-            GameManager.GetInstance().GetResources(resourcesReward.type).Add(resourcesReward.count);
-        } else {
-            GameManager.GetInstance().GetResources(resourcesReward.type).Add(resourcesReward.count);
-            GameManager.GetInstance().GetResources(resourceConfCost.A.type).Use(resourceConfCost.A.count);
-            GameManager.GetInstance().GetResources(resourceConfCost.B.type).Use(resourceConfCost.B.count);
-            GameManager.GetInstance().GetResources(resourceConfCost.C.type).Use(resourceConfCost.C.count);
+        // make the reward only tje first time for resourceD
+        if (rewardDAlreadyDone) {
+            return;
         }
-
+        int reward = resourcesReward.count;
+        if (rewardAx2) {
+            reward = reward * 2;
+        }
+        if (resourcesType == Resources.ResourcesType.D) {
+            
+            rewardDAlreadyDone = true;
+        } else if  (resourcesType == Resources.ResourcesType.A) {
+            rewardAx2 = false;
+        }
+        GameManager.GetInstance().GetResources(resourcesReward.type).Add(resourcesReward.count);
     }
 }
