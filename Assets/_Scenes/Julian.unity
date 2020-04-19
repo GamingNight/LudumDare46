@@ -805,9 +805,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   organPrefabs:
-  - {fileID: 6460248508842597902, guid: 0a521b7a3b854a44eb874ea0d98fe252, type: 3}
-  - {fileID: 6460248508842597902, guid: 50ba5f6aa67f04a48a6b15e56c5f42d7, type: 3}
   - {fileID: 8045408162216531858, guid: d0ceda2418ab5824caafc276f1cfaec5, type: 3}
+  - {fileID: 6460248508842597902, guid: 50ba5f6aa67f04a48a6b15e56c5f42d7, type: 3}
+  - {fileID: 6460248508842597902, guid: 0a521b7a3b854a44eb874ea0d98fe252, type: 3}
   iconPrefab: {fileID: 1357568027257656121, guid: f15e81db56daf204ea570771e73aeeb5,
     type: 3}
   canvas: {fileID: 1848401356}

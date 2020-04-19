@@ -709,7 +709,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   organName: Blue
   unlockedAtStart: 1
-  hudImage: {fileID: 21300000, guid: 2f3313ed6037df74088504bed32374a4, type: 3}
-  hudImageSelected: {fileID: 21300000, guid: c37dea38530739349aadaf91c552c354, type: 3}
+  hudImage: {fileID: 21300000, guid: cde166d45296e744b91a2eacce30ac53, type: 3}
+  hudImageSelected: {fileID: 21300000, guid: 7a868e74f90b94347a4640306078fa68, type: 3}
   forbiddenColor: {r: 0, g: 0, b: 0, a: 0.53333336}
-  resourcesType: 1
+  resourcesType: 0

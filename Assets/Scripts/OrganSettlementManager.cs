@@ -133,7 +133,7 @@ public class OrganSettlementManager : MonoBehaviour {
         GameObject[] unlockedOrganPrefabs = GetUnlockedOrganPrefabs();
         iconMap.Clear();
         float startAngle = Mathf.PI;
-        float stepAngle = Mathf.PI / 2f;
+        float stepAngle = Mathf.PI / 4f;
         float radius = 1.5f;
         for (int i = 0; i < unlockedOrganPrefabs.Length; i++) {
             Organ organ = unlockedOrganPrefabs[i].GetComponent<Organ>();
