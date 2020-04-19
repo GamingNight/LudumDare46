@@ -33,7 +33,7 @@ public class GameManager : MonoBehaviour {
         UpdateSimulation();
     }
 
-    void Reset() {
+    public void Reset() {
         Start();
         ResetSimulation();
     }
@@ -50,6 +50,12 @@ public class GameManager : MonoBehaviour {
         bool toto = resourcesConf.Buy(collec);
         // DebugDisplay();
         return toto;
+    }
+
+    public void BuyDef() {
+        if (GameManager.GetInstance().Buy(Resources.ResourcesType.D)) {
+            GameManager.GetInstance().Add(Resources.ResourcesType.D);
+        }
     }
 
     public bool BuyBoost() {
