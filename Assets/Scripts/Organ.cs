@@ -16,14 +16,15 @@ public class Organ : MonoBehaviour {
 
     private Color initColor;
     private List<Color> initColors;
-    private ResourceConf resourceConfCost = new ResourceConf();
+    private ResourceCollection resourceCollecCost = new ResourceCollection();
+    private ResourceCollection resourceCollecReward = new ResourceCollection();
     private Resources resourcesReward = new Resources(0, Resources.ResourcesType.A);
     private bool collideWithOtherOrgan;
     public bool CollideWithOtherOrgan { get { return collideWithOtherOrgan; } }
 
     private bool startHasBeenCalled = false;
     private bool rewardDAlreadyDone = false;
-    private bool rewardAx2 = false;
+    private bool rewardx2 = false;
 
     void Start() {
         startHasBeenCalled = true;
@@ -39,26 +40,23 @@ public class Organ : MonoBehaviour {
 
         // Init Cost and reward Configuration
         if (resourcesType == Resources.ResourcesType.A) {
-            resourceConfCost.A.count = 1;
+            resourceCollecCost.A.count = 1;
             resourcesReward.Set(2, Resources.ResourcesType.A);
         } else if (resourcesType == Resources.ResourcesType.B) {
-            resourceConfCost.A.count = 1;
+            resourceCollecCost.A.count = 1;
             resourcesReward.Set(1, Resources.ResourcesType.B);
         } else if (resourcesType == Resources.ResourcesType.C) {
-            resourceConfCost.A.count = 1;
-            resourceConfCost.B.count = 1;
+            resourceCollecCost.A.count = 1;
+            resourceCollecCost.B.count = 1;
             resourcesReward.Set(1, Resources.ResourcesType.C);
         } else if (resourcesType == Resources.ResourcesType.D) {
-            resourceConfCost.A.count = 1;
+            resourceCollecCost.A.count = 1;
             resourcesReward.Set(1, Resources.ResourcesType.D);
         }
     }
 
-    bool Buy(Resources.ResourcesType type) {
-        return GameManager.GetInstance().GetResources(resourceConfCost.A.type).Use(resourceConfCost.A.count) &
-               GameManager.GetInstance().GetResources(resourceConfCost.B.type).Use(resourceConfCost.B.count) &
-               GameManager.GetInstance().GetResources(resourceConfCost.C.type).Use(resourceConfCost.C.count) &
-               GameManager.GetInstance().GetResources(resourceConfCost.D.type).Use(resourceConfCost.D.count);
+    public bool Buy() {
+        return GameManager.GetInstance().GetResourcesConf().Buy(resourceCollecCost);
     }
 
     public void SetToForbiddenColor() {
@@ -102,15 +100,14 @@ public class Organ : MonoBehaviour {
         if (rewardDAlreadyDone) {
             return;
         }
-        int reward = resourcesReward.count;
-        if (rewardAx2) {
-            reward = reward * 2;
-        }
+
         if (resourcesType == Resources.ResourcesType.D) {
             
             rewardDAlreadyDone = true;
-        } else if  (resourcesType == Resources.ResourcesType.A) {
-            rewardAx2 = false;
+        }
+        if (rewardx2) {
+            GameManager.GetInstance().GetResources(resourcesReward.type).Add(resourcesReward.count);
+            rewardx2 = false;
         }
         GameManager.GetInstance().GetResources(resourcesReward.type).Add(resourcesReward.count);
     }

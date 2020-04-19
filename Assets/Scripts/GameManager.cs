@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour {
         return INSTANCE;
     }
 
-    private ResourceConf resourcesConf = new ResourceConf();
+    private ResourceCollection resourcesConf = new ResourceCollection();
     private Attackers attackersD = new Attackers(Resources.ResourcesType.D);
     public int roundCount;
     public GameObject organContainer;
@@ -26,15 +26,12 @@ public class GameManager : MonoBehaviour {
         roundCount = 0;
         resourcesConf.A.Set(10, Resources.ResourcesType.A);
         resourcesConf.B.Set(10, Resources.ResourcesType.B);
-        resourcesConf.C.Set(0, Resources.ResourcesType.C);
+        resourcesConf.C.Set(10, Resources.ResourcesType.C);
         resourcesConf.D.Set(100, Resources.ResourcesType.D);
     }
 
     public void LaunchAttack() {
-        int power = attackersD.GetPower(roundCount);
-        Debug.Log("A = " + resourcesConf.A.count + " B = " + resourcesConf.B.count +" C = " + resourcesConf.C.count +" D = " + resourcesConf.D.count + " Attack = " + power);
-
-        if (power > resourcesConf.D.count) {
+        if (attackersD.GetPower(roundCount) > resourcesConf.D.count) {
             menuNavig.endMenu();
         }
     }
@@ -53,6 +50,7 @@ public class GameManager : MonoBehaviour {
         LaunchAttack();
         LaunchReward();
         LaunchPreparation();
+        DebugDisplay();
     }
 
     public Resources GetResources(Resources.ResourcesType type) {
@@ -67,5 +65,14 @@ public class GameManager : MonoBehaviour {
             resources = resourcesConf.C;
         }
         return resources;
+    }
+
+    public ResourceCollection GetResourcesConf() {
+
+        return resourcesConf;
+    }
+
+    private void DebugDisplay() {
+        Debug.Log("A = " + resourcesConf.A.count + " B = " + resourcesConf.B.count + " C = " + resourcesConf.C.count + " D = " + resourcesConf.D.count + " Attack = " + attackersD.GetPower(roundCount));
     }
 }
