@@ -40,8 +40,7 @@ public class Organ : MonoBehaviour {
         animator = GetComponent<Animator>();
         isSelected = false;
         GameManager.GetInstance().UpdateSimulation();
-        if (toggleButtonA)
-        {
+        if (toggleButtonA) {
             toggleButtonA.GetComponent<Toggle>().onValueChanged.AddListener(delegate { ToggleBoost(); });   
         }
 
@@ -92,6 +91,9 @@ public class Organ : MonoBehaviour {
 
     public void OnGoToNextTurn() {
         rewardx2 = false;
+        if (toggleButtonA) {
+            toggleButtonA.GetComponent<Toggle>().isOn = false;
+        }
     }
 
     void OnMouseEnter() {
