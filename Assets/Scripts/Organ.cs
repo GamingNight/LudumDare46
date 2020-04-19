@@ -1,9 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-
-public class Coin : MonoBehaviour {
-
-}
+using UnityEngine.UI;
 
 public class Organ : MonoBehaviour {
 
@@ -13,6 +10,7 @@ public class Organ : MonoBehaviour {
     public Sprite hudImageSelected;
     public Color forbiddenColor;
     public Resources.ResourcesType resourcesType;
+    public GameObject toggleButtonA;
 
     private Color initColor;
     private List<Color> initColors;
@@ -42,6 +40,11 @@ public class Organ : MonoBehaviour {
         animator = GetComponent<Animator>();
         isSelected = false;
         GameManager.GetInstance().UpdateSimulation();
+        if (toggleButtonA)
+        {
+            toggleButtonA.GetComponent<Toggle>().onValueChanged.AddListener(delegate { ToggleBoost(); });   
+        }
+
     }
 
     public void SetToForbiddenColor() {
@@ -107,6 +110,23 @@ public class Organ : MonoBehaviour {
         }
         CursorManager.GetInstance().TriggerNavigationCursor();
         isSelected = false;
+    }
+
+    public void ToggleBoost() {
+        Toggle button = toggleButtonA.GetComponent<Toggle>();
+        bool status = button.isOn;
+        if (!status) {
+            if (GameManager.GetInstance().BuyBoost()) {
+                rewardx2 = true;
+            } else {
+                toggleButtonA.GetComponent<Toggle>().isOn = false;
+            }
+        } else {
+            GameManager.GetInstance().RefundBoost();
+            rewardx2 = false;
+        }
+
+        GameManager.GetInstance().UpdateSimulation();
     }
 
     void BuyBoost() {

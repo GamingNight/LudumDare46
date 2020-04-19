@@ -1108,6 +1108,7 @@ MonoBehaviour:
   hudImageSelected: {fileID: 21300000, guid: 7a868e74f90b94347a4640306078fa68, type: 3}
   forbiddenColor: {r: 0, g: 0, b: 0, a: 0.53333336}
   resourcesType: 0
+  toggleButtonA: {fileID: 8761796115496090188}
 --- !u!95 &-7050894568614397888
 Animator:
   serializedVersion: 3

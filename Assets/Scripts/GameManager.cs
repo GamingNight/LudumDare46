@@ -62,6 +62,11 @@ public class GameManager : MonoBehaviour {
         ResourceCollectionBoostCost collec = new ResourceCollectionBoostCost();
         return resourcesConf.Buy(collec);
     }
+    
+    public void RefundBoost() {
+        ResourceCollectionBoostCost collec = new ResourceCollectionBoostCost();
+        resourcesConf.Add(collec);
+    }
 
     public void Add(Resources.ResourcesType type) {
         ResourceCollectionReward collec = new ResourceCollectionReward(type);
