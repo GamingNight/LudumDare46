@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour {
     }
 
     void Start() {
+        Debug.Log("Start organContainer =  " + organContainer);
         roundCount = 0;
         resourcesConf.A.Set(10, Resources.ResourcesType.A);
         resourcesConf.B.Set(10, Resources.ResourcesType.B);
@@ -62,6 +63,7 @@ public class GameManager : MonoBehaviour {
     }
 
     public void LaunchReward() {
+        Debug.Log("LaunchReward organContainer =  " + organContainer);
         foreach (Organ org in organContainer.GetComponentsInChildren<Organ>()) {
             org.OnReward();
         }
