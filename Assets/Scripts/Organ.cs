@@ -1,9 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-
-public class Coin : MonoBehaviour {
-
-}
+using UnityEngine.UI;
 
 public class Organ : MonoBehaviour {
 
@@ -13,6 +10,7 @@ public class Organ : MonoBehaviour {
     public Sprite hudImageSelected;
     public Color forbiddenColor;
     public Resources.ResourcesType resourcesType;
+    public GameObject toggleButtonA;
 
     private Color initColor;
     private List<Color> initColors;
@@ -41,6 +39,11 @@ public class Organ : MonoBehaviour {
 
         animator = GetComponent<Animator>();
         isSelected = false;
+        GameManager.GetInstance().UpdateSimulation();
+        if (toggleButtonA) {
+            toggleButtonA.GetComponent<Toggle>().onValueChanged.AddListener(delegate { ToggleBoost(); });   
+        }
+
     }
 
     public void SetToForbiddenColor() {
@@ -79,12 +82,18 @@ public class Organ : MonoBehaviour {
         }
     }
 
-    public void OnReward() {
+    public void OnSimulateReward() {
         if (rewardx2) {
-            GameManager.GetInstance().Add(resourcesType);
-            rewardx2 = false;
+            GameManager.GetInstance().SimulationAdd(resourcesType);
         }
-        GameManager.GetInstance().Add(resourcesType);
+        GameManager.GetInstance().SimulationAdd(resourcesType);
+    }
+
+    public void OnGoToNextTurn() {
+        rewardx2 = false;
+        if (toggleButtonA) {
+            toggleButtonA.GetComponent<Toggle>().isOn = false;
+        }
     }
 
     void OnMouseEnter() {
@@ -105,15 +114,27 @@ public class Organ : MonoBehaviour {
         isSelected = false;
     }
 
-    void BuyDef() {
-        if (GameManager.GetInstance().Buy(Resources.ResourcesType.D)) {
-            GameManager.GetInstance().Add(Resources.ResourcesType.D);
+    public void ToggleBoost() {
+        Toggle button = toggleButtonA.GetComponent<Toggle>();
+        bool status = button.isOn;
+        if (!status) {
+            if (GameManager.GetInstance().BuyBoost()) {
+                rewardx2 = true;
+            } else {
+                toggleButtonA.GetComponent<Toggle>().isOn = false;
+            }
+        } else {
+            GameManager.GetInstance().RefundBoost();
+            rewardx2 = false;
         }
+
+        GameManager.GetInstance().UpdateSimulation();
     }
 
     void BuyBoost() {
         if (GameManager.GetInstance().BuyBoost()) {
             rewardx2 = true;
+            GameManager.GetInstance().UpdateSimulation();
         }
     }
 
@@ -122,10 +143,6 @@ public class Organ : MonoBehaviour {
         {
 
             float scrollWheel = Input.GetAxis("Mouse ScrollWheel");
-            bool scrollup = (scrollWheel > 0f);
-            if (scrollup) {
-                BuyDef();
-            }
             bool scrolldown = (scrollWheel < 0f);
             if (scrolldown & !rewardx2) {
                 BuyBoost();

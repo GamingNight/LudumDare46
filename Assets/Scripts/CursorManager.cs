@@ -24,6 +24,19 @@ public class CursorManager : MonoBehaviour {
     void Start() {
 
         animator = GetComponent<Animator>();
+        Init();
+    }
+
+    public void Init() {
+
+        DestroyStaticCursor();
+    }
+
+    void OnDisable() {
+        Cursor.visible = true;
+        if (staticCursor != null) {
+            Destroy(staticCursor);
+        }
     }
 
     void Update() {

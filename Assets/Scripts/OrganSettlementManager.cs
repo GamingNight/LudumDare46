@@ -22,13 +22,25 @@ public class OrganSettlementManager : MonoBehaviour {
     private List<GameObject> organObjectList;
 
     void Start() {
+        Init();
+    }
+
+    public void Init() {
+
         unlockedOrganTable = new bool[organPrefabs.Length];
         for (int i = 0; i < organPrefabs.Length; i++) {
             unlockedOrganTable[i] = organPrefabs[i].GetComponent<Organ>().unlockedAtStart;
         }
         mode = Mode.IDLE;
         iconMap = new Dictionary<OrganSettlementIcon, Organ>();
-        organObjectList = new List<GameObject>();
+        if (organObjectList == null) {
+            organObjectList = new List<GameObject>();
+        } else {
+            foreach (GameObject organ in organObjectList) {
+                Destroy(organ);
+            }
+            organObjectList.Clear();
+        }
     }
 
     public void UnlockOrgan(string organName) {
@@ -62,7 +74,7 @@ public class OrganSettlementManager : MonoBehaviour {
                 bool removeMenu = true;
                 if (selectedIcon != null) {
                     if (GameManager.GetInstance().Buy(iconMap[selectedIcon].resourcesType)) {
-                        organObjectList.Add(InstantiateOrgan(new Vector3(mouseWorldPosition.x, 0.1f, mouseWorldPosition.z), iconMap[selectedIcon]));
+                        organObjectList.Add(InstantiateOrgan(new Vector3(mouseWorldPosition.x, 1f, mouseWorldPosition.z), iconMap[selectedIcon]));
                         CursorManager.GetInstance().DestroyStaticCursor();
                         mode = Mode.SETTLEMENT;
                     } else {
@@ -91,7 +103,7 @@ public class OrganSettlementManager : MonoBehaviour {
         if (mode == Mode.SETTLEMENT) {
             Vector3 mouseWorldPosition = GetMouseWorldPosition();
             GameObject lastOrganInstantiated = organObjectList[organObjectList.Count - 1];
-            lastOrganInstantiated.transform.position = new Vector3(mouseWorldPosition.x, 0.1f, mouseWorldPosition.z);
+            lastOrganInstantiated.transform.position = new Vector3(mouseWorldPosition.x, 1f, mouseWorldPosition.z);
             lastOrganInstantiated.transform.eulerAngles = new Vector3(90, 0, 0);
             if (lastOrganInstantiated.GetComponent<Organ>().CollideWithOtherOrgan) {
                 lastOrganInstantiated.GetComponent<Organ>().SetToForbiddenColor();

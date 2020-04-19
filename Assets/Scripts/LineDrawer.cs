@@ -82,4 +82,15 @@ public class LineDrawer : MonoBehaviour {
             }
         }
     }
+
+    public static void ClearRelations() {
+        if (lineRelationList == null) {
+            return;
+        }
+
+        foreach (LineRelation relation in lineRelationList) {
+            Destroy(relation.lineRenderer);
+        }
+        lineRelationList.Clear();
+    }
 }

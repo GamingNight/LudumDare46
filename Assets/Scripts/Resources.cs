@@ -63,6 +63,20 @@ public class ResourceCollection {
         C.Add(resource2Add.C.count);
         D.Add(resource2Add.D.count);
     }
+
+    public Resources GetResources(Resources.ResourcesType type) {
+        Resources resources = D;
+        if (type == Resources.ResourcesType.A) {
+            resources = A;
+        }
+        else if (type == Resources.ResourcesType.B) {
+            resources = B;
+        }
+        else if (type == Resources.ResourcesType.C) {
+            resources = C;
+        }
+        return resources;
+    }
 }
 
 public class ResourceCollectionReward : ResourceCollection {
