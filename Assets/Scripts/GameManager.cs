@@ -33,6 +33,11 @@ public class GameManager : MonoBehaviour {
         UpdateSimulation();
     }
 
+    void Reset() {
+        Start();
+        ResetSimulation();
+    }
+
     void ResetSimulation() {
         resourcesSimu.A.Set(0, Resources.ResourcesType.A);
         resourcesSimu.B.Set(0, Resources.ResourcesType.B);
