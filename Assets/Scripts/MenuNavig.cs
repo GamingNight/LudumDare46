@@ -9,7 +9,6 @@ public class MenuNavig : MonoBehaviour {
     public GameObject cursor;
     public GameObject gameManager;
     public GameObject organContainer;
-    public GameObject hud;
 
     public void Quit() {
         Application.Quit();
@@ -39,6 +38,5 @@ public class MenuNavig : MonoBehaviour {
         cursor.SetActive(b);
         gameManager.SetActive(b);
         organContainer.SetActive(b);
-        hud.SetActive(b);
     }
 }
