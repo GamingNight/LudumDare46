@@ -774,6 +774,7 @@ MonoBehaviour:
   unlockedAtStart: 1
   hudImage: {fileID: 21300000, guid: 12928009f3ac96343814c6d4ec098ddb, type: 3}
   hudImageSelected: {fileID: 21300000, guid: ace6c6f5380a80a4d9b8c8df58de7530, type: 3}
+  hudImageWrong: {fileID: 21300000, guid: 799f24aa7dd0fc94fa404eea2c4c4de5, type: 3}
   forbiddenColor: {r: 0, g: 0, b: 0, a: 0.53333336}
   resourcesType: 1
   toggleButtonA: {fileID: 0}

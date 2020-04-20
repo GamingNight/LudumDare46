@@ -8,6 +8,7 @@ public class Organ : MonoBehaviour {
     public bool unlockedAtStart = true;
     public Sprite hudImage;
     public Sprite hudImageSelected;
+    public Sprite hudImageWrong;
     public Color forbiddenColor;
     public Resources.ResourcesType resourcesType;
     public GameObject toggleButtonA;
