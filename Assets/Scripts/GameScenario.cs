@@ -101,12 +101,12 @@ public class GameScenario : MonoBehaviour {
             } else if (currentState == COST_BLUE) {
                 HideFakeDefensePanel();
                 triggerTimer = true;
-                timerDuration = 4;
+                timerDuration = 5;
                 currentTime = 0;
                 stateAfterTimer = RUNNING_OUT_OF_BLUE;
             } else if (currentState == CLICK_MAP) {
                 triggerTimer = true;
-                timerDuration = 4;
+                timerDuration = 5;
                 currentTime = 0;
                 stateAfterTimer = EXPLAIN_MAIN_ORGAN_COST;
             } else if (currentState == EXPLAIN_MAIN_ORGAN_COST) {
