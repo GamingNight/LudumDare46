@@ -77,8 +77,14 @@ public class MainOrgan : MonoBehaviour {
 
     public void TriggerNextVirusSampleAnimation() {
 
-        GameObject nextVirusAlarm = Instantiate<GameObject>(nextVirusAlarmPrefab);
+        nextVirusAlarm = Instantiate<GameObject>(nextVirusAlarmPrefab);
         nextTurnButton.GetComponentInChildren<Text>().text = "Testing...";
-        //GameManager.GetInstance().GoToNextTurn();
+        nextTurnButton.GetComponentInChildren<Animator>().SetTrigger("fillButton");
+    }
+
+    public void EndNextVirusSample() {
+        GameManager.GetInstance().GoToNextTurn();
+        nextTurnButton.GetComponentInChildren<Text>().text = ">  Submit to next virus sample  <";
+        Destroy(nextVirusAlarm);
     }
 }
