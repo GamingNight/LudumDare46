@@ -8,10 +8,13 @@ public class LineDrawer : MonoBehaviour {
         public GameObject organ2;
         public LineRenderer lineRenderer;
 
+        private int buildTurn = 0;
+
         public LineRelation(GameObject organ1, GameObject organ2, LineRenderer lineRenderer) {
             this.organ1 = organ1;
             this.organ2 = organ2;
             this.lineRenderer = lineRenderer;
+            this.buildTurn = GameManager.GetInstance().roundCount;
         }
 
         public bool TestEqual(GameObject otherOrgan1, GameObject otherOrgan2) {
@@ -31,6 +34,14 @@ public class LineDrawer : MonoBehaviour {
                 i++;
             }
             return res;
+        }
+
+        void Start() {
+            buildTurn = GameManager.GetInstance().roundCount;
+        }
+
+        public int GetBuildTurn() {
+            return buildTurn;
         }
     }
 
@@ -94,18 +105,17 @@ public class LineDrawer : MonoBehaviour {
         lineRelationList.Clear();
     }
 
-    public static void ClearOrganRelations(GameObject organ) {
+    public static void ClearOrganRelations(int turnNumber) {
         if (lineRelationList == null) {
             return;
         }
 
         foreach (LineRelation relation in lineRelationList) {
-            Debug.Log("AAA relation.organ1 " + relation.organ1);
-            Debug.Log("AAA relation.organ2 " + relation.organ2);
-            Debug.Log("AAA organ " + organ);
-            if ((relation.organ1 == organ) | (relation.organ2 == organ) ) {
+            Debug.Log("AAA turnNumber " + turnNumber);
+            Debug.Log("AAA relation.GetBuildTurn() " + relation.GetBuildTurn());
+            if (relation.GetBuildTurn() == turnNumber)
+            {
                 Destroy(relation.lineRenderer);
-                lineRelationList.Remove(relation);
             }
         }
     }

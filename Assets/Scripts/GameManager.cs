@@ -44,7 +44,7 @@ public class GameManager : MonoBehaviour {
             if (org.GetBuildTurn() == roundCount) {
                 // Debug.Log("Organ : " + org.name);
                 Refund(org.resourcesType);
-                LineDrawer.ClearOrganRelations(org.gameObject);
+                LineDrawer.ClearOrganRelations(org.GetBuildTurn());
                 Destroy(org.gameObject);       
             }
         }
