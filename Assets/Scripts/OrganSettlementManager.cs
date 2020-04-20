@@ -116,6 +116,8 @@ public class OrganSettlementManager : MonoBehaviour {
                     if (GameScenario.IS_TUTORIAL) {
                         GameScenario.GetInstance().ReachState(GameScenario.CLICK_MAP);
                     }
+                } else {
+                    Play(errorClip);
                 }
             }
         }
