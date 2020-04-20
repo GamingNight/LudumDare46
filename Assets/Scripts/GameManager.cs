@@ -116,13 +116,15 @@ public class GameManager : MonoBehaviour {
         resourcesSimu.Add(collec);
     }
 
-    public void LaunchAttack() {
+    public bool LaunchAttack() {
         Debug.Log("attack");
         if (attackersD.GetPower(roundCount) > resourcesConf.D.count) {
             Debug.Log("perdu au tour " + roundCount);
             menuCanvas.SetActive(true);
             menuNavig.EndMenu();
+            return false;
         }
+        return true;
     }
 
     public void LaunchPreparation() {
@@ -141,7 +143,7 @@ public class GameManager : MonoBehaviour {
     }
 
     public void GoToNextTurn() {
-        LaunchAttack();
+        bool res = LaunchAttack();
         LaunchReward();
         LaunchPreparation();
         foreach (Organ org in organContainer.GetComponentsInChildren<Organ>()) {

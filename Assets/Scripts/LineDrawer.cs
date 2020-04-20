@@ -100,6 +100,9 @@ public class LineDrawer : MonoBehaviour {
         }
 
         foreach (LineRelation relation in lineRelationList) {
+            Debug.Log("AAA relation.organ1 " + relation.organ1);
+            Debug.Log("AAA relation.organ2 " + relation.organ2);
+            Debug.Log("AAA organ " + organ);
             if ((relation.organ1 == organ) | (relation.organ2 == organ) ) {
                 Destroy(relation.lineRenderer);
                 lineRelationList.Remove(relation);
