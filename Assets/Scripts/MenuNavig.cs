@@ -44,6 +44,15 @@ public class MenuNavig : MonoBehaviour {
         welcomeText.SetActive(false);
     }
 
+    public void WinMenu() {
+        SetMainGameActive(false);
+        startButton.SetActive(false);
+        tutorialButton.SetActive(false);
+        restartButton.SetActive(true);
+        gameoverText.SetActive(true);
+        welcomeText.SetActive(false);
+    }
+
     private void SetMainGameActive(bool b) {
         cursor.SetActive(b);
         gameManager.SetActive(b);
