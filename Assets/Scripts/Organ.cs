@@ -25,6 +25,8 @@ public class Organ : MonoBehaviour {
     private bool isSelected;
     public bool IsSelected { get { return isSelected; } }
 
+    private int buildTurn = 0;
+
     void Start() {
         startHasBeenCalled = true;
         if (GetComponent<SpriteRenderer>() != null) {
@@ -43,7 +45,7 @@ public class Organ : MonoBehaviour {
         if (toggleButtonA) {
             toggleButtonA.GetComponent<Toggle>().onValueChanged.AddListener(delegate { ToggleBoost(); });
         }
-
+        buildTurn = GameManager.GetInstance().roundCount;
     }
 
     public void SetToForbiddenColor() {

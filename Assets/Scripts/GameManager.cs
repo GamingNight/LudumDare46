@@ -38,6 +38,14 @@ public class GameManager : MonoBehaviour {
         ResetSimulation();
     }
 
+    public void ResetTurn() {
+        foreach (Organ org in organContainer.GetComponentsInChildren<Organ>()) {
+            Refund(org.resourcesType);
+            Destroy(org);
+        }
+        ResetSimulation();
+    }
+
     void ResetSimulation() {
         resourcesSimu.A.Set(0, Resources.ResourcesType.A);
         resourcesSimu.B.Set(0, Resources.ResourcesType.B);
@@ -63,16 +71,24 @@ public class GameManager : MonoBehaviour {
         return resourcesConf.CanBuy(collec);
     }
 
-    public bool Generate() {
+    public void Generate() {
         ResourceCollectionHeartCost collec = new ResourceCollectionHeartCost();
-        return resourcesConf.Buy(collec);
+        bool res = resourcesConf.Buy(collec);
+        if (res) {
+            Debug.Log("TODO END OF GAME");
+        }
     }
 
     public bool BuyBoost() {
         ResourceCollectionBoostCost collec = new ResourceCollectionBoostCost();
         return resourcesConf.Buy(collec);
     }
-    
+
+    public void Refund(Resources.ResourcesType type) {
+        ResourceCollectionCost collec = new ResourceCollectionCost(type);
+        resourcesConf.Add(collec);
+    }
+
     public void RefundBoost() {
         ResourceCollectionBoostCost collec = new ResourceCollectionBoostCost();
         resourcesConf.Add(collec);
@@ -134,7 +150,6 @@ public class GameManager : MonoBehaviour {
     public Resources GetSimulation(Resources.ResourcesType type) {
         return resourcesSimu.GetResources(type);
     }
-
 
     private void DebugDisplay() {
         Debug.Log("A = " + resourcesConf.A.count + " B = " + resourcesConf.B.count + " C = " + resourcesConf.C.count + " D = " + resourcesConf.D.count + " Attack = " + attackersD.GetPower(roundCount));
