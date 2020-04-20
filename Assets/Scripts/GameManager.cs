@@ -58,6 +58,16 @@ public class GameManager : MonoBehaviour {
         }
     }
 
+    public bool CanGenerate() {
+        ResourceCollectionHeartCost collec = new ResourceCollectionHeartCost();
+        return resourcesConf.CanBuy(collec);
+    }
+
+    public bool Generate() {
+        ResourceCollectionHeartCost collec = new ResourceCollectionHeartCost();
+        return resourcesConf.Buy(collec);
+    }
+
     public bool BuyBoost() {
         ResourceCollectionBoostCost collec = new ResourceCollectionBoostCost();
         return resourcesConf.Buy(collec);
@@ -108,6 +118,9 @@ public class GameManager : MonoBehaviour {
         LaunchPreparation();
         foreach (Organ org in organContainer.GetComponentsInChildren<Organ>()) {
             org.OnGoToNextTurn();
+        }
+        foreach (MainOrgan mOrg in organContainer.GetComponentsInChildren<MainOrgan>()) {
+            mOrg.OnGoToNextTurn();
         }
         UpdateSimulation();
         DebugDisplay();

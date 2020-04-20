@@ -42,12 +42,16 @@ public class ResourceCollection {
     public Resources C = new Resources(3, Resources.ResourcesType.C);
     public Resources D = new Resources(3, Resources.ResourcesType.D);
 
-    public bool Buy(ResourceCollection resource2Buy) {
+    public bool CanBuy(ResourceCollection resource2Buy) {
         bool resA = A.CanBuy(resource2Buy.A.count);
         bool resB = B.CanBuy(resource2Buy.B.count);
         bool resC = C.CanBuy(resource2Buy.C.count);
         bool resD = D.CanBuy(resource2Buy.D.count);
-        bool res = (resA & resB & resC & resD);
+        return (resA & resB & resC & resD);
+    }
+
+    public bool Buy(ResourceCollection resource2Buy) {
+        bool res = CanBuy(resource2Buy);
         if (res) {
             A.Buy(resource2Buy.A.count);
             B.Buy(resource2Buy.B.count);

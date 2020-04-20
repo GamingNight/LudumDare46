@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class MainOrgan : MonoBehaviour {
 
@@ -7,11 +8,13 @@ public class MainOrgan : MonoBehaviour {
     private Animator animator;
     private bool isSelected;
     public bool IsSelected { get { return isSelected; } }
+    public GameObject GenerateButton;
 
     void Start() {
         collideWithOtherOrgan = false;
         animator = GetComponent<Animator>();
         isSelected = false;
+        updateGenerateButton();
     }
 
     void OnTriggerStay(Collider other) {
@@ -47,5 +50,21 @@ public class MainOrgan : MonoBehaviour {
     void OnMouseOver() {
 
         CursorManager.GetInstance().TriggerSelectionCursor();
+    }
+
+    private void updateGenerateButton() {
+        if (GenerateButton) {
+            Button button = GenerateButton.GetComponent<Button>();
+            bool canBuy = GameManager.GetInstance().CanGenerate();
+            if (canBuy) {
+                // Activate the Button
+            } else {
+                // Deactivate the Button
+            }
+        }   
+    }
+
+    public void OnGoToNextTurn() {
+        updateGenerateButton();
     }
 }
