@@ -153,3 +153,12 @@ public class ResourceCollectionBoostCost : ResourceCollection {
         D.count = 0;
     }
 }
+
+public class ResourceCollectionHeartCost : ResourceCollection {
+    public ResourceCollectionHeartCost() {
+        A.count = 0;
+        B.count = 20;
+        C.count = 10;
+        D.count = 0;
+    }
+}
