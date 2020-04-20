@@ -24,13 +24,13 @@ public class CursorManager : MonoBehaviour {
 
     void Start() {
 
-        fromOrganSettlementManager = false;
         animator = GetComponent<Animator>();
         Init();
     }
 
     public void Init() {
 
+        fromOrganSettlementManager = false;
         DestroyStaticCursor();
     }
 

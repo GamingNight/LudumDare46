@@ -22,6 +22,8 @@ public class Attackers {
         float d = 4f;
         //  attack power formula
         float res = a * Mathf.Pow(turn, b)+Mathf.Pow(2f,turn)*Mathf.Pow(turn/c,d);
+        // transiton blue to orange gate at turn 7
+        res = res * Mathf.Min((0.1f/3.5f/3.5f*(turn-3f)*(turn-10f)+1f),1);
         Debug.Log("res="+res);
         int intres = (int)res;
         //intres = 0;
