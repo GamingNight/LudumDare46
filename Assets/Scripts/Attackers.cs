@@ -18,7 +18,7 @@ public class Attackers {
         float a = 0.33f;
         float b = 2.2f;
         // set game over and speed of "full blue" player
-        float c = 25f;
+        float c = 40f;
         float d = 4f;
         //  attack power formula
         float res = a * Mathf.Pow(turn, b)+Mathf.Pow(2f,turn)*Mathf.Pow(turn/c,d);

@@ -85,6 +85,7 @@ public class Organ : MonoBehaviour {
     public void OnSimulateReward() {
         if (rewardx2) {
             GameManager.GetInstance().SimulationAdd(resourcesType);
+            GameManager.GetInstance().SimulationAdd(resourcesType);
         }
         GameManager.GetInstance().SimulationAdd(resourcesType);
     }
