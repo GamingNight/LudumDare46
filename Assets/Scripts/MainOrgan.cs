@@ -8,7 +8,8 @@ public class MainOrgan : MonoBehaviour {
     private Animator animator;
     private bool isSelected;
     public bool IsSelected { get { return isSelected; } }
-    public GameObject GenerateButton;
+    public GameObject GenerateButtonActivated;
+    public GameObject GenerateButtonDeactivated;
 
     void Start() {
         collideWithOtherOrgan = false;
@@ -53,15 +54,16 @@ public class MainOrgan : MonoBehaviour {
     }
 
     private void updateGenerateButton() {
-        if (GenerateButton) {
-            Button button = GenerateButton.GetComponent<Button>();
-            bool canBuy = GameManager.GetInstance().CanGenerate();
-            if (canBuy) {
-                // Activate the Button
-            } else {
-                // Deactivate the Button
-            }
-        }   
+        if (!GenerateButtonActivated)
+            return;
+        if (!GenerateButtonDeactivated)
+            return;
+
+        Button activated = GenerateButtonActivated.GetComponent<Button>();
+        Button deactivated = GenerateButtonDeactivated.GetComponent<Button>();
+        bool canBuy = GameManager.GetInstance().CanGenerate();
+        activated.enabled = canBuy;
+        deactivated.enabled = (!canBuy);
     }
 
     public void OnGoToNextTurn() {
