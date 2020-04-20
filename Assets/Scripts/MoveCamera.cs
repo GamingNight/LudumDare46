@@ -9,6 +9,8 @@ public class MoveCamera : MonoBehaviour {
 
     public float speed = 10;
     public float movementDectectionLimit = 0.6f;
+    public Vector2 zoomBoundaries = new Vector2(6, 15);
+    public float zoomSpeed = 15;
     private ScreenPart currentScreenPart;
 
     void Start() {
@@ -82,6 +84,11 @@ public class MoveCamera : MonoBehaviour {
         if (move) {
             Move();
         }
+
+        float scrollWheel = Input.GetAxis("Mouse ScrollWheel");
+        float newPosY = transform.position.y + scrollWheel * Time.deltaTime * zoomSpeed * -1;
+        newPosY = Mathf.Min(Mathf.Max(newPosY, zoomBoundaries.x), zoomBoundaries.y);
+        transform.position = new Vector3(transform.position.x, newPosY, transform.position.z);
     }
 
     private void Move() {
