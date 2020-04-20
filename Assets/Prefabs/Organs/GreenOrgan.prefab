@@ -679,7 +679,7 @@ MonoBehaviour:
   organName: Green
   unlockedAtStart: 1
   hudImage: {fileID: 21300000, guid: 9906f78e438f56e4aabc528de552bc15, type: 3}
-  hudImageSelected: {fileID: 21300000, guid: 7a868e74f90b94347a4640306078fa68, type: 3}
+  hudImageSelected: {fileID: 21300000, guid: 937714b314a5e5547a9958cf252d472f, type: 3}
   forbiddenColor: {r: 0, g: 0, b: 0, a: 0.53333336}
   resourcesType: 2
   toggleButtonA: {fileID: 0}
