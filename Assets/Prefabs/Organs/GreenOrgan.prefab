@@ -553,7 +553,7 @@ Light:
   serializedVersion: 10
   m_Type: 2
   m_Shape: 0
-  m_Color: {r: 0.013171937, g: 0.6981132, b: 0.29048967, a: 1}
+  m_Color: {r: 0.022783892, g: 0.6037736, b: 0.2584997, a: 1}
   m_Intensity: 0.2
   m_Range: 10
   m_SpotAngle: 30
@@ -778,6 +778,7 @@ MonoBehaviour:
   resourcesType: 2
   toggleButtonA: {fileID: 0}
   shape3D: {fileID: 6459305957645494488}
+  boostedCube: {fileID: 0}
 --- !u!95 &-4820578559657704852
 Animator:
   serializedVersion: 3
