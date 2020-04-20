@@ -85,14 +85,14 @@ public class GameManager : MonoBehaviour {
 
     public void BuyDef() {
 
-        if (GameScenario.IS_TUTORIAL) {
+        //if (GameScenario.IS_TUTORIAL) {
 
-        } else {
+        //} else {
             if (Buy(Resources.ResourcesType.D)) {
                 Add(Resources.ResourcesType.D);
                 defOnTurn += 1;
             }
-        }
+        //}
     }
 
     public int GetDefCost() {
