@@ -208,7 +208,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &287040574
 RectTransform:
   m_ObjectHideFlags: 0
@@ -275,7 +275,7 @@ Animator:
   m_GameObject: {fileID: 287040573}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 3402b917cb52f77459ddb9dfc7925c0b, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -405,7 +405,7 @@ PrefabInstance:
     - target: {fileID: 8967928455854204220, guid: 9cc4d175fdb6c664eb5a74ff4ec68322,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9cc4d175fdb6c664eb5a74ff4ec68322, type: 3}
@@ -651,7 +651,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 0.2, g: 0.2, b: 0.2, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -670,7 +670,7 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: This is your main Organ. Before actually releasing it, you have to run
-    a battery of tests to check is resistance. Click here to run the first test.
+    a battery of tests to check its resistance. Click above to run the first test.
 --- !u!222 &1339070245
 CanvasRenderer:
   m_ObjectHideFlags: 0

@@ -20,6 +20,7 @@ public class GameScenario : MonoBehaviour {
         currentState = 0;
         stateAccomplished = false;
         int i = 0;
+        tutoPanels = new GameObject[tutoCanvas.transform.childCount];
         foreach (Transform t in tutoCanvas.transform) {
             tutoPanels[i] = t.gameObject;
             t.gameObject.SetActive(false);
@@ -34,7 +35,7 @@ public class GameScenario : MonoBehaviour {
         }
 
         if (currentState == 0) {
-
+            tutoPanels[currentState].SetActive(true);
         }
         stateAccomplished = true;
     }

@@ -91,7 +91,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f58531eb0e8b3ab4091ecc6689afb7e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
+  speed: 3
   movementDectectionLimit: 0.85
   zoomBoundaries: {x: 5, y: 15}
   initPosition: {x: 0, y: 7, z: -1}
