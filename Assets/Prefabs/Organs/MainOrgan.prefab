@@ -3490,8 +3490,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 6dcecf0f126a2974d8d5a7dc132e842b, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -3867,6 +3867,7 @@ MonoBehaviour:
   nextVirusAlarmPrefab: {fileID: 3948636323234896116, guid: ff02a5f88411beb4a87260d8af5529d9,
     type: 3}
   nextTurnButton: {fileID: 6035712430300093754}
+  menuCanvas: {fileID: 0}
 --- !u!114 &2025596404245017370
 MonoBehaviour:
   m_ObjectHideFlags: 0
