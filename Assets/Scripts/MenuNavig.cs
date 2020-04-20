@@ -39,6 +39,7 @@ public class MenuNavig : MonoBehaviour {
         cursor.SetActive(b);
         gameManager.SetActive(b);
         organContainer.SetActive(b);
+        Camera.main.GetComponent<MoveCamera>().enabled = b;
     }
 
     private void ResetGame() {
@@ -47,5 +48,6 @@ public class MenuNavig : MonoBehaviour {
         gameManager.GetComponent<OrganSettlementManager>().Init();
         gameManager.GetComponent<GameManager>().Reset();
         LineDrawer.ClearRelations();
+        Camera.main.GetComponent<MoveCamera>().Init();
     }
 }

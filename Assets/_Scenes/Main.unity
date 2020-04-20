@@ -185,8 +185,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1252325638652950091, guid: 810552125b37b124f8b9eeb16549e7fc,
         type: 3}
-      propertyPath: movementDectectionLimit
-      value: 0.9
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1252325638652950095, guid: 810552125b37b124f8b9eeb16549e7fc,
         type: 3}

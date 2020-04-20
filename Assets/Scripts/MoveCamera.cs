@@ -12,9 +12,16 @@ public class MoveCamera : MonoBehaviour {
     public Vector2 zoomBoundaries = new Vector2(6, 15);
     public float zoomSpeed = 15;
     private ScreenPart currentScreenPart;
+    private Vector3 initPosition;
 
     void Start() {
         currentScreenPart = ScreenPart.NONE;
+        initPosition = transform.position;
+        Init();
+    }
+
+    public void Init() {
+        transform.position = initPosition;
     }
 
     void Update() {
