@@ -83,8 +83,15 @@ public class MainOrgan : MonoBehaviour {
     }
 
     public void EndNextVirusSample() {
-        GameManager.GetInstance().GoToNextTurn();
+        if (GameManager.GetInstance().GoToNextTurn()) {
+            nextTurnButton.GetComponentInChildren<Text>().text = "Success!";
+            nextTurnButton.GetComponentInChildren<Animator>().SetTrigger("success");
+            Destroy(nextVirusAlarm);
+            nextTurnButton.GetComponent<AudioSource>().Play();
+        }
+    }
+
+    public void EndSuccessVirusSample() {
         nextTurnButton.GetComponentInChildren<Text>().text = ">  Submit to next virus sample  <";
-        Destroy(nextVirusAlarm);
     }
 }

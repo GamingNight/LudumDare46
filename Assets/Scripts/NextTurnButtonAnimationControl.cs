@@ -4,7 +4,11 @@ public class NextTurnButtonAnimationControl : MonoBehaviour {
 
     public MainOrgan mainOrgan;
 
-    public void ReachedEndOfAnimation() {
+    public void ReachedEndOfTest() {
         mainOrgan.EndNextVirusSample();
+    }
+
+    public void ReachedEndOfSuccess() {
+        mainOrgan.EndSuccessVirusSample();
     }
 }
