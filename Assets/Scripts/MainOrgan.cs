@@ -11,13 +11,15 @@ public class MainOrgan : MonoBehaviour {
     public GameObject nextVirusAlarmPrefab;
     public GameObject nextTurnButton;
     public GameObject menuCanvas;
-    public GameObject IncreseButton;
+    public GameObject increaseButton;
 
     private bool collideWithOtherOrgan;
     public bool CollideWithOtherOrgan { get { return collideWithOtherOrgan; } }
     private Animator animator;
     private bool isSelected;
     private GameObject nextVirusAlarm;
+    private Coroutine increaseButtonColorCoroutine;
+    private Color increaseButtonInitColor;
 
     void Start() {
         collideWithOtherOrgan = false;
@@ -30,24 +32,23 @@ public class MainOrgan : MonoBehaviour {
 
     }
 
-    public void LaunchCannotBuyAnimation() {
-
-
-    }
-
     private IEnumerator ChangeIncreaseButtonColor() {
-        var Initcolors = IncreseButton.GetComponent<Image>().color;
-        IncreseButton.GetComponent<Image>().color = Color.red;
+        increaseButtonInitColor = increaseButton.GetComponent<Image>().color;
+        increaseButton.GetComponent<Image>().color = Color.red;
         yield return new WaitForSeconds(0.5f);
-        IncreseButton.GetComponent<Image>().color = Initcolors;
+        increaseButton.GetComponent<Image>().color = increaseButtonInitColor;
     }
 
     public void BuyDef() {
 
         if (GameManager.GetInstance().CanBuyDef()) {
             GameManager.GetInstance().BuyDef();
-        } else if (IncreseButton) {
-            StartCoroutine(ChangeIncreaseButtonColor());
+        } else if (increaseButton) {
+            if (increaseButtonColorCoroutine != null) {
+                StopCoroutine(increaseButtonColorCoroutine);
+                increaseButton.GetComponent<Image>().color = increaseButtonInitColor;
+            }
+            increaseButtonColorCoroutine = StartCoroutine(ChangeIncreaseButtonColor());
         }
     }
 
