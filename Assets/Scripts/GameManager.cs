@@ -47,9 +47,7 @@ public class GameManager : MonoBehaviour {
                 Destroy(org.gameObject);       
             }
         }
-
-
-        ResetSimulation();
+        UpdateSimulation();
     }
 
     void ResetSimulation() {
