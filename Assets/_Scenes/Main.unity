@@ -1085,7 +1085,7 @@ MonoBehaviour:
     m_LineSpacing: 0.7
   m_Text: '
 
-    You can produce more of them buy clicking on the map and creating
+    You can produce more of them by clicking on the map and creating
     a secondary organ "LungNode_3.for".'
 --- !u!222 &648778005
 CanvasRenderer:
