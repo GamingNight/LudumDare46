@@ -1,4 +1,7 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour {
 
@@ -23,7 +26,7 @@ public class GameManager : MonoBehaviour {
 
     void Start() {
         roundCount = 0;
-        resourcesConf.A.Set(3, Resources.ResourcesType.A);
+        resourcesConf.A.Set(100, Resources.ResourcesType.A);
         resourcesConf.B.Set(0, Resources.ResourcesType.B);
         resourcesConf.C.Set(0, Resources.ResourcesType.C);
         resourcesConf.D.Set(1, Resources.ResourcesType.D);
@@ -36,16 +39,25 @@ public class GameManager : MonoBehaviour {
     }
 
     public void ResetTurn() {
-        // Debug.Log("ResetTurn : ");
-        foreach (Organ org in organContainer.GetComponentsInChildren<Organ>()) {
+        ResetSimulation();
+        OrganSettlementManager MyMan = gameObject.GetComponent<OrganSettlementManager>();
+        List<GameObject> Obj2Unlist = new List<GameObject>();
+        foreach (GameObject orgObj in MyMan.GetInstantiatedOrgans()) {
+           Organ org = orgObj.GetComponent<Organ>();
             if (org.GetBuildTurn() == roundCount) {
                 Refund(org.resourcesType);
                 LineDrawer.ClearOrganRelations(org.GetBuildTurn());
-                Destroy(org.gameObject);
+                Obj2Unlist.Add(orgObj);
+                Destroy(orgObj);
+            } else {
+                org.OnSimulateReward();
             }
         }
-        UpdateSimulation();
+        foreach (GameObject orgObj in Obj2Unlist) {
+            MyMan.GetInstantiatedOrgans().Remove(orgObj);
+        }
     }
+
 
     void ResetSimulation() {
         resourcesSimu.A.Set(0, Resources.ResourcesType.A);
@@ -129,7 +141,9 @@ public class GameManager : MonoBehaviour {
 
     public void UpdateSimulation() {
         ResetSimulation();
-        foreach (Organ org in organContainer.GetComponentsInChildren<Organ>()) {
+        OrganSettlementManager MyMan = gameObject.GetComponent<OrganSettlementManager>();
+        foreach (GameObject orgObj in MyMan.GetInstantiatedOrgans()) {
+            Organ org = orgObj.GetComponent<Organ>();
             org.OnSimulateReward();
         }
     }

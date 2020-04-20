@@ -25,6 +25,10 @@ public class OrganSettlementManager : MonoBehaviour {
         Init();
     }
 
+    public List<GameObject> GetInstantiatedOrgans() {
+        return organObjectList;
+    }
+
     public void Init() {
 
         unlockedOrganTable = new bool[organPrefabs.Length];
