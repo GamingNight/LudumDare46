@@ -8,7 +8,7 @@ public class MoveCamera : MonoBehaviour {
     }
 
     public float speed = 10;
-    public float movementDectectionLimit = 0.6f;
+    public float movementDectectionLimit = 0.9f;
     public Vector2 zoomBoundaries = new Vector2(6, 15);
     public float zoomSpeed = 15;
     private ScreenPart currentScreenPart;
@@ -19,42 +19,13 @@ public class MoveCamera : MonoBehaviour {
 
     void Update() {
 
-        bool move = true;
         float horizontalEn = Input.GetAxisRaw("Horizontal");
         float horizontalFr = Input.GetAxisRaw("HorizontalFR");
         float verticalEn = Input.GetAxisRaw("Vertical");
         float verticalFr = Input.GetAxisRaw("VerticalFR");
-        if (Input.GetMouseButton(1) || Input.GetMouseButton(2)) {
-            Vector3 mousePosition = Input.mousePosition;
-            float mouseXPercent = mousePosition.x / Screen.width;
-            float mouseYPercent = mousePosition.y / Screen.height;
-            if (mouseYPercent > movementDectectionLimit) {
-                if (mouseXPercent < (1 - movementDectectionLimit)) {
-                    currentScreenPart = ScreenPart.UPLEFT;
-                } else if (mouseXPercent > movementDectectionLimit) {
-                    currentScreenPart = ScreenPart.UPRIGHT;
-                } else {
-                    currentScreenPart = ScreenPart.UP;
-                }
-            } else if (mouseYPercent < (1 - movementDectectionLimit)) {
-                if (mouseXPercent < (1 - movementDectectionLimit)) {
-                    currentScreenPart = ScreenPart.DOWNLEFT;
-                } else if (mouseXPercent > movementDectectionLimit) {
-                    currentScreenPart = ScreenPart.DOWNRIGHT;
-                } else {
-                    currentScreenPart = ScreenPart.DOWN;
-                }
-            } else {
-                if (mouseXPercent < (1 - movementDectectionLimit)) {
-                    currentScreenPart = ScreenPart.LEFT;
-                } else if (mouseXPercent > movementDectectionLimit) {
-                    currentScreenPart = ScreenPart.RIGHT;
-                } else {
-                    move = false;
-                    currentScreenPart = ScreenPart.NONE;
-                }
-            }
-        } else if (verticalEn == 1 || verticalFr == 1) {
+
+        //Keys
+        if (verticalEn == 1 || verticalFr == 1) {
             if (horizontalEn == -1 || horizontalFr == -1) {
                 currentScreenPart = ScreenPart.UPLEFT;
             } else if (horizontalEn == 1 || horizontalFr == 1) {
@@ -76,14 +47,41 @@ public class MoveCamera : MonoBehaviour {
             } else if (horizontalEn == 1 || horizontalFr == 1) {
                 currentScreenPart = ScreenPart.RIGHT;
             } else {
-                move = false;
                 currentScreenPart = ScreenPart.NONE;
             }
         }
 
-        if (move) {
-            Move();
+        //Mouse
+        Vector3 mousePosition = Input.mousePosition;
+        float mouseXPercent = mousePosition.x / Screen.width;
+        float mouseYPercent = mousePosition.y / Screen.height;
+        if (mouseYPercent > movementDectectionLimit) {
+            if (mouseXPercent < (1 - movementDectectionLimit)) {
+                currentScreenPart = ScreenPart.UPLEFT;
+            } else if (mouseXPercent > movementDectectionLimit) {
+                currentScreenPart = ScreenPart.UPRIGHT;
+            } else {
+                currentScreenPart = ScreenPart.UP;
+            }
+        } else if (mouseYPercent < (1 - movementDectectionLimit)) {
+            if (mouseXPercent < (1 - movementDectectionLimit)) {
+                currentScreenPart = ScreenPart.DOWNLEFT;
+            } else if (mouseXPercent > movementDectectionLimit) {
+                currentScreenPart = ScreenPart.DOWNRIGHT;
+            } else {
+                currentScreenPart = ScreenPart.DOWN;
+            }
+        } else {
+            if (mouseXPercent < (1 - movementDectectionLimit)) {
+                currentScreenPart = ScreenPart.LEFT;
+            } else if (mouseXPercent > movementDectectionLimit) {
+                currentScreenPart = ScreenPart.RIGHT;
+            } else {
+                currentScreenPart = ScreenPart.NONE;
+            }
         }
+
+        Move();
 
         float scrollWheel = Input.GetAxis("Mouse ScrollWheel");
         float newPosY = transform.position.y + scrollWheel * Time.deltaTime * zoomSpeed * -1;

@@ -92,7 +92,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
-  movementDectectionLimit: 0.6
+  movementDectectionLimit: 0.8
+  zoomBoundaries: {x: 5, y: 15}
+  zoomSpeed: 500
 --- !u!114 &7653956151000213152
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -111,7 +113,7 @@ MonoBehaviour:
     m_Bits: 256
   stopNaNPropagation: 1
   finalBlitToCameraTarget: 0
-  antialiasingMode: 0
+  antialiasingMode: 1
   temporalAntialiasing:
     jitterSpread: 0.75
     sharpness: 0.25
@@ -120,7 +122,7 @@ MonoBehaviour:
   subpixelMorphologicalAntialiasing:
     quality: 2
   fastApproximateAntialiasing:
-    fastMode: 0
+    fastMode: 1
     keepAlpha: 0
   fog:
     enabled: 1
