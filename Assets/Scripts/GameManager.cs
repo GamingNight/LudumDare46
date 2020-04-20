@@ -115,12 +115,10 @@ public class GameManager : MonoBehaviour {
         return resourcesConf.CanBuy(collec);
     }
 
-    public void Generate() {
+    public bool Generate() {
         ResourceCollectionHeartCost collec = new ResourceCollectionHeartCost();
         bool res = resourcesConf.Buy(collec);
-        if (res) {
-            Debug.Log("TODO END OF GAME");
-        }
+        return res;
     }
 
     public void RefundDef() {

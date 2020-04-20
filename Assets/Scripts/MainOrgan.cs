@@ -148,10 +148,17 @@ public class MainOrgan : MonoBehaviour {
         Destroy(nextVirusAlarm);
     }
 
-    private void TriggerSuccesGame() {
+    public void TriggerGenerate() {
+        bool win = GameManager.GetInstance().Generate();
+        if (win) {
+            TriggerWin();
+        }
+    }
+
+    private void TriggerWin() {
         nextTurnButton.GetComponentInChildren<Text>().text = ">  Submit to next virus sample  <";
         menuCanvas.SetActive(true);
-        menuCanvas.GetComponent<MenuNavig>().EndMenu();
+        menuCanvas.GetComponent<MenuNavig>().WinMenu();
         Destroy(nextVirusAlarm);
     }
 
