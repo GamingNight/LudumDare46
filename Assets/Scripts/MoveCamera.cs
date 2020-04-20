@@ -9,6 +9,8 @@ public class MoveCamera : MonoBehaviour {
 
     public float speed = 10;
     public float movementDectectionLimit = 0.9f;
+    public Vector2 xBoundaries = new Vector2(-29, 29);
+    public Vector2 zBoundaries = new Vector2(-45, 38);
     public Vector2 zoomBoundaries = new Vector2(6, 15);
     public Vector3 initPosition = new Vector3(0, 7, -1);
     public float zoomSpeed = 15;
@@ -94,20 +96,24 @@ public class MoveCamera : MonoBehaviour {
     }
 
     private void Move() {
+
+        float posX = transform.position.x;
+        float posZ = transform.position.z;
+
         if (currentScreenPart == ScreenPart.UP || currentScreenPart == ScreenPart.UPRIGHT || currentScreenPart == ScreenPart.UPLEFT) {
-            Vector3 pos = transform.position;
-            transform.position = new Vector3(pos.x, pos.y, pos.z + speed * Time.deltaTime);
+            posZ += speed * Time.deltaTime;
         } else if (currentScreenPart == ScreenPart.DOWN || currentScreenPart == ScreenPart.DOWNRIGHT || currentScreenPart == ScreenPart.DOWNLEFT) {
-            Vector3 pos = transform.position;
-            transform.position = new Vector3(pos.x, pos.y, pos.z - speed * Time.deltaTime);
+            posZ -= speed * Time.deltaTime;
         }
 
         if (currentScreenPart == ScreenPart.RIGHT || currentScreenPart == ScreenPart.UPRIGHT || currentScreenPart == ScreenPart.DOWNRIGHT) {
-            Vector3 pos = transform.position;
-            transform.position = new Vector3(pos.x + speed * Time.deltaTime, pos.y, pos.z);
+            posX += speed * Time.deltaTime;
         } else if (currentScreenPart == ScreenPart.LEFT || currentScreenPart == ScreenPart.DOWNLEFT || currentScreenPart == ScreenPart.UPLEFT) {
-            Vector3 pos = transform.position;
-            transform.position = new Vector3(pos.x - speed * Time.deltaTime, pos.y, pos.z);
+            posX -= speed * Time.deltaTime;
         }
+
+        posX = Mathf.Max(xBoundaries.x, Mathf.Min(xBoundaries.y, posX));
+        posZ = Mathf.Max(zBoundaries.x, Mathf.Min(zBoundaries.y, posZ));
+        transform.position = new Vector3(posX, transform.position.y, posZ);
     }
 }
