@@ -57,6 +57,7 @@ public class GameManager : MonoBehaviour {
         foreach (GameObject orgObj in Obj2Unlist) {
             MyMan.GetInstantiatedOrgans().Remove(orgObj);
         }
+        MyMan.SetMode(OrganSettlementManager.Mode.IDLE);
 
     }
 
