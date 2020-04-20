@@ -224,6 +224,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: BlueOrgan (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 8045408162216531858, guid: d0ceda2418ab5824caafc276f1cfaec5,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8045408162216531859, guid: d0ceda2418ab5824caafc276f1cfaec5,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -298,6 +303,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: OrangeOrgan (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8045408162216531858, guid: 0bf04b7c6afa5354992b546be42f5dda,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8045408162216531859, guid: 0bf04b7c6afa5354992b546be42f5dda,
         type: 3}
@@ -490,6 +500,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: GreenOrgan
       objectReference: {fileID: 0}
+    - target: {fileID: 8045408162216531858, guid: 9917bb15f1e021d49ad4c342b9f3aa64,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8045408162216531859, guid: 9917bb15f1e021d49ad4c342b9f3aa64,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -643,6 +658,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: BlueOrgan (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 8045408162216531858, guid: d0ceda2418ab5824caafc276f1cfaec5,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8045408162216531859, guid: d0ceda2418ab5824caafc276f1cfaec5,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -711,6 +731,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: OrangeOrgan
+      objectReference: {fileID: 0}
+    - target: {fileID: 8045408162216531858, guid: 0bf04b7c6afa5354992b546be42f5dda,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8045408162216531859, guid: 0bf04b7c6afa5354992b546be42f5dda,
         type: 3}
@@ -874,11 +899,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 613635095}
     m_Modifications:
-    - target: {fileID: 5326484860911827197, guid: a72bfc08fe7c7d14db1b2c36e0a746e4,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8045408162216531858, guid: a72bfc08fe7c7d14db1b2c36e0a746e4,
         type: 3}
       propertyPath: m_Name
@@ -944,11 +964,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8312940401546301170, guid: a72bfc08fe7c7d14db1b2c36e0a746e4,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a72bfc08fe7c7d14db1b2c36e0a746e4, type: 3}
 --- !u!1001 &1832453431
@@ -962,6 +977,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: GreenOrgan (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8045408162216531858, guid: 9917bb15f1e021d49ad4c342b9f3aa64,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8045408162216531859, guid: 9917bb15f1e021d49ad4c342b9f3aa64,
         type: 3}
