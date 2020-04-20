@@ -1560,6 +1560,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 7709016186946698758, guid: 83d1d7e9bb2d82543b3ff6c8fa375f2c,
         type: 3}
+      propertyPath: tutorialButton
+      value: 
+      objectReference: {fileID: 2057706294}
+    - target: {fileID: 7709016186946698758, guid: 83d1d7e9bb2d82543b3ff6c8fa375f2c,
+        type: 3}
       propertyPath: cursor
       value: 
       objectReference: {fileID: 303777139}
@@ -1577,11 +1582,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: MenuCanvas
-      objectReference: {fileID: 0}
-    - target: {fileID: 7709016186946698759, guid: 83d1d7e9bb2d82543b3ff6c8fa375f2c,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7709016186946698762, guid: 83d1d7e9bb2d82543b3ff6c8fa375f2c,
         type: 3}
@@ -2390,6 +2390,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2037417716}
   m_CullTransparentMesh: 0
+--- !u!1 &2057706294 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8547706054103715674, guid: 83d1d7e9bb2d82543b3ff6c8fa375f2c,
+    type: 3}
+  m_PrefabInstance: {fileID: 1365890468}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4352572615796235523
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -3,6 +3,7 @@
 public class MenuNavig : MonoBehaviour {
     public GameObject welcomeText;
     public GameObject startButton;
+    public GameObject tutorialButton;
     public GameObject restartButton;
     public GameObject gameoverText;
 
@@ -28,6 +29,7 @@ public class MenuNavig : MonoBehaviour {
 
     public void WelcomeMenu() {
         startButton.SetActive(true);
+        tutorialButton.SetActive(true);
         restartButton.SetActive(false);
         gameoverText.SetActive(false);
         welcomeText.SetActive(true);
@@ -36,6 +38,7 @@ public class MenuNavig : MonoBehaviour {
     public void EndMenu() {
         SetMainGameActive(false);
         startButton.SetActive(false);
+        tutorialButton.SetActive(false);
         restartButton.SetActive(true);
         gameoverText.SetActive(true);
         welcomeText.SetActive(false);
