@@ -13,8 +13,15 @@ public class Attackers {
                                          //      float rand_range = 0.1f * result;
                                          //      int min = (int) (result - rand_range);
                                          //      int max = (int) (result + rand_range);
-                                         //      int res = (int) Random.Range(min, max);
-        float res = 0.33f * Mathf.Pow(turn, 2.2f)+Mathf.Pow(2f,turn)*Mathf.Pow(turn/25f,4);
+                                         //      int res = (int) Random.Range(min, max);                                                
+        // set game over turn and speed of complete noob
+        float a = 0.33f;
+        float b = 2.2f;
+        // set game over and speed of "full blue" player
+        float c = 25f;
+        float d = 4f;
+        //  attack power formula
+        float res = a * Mathf.Pow(turn, b)+Mathf.Pow(2f,turn)*Mathf.Pow(turn/c,d);
         Debug.Log("res="+res);
         int intres = (int)res;
         //intres = 0;

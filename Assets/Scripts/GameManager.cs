@@ -48,7 +48,7 @@ public class GameManager : MonoBehaviour {
     public bool Buy(Resources.ResourcesType type) {
         ResourceCollectionCost collec = new ResourceCollectionCost(type);
         bool toto = resourcesConf.Buy(collec);
-        // DebugDisplay();
+        DebugDisplay();
         return toto;
     }
 
