@@ -47,6 +47,7 @@ public class MenuNavig : MonoBehaviour {
         cursor.GetComponent<CursorManager>().Init();
         gameManager.GetComponent<OrganSettlementManager>().Init();
         gameManager.GetComponent<GameManager>().Reset();
+        gameManager.GetComponent<GameScenario>().Init();
         LineDrawer.ClearRelations();
         Camera.main.GetComponent<MoveCamera>().Init();
     }
