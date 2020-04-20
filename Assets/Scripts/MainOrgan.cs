@@ -3,13 +3,16 @@ using UnityEngine.UI;
 
 public class MainOrgan : MonoBehaviour {
 
+    public bool IsSelected { get { return isSelected; } }
+    public GameObject generateButtonActivated;
+    public GameObject generateButtonDeactivated;
+    public GameObject nextVirusAlarmPrefab;
+
     private bool collideWithOtherOrgan;
     public bool CollideWithOtherOrgan { get { return collideWithOtherOrgan; } }
     private Animator animator;
     private bool isSelected;
-    public bool IsSelected { get { return isSelected; } }
-    public GameObject generateButtonActivated;
-    public GameObject generateButtonDeactivated;
+    private GameObject nextVirusAlarm;
 
     void Start() {
         collideWithOtherOrgan = false;
@@ -60,11 +63,17 @@ public class MainOrgan : MonoBehaviour {
             return;
 
         bool canBuy = GameManager.GetInstance().CanGenerate();
-        generateButtonActivated.active = canBuy;
-        generateButtonDeactivated.active = (!canBuy);
+        generateButtonActivated.SetActive(canBuy);
+        generateButtonDeactivated.SetActive(!canBuy);
     }
 
     public void OnGoToNextTurn() {
         UpdateGenerateButton();
+    }
+
+    public void TriggerNextVirusSampleAnimation() {
+
+        GameObject nextVirusAlarm = Instantiate<GameObject>(nextVirusAlarmPrefab);
+        //GameManager.GetInstance().GoToNextTurn();
     }
 }
