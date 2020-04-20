@@ -4226,6 +4226,7 @@ MonoBehaviour:
     type: 3}
   nextTurnButton: {fileID: 6035712430300093754}
   menuCanvas: {fileID: 0}
+  IncreseButton: {fileID: 4353881060613172796}
 --- !u!114 &2025596404245017370
 MonoBehaviour:
   m_ObjectHideFlags: 0

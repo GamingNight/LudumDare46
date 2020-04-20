@@ -9,6 +9,7 @@ public class MainOrgan : MonoBehaviour {
     public GameObject nextVirusAlarmPrefab;
     public GameObject nextTurnButton;
     public GameObject menuCanvas;
+    public GameObject IncreseButton;
 
     private bool collideWithOtherOrgan;
     public bool CollideWithOtherOrgan { get { return collideWithOtherOrgan; } }
