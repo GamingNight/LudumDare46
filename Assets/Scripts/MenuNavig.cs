@@ -33,6 +33,7 @@ public class MenuNavig : MonoBehaviour {
         tutorialButton.SetActive(true);
         restartButton.SetActive(false);
         gameoverText.SetActive(false);
+        winText.SetActive(false);
         welcomeText.SetActive(true);
     }
 
@@ -42,6 +43,7 @@ public class MenuNavig : MonoBehaviour {
         tutorialButton.SetActive(false);
         restartButton.SetActive(true);
         gameoverText.SetActive(true);
+        winText.SetActive(false);
         welcomeText.SetActive(false);
     }
 
@@ -50,6 +52,7 @@ public class MenuNavig : MonoBehaviour {
         startButton.SetActive(false);
         tutorialButton.SetActive(false);
         restartButton.SetActive(true);
+        gameoverText.SetActive(false);
         winText.SetActive(true);
         welcomeText.SetActive(false);
     }
