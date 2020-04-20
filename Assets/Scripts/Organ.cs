@@ -90,10 +90,9 @@ public class Organ : MonoBehaviour {
     }
 
     public void OnGoToNextTurn() {
-        rewardx2 = false;
-        if (toggleButtonA) {
-            toggleButtonA.GetComponent<Toggle>().isOn = false;
-        }
+        // rewardx2 = false;
+        // if (toggleButtonA) {
+        //    toggleButtonA.GetComponent<Toggle>().isOn = false;
     }
 
     void OnMouseEnter() {
