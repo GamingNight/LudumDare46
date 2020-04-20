@@ -1,5 +1,7 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.UI;
+
 
 public class MainOrgan : MonoBehaviour {
 
@@ -26,7 +28,27 @@ public class MainOrgan : MonoBehaviour {
 
     public void Init() {
 
+    }
 
+    public void LaunchCannotBuyAnimation() {
+
+        
+    }
+
+    private IEnumerator ChangeIncreaseButtonColor() {
+        var Initcolors = IncreseButton.GetComponent<Image>().color;
+        IncreseButton.GetComponent<Image>().color = Color.red;
+        yield return new WaitForSeconds(0.5f);
+        IncreseButton.GetComponent<Image>().color = Initcolors;
+    }
+
+    public void BuyDef() {
+        if (GameManager.GetInstance().CanBuyDef())
+        {
+            GameManager.GetInstance().BuyDef();
+        } else if (IncreseButton) {
+            StartCoroutine(ChangeIncreaseButtonColor());
+        }
     }
 
     void OnTriggerStay(Collider other) {

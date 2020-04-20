@@ -76,11 +76,21 @@ public class GameManager : MonoBehaviour {
         resourcesSimu.D.Set(0, Resources.ResourcesType.D);
     }
 
+    public bool CanBuy(Resources.ResourcesType type) {
+        ResourceCollectionCost collec = new ResourceCollectionCost(type);
+        bool res = resourcesConf.CanBuy(collec);
+        return res;
+    }
+
     public bool Buy(Resources.ResourcesType type) {
         ResourceCollectionCost collec = new ResourceCollectionCost(type);
         bool res = resourcesConf.Buy(collec);
         DebugDisplay();
         return res;
+    }
+
+    public bool CanBuyDef() {
+        return CanBuy(Resources.ResourcesType.D);
     }
 
     public void BuyDef() {
