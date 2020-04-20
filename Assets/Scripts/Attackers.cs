@@ -33,6 +33,11 @@ public class Attackers
         // transiton blue to red gate at turn 7
         res = res * Mathf.Min((e / 3.5f / 3.5f * (turn - 3f) * (turn - 10f) + 1f), 1);
         Debug.Log("res=" + res);
+        float M1 = Mathf.Min((g / 3.5f / 3.5f * (turn - 8f) * (turn - 15f) + 1f),1);
+        float M2 = Mathf.Min((g /1.5f / 3.5f / 3.5f * (turn - 11.5f) * (turn - 18.5f) + 1f),1);
+        float M3 = Mathf.Min((g /2f / 3.5f / 3.5f * (turn - 15f) * (turn - 22f) + 1f),1);
+        //res = res * (Mathf.Min(M1+M2+M3,1));
+        res = res * (M1 + M2 + M3)/3;
         res = res * Mathf.Min((g / 3.5f / 3.5f * (turn - 8f) * (turn - 15f) + 1f), 1);
         Debug.Log("resgate=" + res);
         float logres = Mathf.Max(0, 4.5f * Mathf.Log10(Mathf.Max(res, 1f)) - 1);
