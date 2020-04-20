@@ -56,7 +56,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
-  m_SortingLayerID: 0
+  m_SortingLayerID: -862747001
   m_SortingOrder: 0
   m_TargetDisplay: 0
 --- !u!114 &372317373372263836
@@ -109,13 +109,14 @@ GameObject:
   - component: {fileID: 372317373403433697}
   - component: {fileID: 372317373403433696}
   - component: {fileID: 372317373403433702}
+  - component: {fileID: 248841481881982739}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &372317373403433697
 Transform:
   m_ObjectHideFlags: 0
@@ -145,8 +146,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   roundCount: 0
   organContainer: {fileID: 0}
-  menuNavig: {fileID: 0}
-  menuCanvas: {fileID: 0}
 --- !u!114 &372317373403433702
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -161,9 +160,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   organPrefabs:
   - {fileID: 8045408162216531858, guid: d0ceda2418ab5824caafc276f1cfaec5, type: 3}
-  - {fileID: 6460248508842597902, guid: 50ba5f6aa67f04a48a6b15e56c5f42d7, type: 3}
-  - {fileID: 6460248508842597902, guid: 0a521b7a3b854a44eb874ea0d98fe252, type: 3}
+  - {fileID: 8045408162216531858, guid: 0bf04b7c6afa5354992b546be42f5dda, type: 3}
+  - {fileID: 8045408162216531858, guid: 9917bb15f1e021d49ad4c342b9f3aa64, type: 3}
   iconPrefab: {fileID: 1357568027257656121, guid: f15e81db56daf204ea570771e73aeeb5,
     type: 3}
   canvas: {fileID: 372317373372263838}
   organContainer: {fileID: 0}
+--- !u!114 &248841481881982739
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 372317373403433699}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1652c6515b2c77a43959e739fe25c8a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
