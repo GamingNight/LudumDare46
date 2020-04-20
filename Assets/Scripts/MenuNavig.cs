@@ -16,7 +16,13 @@ public class MenuNavig : MonoBehaviour {
 
     public void StartGame() {
         SetMainGameActive(true);
-        ResetGame();
+        ResetGame(false);
+        gameObject.SetActive(false);
+    }
+
+    public void StartGameWithTutorial() {
+        SetMainGameActive(true);
+        ResetGame(true);
         gameObject.SetActive(false);
     }
 
@@ -42,12 +48,16 @@ public class MenuNavig : MonoBehaviour {
         Camera.main.GetComponent<MoveCamera>().enabled = b;
     }
 
-    private void ResetGame() {
+    private void ResetGame(bool withTuto) {
 
         cursor.GetComponent<CursorManager>().Init();
         gameManager.GetComponent<OrganSettlementManager>().Init();
         gameManager.GetComponent<GameManager>().Reset();
-        gameManager.GetComponent<GameScenario>().Init();
+        if (withTuto) {
+            gameManager.GetComponent<GameScenario>().Init();
+        } else {
+            gameManager.GetComponent<GameScenario>().SkipTutorial();
+        }
         LineDrawer.ClearRelations();
         Camera.main.GetComponent<MoveCamera>().Init();
     }

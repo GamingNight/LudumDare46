@@ -35,11 +35,6 @@ public class GameScenario : MonoBehaviour {
         }
     }
 
-    void Start() {
-
-        Init();
-    }
-
     public void Init() {
 
         _TUTORIAL = true;
@@ -58,7 +53,7 @@ public class GameScenario : MonoBehaviour {
     }
 
     public void SkipTutorial() {
-
+        Debug.Log("Skip tuto");
         _TUTORIAL = false;
         currentState = 8;
         int i = 0;
