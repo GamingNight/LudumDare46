@@ -12,6 +12,7 @@ public class MainOrgan : MonoBehaviour {
     public GameObject nextTurnButton;
     public GameObject menuCanvas;
     public GameObject increaseButton;
+    public AudioSource errorAudioSource;
 
     private bool collideWithOtherOrgan;
     public bool CollideWithOtherOrgan { get { return collideWithOtherOrgan; } }
@@ -28,10 +29,6 @@ public class MainOrgan : MonoBehaviour {
         UpdateGenerateButton();
     }
 
-    public void Init() {
-
-    }
-
     private IEnumerator ChangeIncreaseButtonColor() {
         increaseButtonInitColor = increaseButton.GetComponent<Image>().color;
         increaseButton.GetComponent<Image>().color = Color.red;
@@ -44,6 +41,10 @@ public class MainOrgan : MonoBehaviour {
         if (GameManager.GetInstance().CanBuyDef()) {
             GameManager.GetInstance().BuyDef();
         } else if (increaseButton) {
+            if (errorAudioSource.isPlaying) {
+                errorAudioSource.Stop();
+            }
+            errorAudioSource.Play();
             if (increaseButtonColorCoroutine != null) {
                 StopCoroutine(increaseButtonColorCoroutine);
                 increaseButton.GetComponent<Image>().color = increaseButtonInitColor;
