@@ -155,6 +155,10 @@ public class GameManager : MonoBehaviour {
         resourcesSimu.Add(collec);
     }
 
+    public int GetTestLevel() {
+        return attackersD.GetPower(roundCount);
+    }
+
     public bool LaunchAttack() {
         Debug.Log("attack");
         if (attackersD.GetPower(roundCount) > resourcesConf.D.count) {

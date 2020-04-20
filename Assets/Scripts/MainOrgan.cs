@@ -108,7 +108,8 @@ public class MainOrgan : MonoBehaviour {
     public void TriggerNextVirusSampleAnimation() {
 
         nextVirusAlarm = Instantiate<GameObject>(nextVirusAlarmPrefab);
-        nextTurnButton.GetComponentInChildren<Text>().text = "Testing...";
+
+        nextTurnButton.GetComponentInChildren<Text>().text = "testing with level " + GameManager.GetInstance().GetTestLevel().ToString() + " virus sample";
         nextTurnButton.GetComponentInChildren<Animator>().SetTrigger("fillButton");
     }
 
@@ -141,6 +142,13 @@ public class MainOrgan : MonoBehaviour {
     }
 
     private void TriggerEndGame() {
+        nextTurnButton.GetComponentInChildren<Text>().text = ">  Submit to next virus sample  <";
+        menuCanvas.SetActive(true);
+        menuCanvas.GetComponent<MenuNavig>().EndMenu();
+        Destroy(nextVirusAlarm);
+    }
+
+    private void TriggerSuccesGame() {
         nextTurnButton.GetComponentInChildren<Text>().text = ">  Submit to next virus sample  <";
         menuCanvas.SetActive(true);
         menuCanvas.GetComponent<MenuNavig>().EndMenu();
