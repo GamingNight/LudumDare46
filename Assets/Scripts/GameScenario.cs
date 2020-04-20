@@ -129,6 +129,9 @@ public class GameScenario : MonoBehaviour {
 
     public void ReachState(int state) {
 
+        if (state != currentState + 1) {
+            return;
+        }
         currentState = state;
         stateAccomplished = false;
     }
