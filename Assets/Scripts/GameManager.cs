@@ -142,7 +142,7 @@ public class GameManager : MonoBehaviour {
         }
     }
 
-    public void GoToNextTurn() {
+    public bool GoToNextTurn() {
         bool res = LaunchAttack();
         LaunchReward();
         LaunchPreparation();
@@ -155,6 +155,7 @@ public class GameManager : MonoBehaviour {
         UpdateSimulation();
         DebugDisplay();
         Debug.Log("tour " + roundCount);
+        return res;
     }
 
     public Resources GetResources(Resources.ResourcesType type) {
