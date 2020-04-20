@@ -96,7 +96,7 @@ public class GameManager : MonoBehaviour {
     public void BuyDef() {
 
         if (GameScenario.IS_TUTORIAL) {
-            GameScenario.GetInstance().ReachState(GameScenario.StateName.COST_BLUE);
+            GameScenario.GetInstance().ReachState(GameScenario.COST_BLUE);
         } else {
             if (Buy(Resources.ResourcesType.D)) {
                 Add(Resources.ResourcesType.D);

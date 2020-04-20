@@ -137,7 +137,7 @@ public class MainOrgan : MonoBehaviour {
     public void EndSuccessVirusSample() {
         nextTurnButton.GetComponentInChildren<Text>().text = ">  Submit to next virus sample  <";
         if (GameScenario.IS_TUTORIAL) {
-            GameScenario.GetInstance().ReachState(GameScenario.StateName.CONGRATS_FIRST_TEST);
+            GameScenario.GetInstance().ReachState(GameScenario.CONGRATS_FIRST_TEST);
         }
     }
 

@@ -102,7 +102,7 @@ public class OrganSettlementManager : MonoBehaviour {
                     CursorManager.GetInstance().TriggerNavigationCursorFromSettlementManager();
                     mode = Mode.IDLE;
                     if (GameScenario.IS_TUTORIAL) {
-                        GameScenario.GetInstance().ReachState(GameScenario.StateName.CLICK_MAP);
+                        GameScenario.GetInstance().ReachState(GameScenario.CLICK_MAP);
                     }
                 }
             }

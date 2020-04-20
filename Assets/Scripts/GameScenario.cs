@@ -6,11 +6,15 @@ public class GameScenario : MonoBehaviour {
     private static bool _TUTORIAL = true;
     public static bool IS_TUTORIAL { get { return _TUTORIAL; } }
 
-
-    public enum StateName {
-        FIRST_TEST, CONGRATS_FIRST_TEST, INCREASE_DEFENSE, COST_BLUE, RUNNING_OUT_OF_BLUE, CLICK_MAP, EXPLAIN_MAIN_ORGAN_COST, IT_S_YOUR_TURN, END_TUTO
-
-    }
+    public static readonly int FIRST_TEST = 0;
+    public static readonly int CONGRATS_FIRST_TEST = 1;
+    public static readonly int INCREASE_DEFENSE = 2;
+    public static readonly int COST_BLUE = 3;
+    public static readonly int RUNNING_OUT_OF_BLUE = 4;
+    public static readonly int CLICK_MAP = 5;
+    public static readonly int EXPLAIN_MAIN_ORGAN_COST = 6;
+    public static readonly int IT_S_YOUR_TURN = 7;
+    public static readonly int END_TUTO = 8;
 
     public GameObject tutoCanvas;
 
@@ -21,7 +25,7 @@ public class GameScenario : MonoBehaviour {
     private bool triggerTimer;
     private float timerDuration;
     private float currentTime;
-    private StateName stateAfterTimer;
+    private int stateAfterTimer;
 
     public static GameScenario GetInstance() {
 
@@ -81,7 +85,7 @@ public class GameScenario : MonoBehaviour {
             return;
         }
 
-        if (currentState == 0) {
+        if (currentState == FIRST_TEST) {
             tutoPanels[0].SetActive(true);
             stateAccomplished = true;
         } else {
@@ -89,32 +93,32 @@ public class GameScenario : MonoBehaviour {
             if (currentState < tutoPanels.Length - 1) {
                 tutoPanels[currentState].SetActive(true);
             }
-            if (currentState == 1) {
+            if (currentState == CONGRATS_FIRST_TEST) {
                 triggerTimer = true;
                 timerDuration = 4;
                 currentTime = 0;
-                stateAfterTimer = StateName.INCREASE_DEFENSE;
-            } else if (currentState == 3) {
+                stateAfterTimer = INCREASE_DEFENSE;
+            } else if (currentState == COST_BLUE) {
                 HideFakeDefensePanel();
                 triggerTimer = true;
                 timerDuration = 4;
                 currentTime = 0;
-                stateAfterTimer = StateName.RUNNING_OUT_OF_BLUE;
-            } else if (currentState == 5) {
+                stateAfterTimer = RUNNING_OUT_OF_BLUE;
+            } else if (currentState == CLICK_MAP) {
                 triggerTimer = true;
                 timerDuration = 4;
                 currentTime = 0;
-                stateAfterTimer = StateName.EXPLAIN_MAIN_ORGAN_COST;
-            } else if (currentState == 6) {
+                stateAfterTimer = EXPLAIN_MAIN_ORGAN_COST;
+            } else if (currentState == EXPLAIN_MAIN_ORGAN_COST) {
                 triggerTimer = true;
                 timerDuration = 5;
                 currentTime = 0;
-                stateAfterTimer = StateName.IT_S_YOUR_TURN;
-            } else if (currentState == 7) {
+                stateAfterTimer = IT_S_YOUR_TURN;
+            } else if (currentState == IT_S_YOUR_TURN) {
                 triggerTimer = true;
                 timerDuration = 3;
                 currentTime = 0;
-                stateAfterTimer = StateName.END_TUTO;
+                stateAfterTimer = END_TUTO;
             }
         }
         stateAccomplished = true;
@@ -123,39 +127,9 @@ public class GameScenario : MonoBehaviour {
         }
     }
 
-    public void ReachState(StateName stateName) {
+    public void ReachState(int state) {
 
-        switch (stateName) {
-            case StateName.FIRST_TEST:
-                currentState = 0;
-                break;
-            case StateName.CONGRATS_FIRST_TEST:
-                currentState = 1;
-                break;
-            case StateName.INCREASE_DEFENSE:
-                currentState = 2;
-                break;
-            case StateName.COST_BLUE:
-                currentState = 3;
-                break;
-            case StateName.RUNNING_OUT_OF_BLUE:
-                currentState = 4;
-                break;
-            case StateName.CLICK_MAP:
-                currentState = 5;
-                break;
-            case StateName.EXPLAIN_MAIN_ORGAN_COST:
-                currentState = 6;
-                break;
-            case StateName.IT_S_YOUR_TURN:
-                currentState = 7;
-                break;
-            case StateName.END_TUTO:
-                currentState = 8;
-                break;
-            default:
-                break;
-        }
+        currentState = state;
         stateAccomplished = false;
     }
 
