@@ -8,6 +8,7 @@ public class MainOrgan : MonoBehaviour {
     public GameObject generateButtonDeactivated;
     public GameObject nextVirusAlarmPrefab;
     public GameObject nextTurnButton;
+    public GameObject menuCanvas;
 
     private bool collideWithOtherOrgan;
     public bool CollideWithOtherOrgan { get { return collideWithOtherOrgan; } }
@@ -20,6 +21,11 @@ public class MainOrgan : MonoBehaviour {
         animator = GetComponent<Animator>();
         isSelected = false;
         UpdateGenerateButton();
+    }
+
+    public void Init() {
+
+
     }
 
     void OnTriggerStay(Collider other) {
@@ -83,12 +89,17 @@ public class MainOrgan : MonoBehaviour {
     }
 
     public void EndNextVirusSample() {
+
         if (GameManager.GetInstance().GoToNextTurn()) {
             nextTurnButton.GetComponentInChildren<Text>().text = "Success!";
             nextTurnButton.GetComponentInChildren<Animator>().SetTrigger("success");
-            Destroy(nextVirusAlarm);
             nextTurnButton.GetComponent<AudioSource>().Play();
+        } else {
+            nextTurnButton.GetComponentInChildren<Text>().text = ">  Submit to next virus sample  <";
+            menuCanvas.SetActive(true);
+            menuCanvas.GetComponent<MenuNavig>().EndMenu();
         }
+        Destroy(nextVirusAlarm);
     }
 
     public void EndSuccessVirusSample() {

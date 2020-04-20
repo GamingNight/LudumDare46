@@ -15,9 +15,6 @@ public class GameManager : MonoBehaviour {
     public int roundCount;
     public GameObject organContainer;
 
-    public MenuNavig menuNavig;
-    public GameObject menuCanvas;
-
     void Awake() {
         if (INSTANCE == null) {
             INSTANCE = this;
@@ -45,7 +42,7 @@ public class GameManager : MonoBehaviour {
                 // Debug.Log("Organ : " + org.name);
                 Refund(org.resourcesType);
                 LineDrawer.ClearOrganRelations(org.GetBuildTurn());
-                Destroy(org.gameObject);       
+                Destroy(org.gameObject);
             }
         }
 
@@ -120,8 +117,6 @@ public class GameManager : MonoBehaviour {
         Debug.Log("attack");
         if (attackersD.GetPower(roundCount) > resourcesConf.D.count) {
             Debug.Log("perdu au tour " + roundCount);
-            menuCanvas.SetActive(true);
-            menuNavig.EndMenu();
             return false;
         }
         return true;
@@ -144,17 +139,19 @@ public class GameManager : MonoBehaviour {
 
     public bool GoToNextTurn() {
         bool res = LaunchAttack();
-        LaunchReward();
-        LaunchPreparation();
-        foreach (Organ org in organContainer.GetComponentsInChildren<Organ>()) {
-            org.OnGoToNextTurn();
+        if (res) {
+            LaunchReward();
+            LaunchPreparation();
+            foreach (Organ org in organContainer.GetComponentsInChildren<Organ>()) {
+                org.OnGoToNextTurn();
+            }
+            foreach (MainOrgan mOrg in organContainer.GetComponentsInChildren<MainOrgan>()) {
+                mOrg.OnGoToNextTurn();
+            }
+            UpdateSimulation();
+            DebugDisplay();
+            Debug.Log("tour " + roundCount);
         }
-        foreach (MainOrgan mOrg in organContainer.GetComponentsInChildren<MainOrgan>()) {
-            mOrg.OnGoToNextTurn();
-        }
-        UpdateSimulation();
-        DebugDisplay();
-        Debug.Log("tour " + roundCount);
         return res;
     }
 
