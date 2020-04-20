@@ -91,7 +91,7 @@ public class ResourceCollectionReward : ResourceCollection {
 
         if (type == Resources.ResourcesType.B) {
             A.count = 0;
-            B.count = 1;
+            B.count = 2;
             C.count = 0;
             D.count = 0;
         }
