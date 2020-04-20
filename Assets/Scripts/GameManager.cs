@@ -214,7 +214,7 @@ public class GameManager : MonoBehaviour {
 
     void Update() {
 
-        if (Input.GetMouseButtonDown(2)) {
+        if (Input.GetMouseButtonDown(1)) {
             ResetTurn();
         }
     }
