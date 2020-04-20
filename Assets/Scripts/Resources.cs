@@ -162,8 +162,8 @@ public class ResourceCollectionBoostCost : ResourceCollection {
 public class ResourceCollectionHeartCost : ResourceCollection {
     public ResourceCollectionHeartCost() {
         A.count = 0;
-        B.count = 0;
-        C.count = 1;
+        B.count = 12;
+        C.count = 4;
         D.count = 0;
     }
 }
