@@ -635,7 +635,7 @@ GameObject:
   - component: {fileID: 1702487314417545810}
   - component: {fileID: 3964713601618888963}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: BoostedCube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
