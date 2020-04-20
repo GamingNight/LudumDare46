@@ -111,8 +111,6 @@ public class LineDrawer : MonoBehaviour {
         }
 
         foreach (LineRelation relation in lineRelationList) {
-            Debug.Log("AAA turnNumber " + turnNumber);
-            Debug.Log("AAA relation.GetBuildTurn() " + relation.GetBuildTurn());
             if (relation.GetBuildTurn() == turnNumber)
             {
                 Destroy(relation.lineRenderer);
