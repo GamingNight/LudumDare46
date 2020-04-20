@@ -93,6 +93,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 10
   movementDectectionLimit: 0.6
+  zoomBoundaries: {x: 5, y: 15}
+  zoomSpeed: 100
 --- !u!114 &7653956151000213152
 MonoBehaviour:
   m_ObjectHideFlags: 0
