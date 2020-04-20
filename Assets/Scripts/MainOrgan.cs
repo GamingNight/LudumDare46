@@ -7,6 +7,7 @@ public class MainOrgan : MonoBehaviour {
     public GameObject generateButtonActivated;
     public GameObject generateButtonDeactivated;
     public GameObject nextVirusAlarmPrefab;
+    public GameObject nextTurnButton;
 
     private bool collideWithOtherOrgan;
     public bool CollideWithOtherOrgan { get { return collideWithOtherOrgan; } }
@@ -57,10 +58,13 @@ public class MainOrgan : MonoBehaviour {
     }
 
     private void UpdateGenerateButton() {
-        if (!generateButtonActivated)
+        if (!generateButtonActivated) {
             return;
-        if (!generateButtonDeactivated)
+        }
+
+        if (!generateButtonDeactivated) {
             return;
+        }
 
         bool canBuy = GameManager.GetInstance().CanGenerate();
         generateButtonActivated.SetActive(canBuy);
@@ -74,6 +78,7 @@ public class MainOrgan : MonoBehaviour {
     public void TriggerNextVirusSampleAnimation() {
 
         GameObject nextVirusAlarm = Instantiate<GameObject>(nextVirusAlarmPrefab);
+        nextTurnButton.GetComponent<Button>();
         //GameManager.GetInstance().GoToNextTurn();
     }
 }
