@@ -141,7 +141,8 @@ public class ResourceCollectionCost : ResourceCollection {
         }
 
         if (type == Resources.ResourcesType.D) {
-            A.count = 1;
+            int currentD = GameManager.GetInstance().GetResources(Resources.ResourcesType.D).count;
+            A.count = (int) (Mathf.Pow(10, ((currentD+1)/4.5f)) * (Mathf.Pow(10, (1/4.5f)) - 1));
             B.count = 0;
             C.count = 0;
             D.count = 0;

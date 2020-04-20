@@ -4,12 +4,14 @@ using UnityEngine.UI;
 public class HUDManager : MonoBehaviour {
 
     public GameObject defLevel;
+    public GameObject defPay;
     public GameObject aCount;
     public GameObject aProd;
     public GameObject bCount;
     public GameObject bProd;
     public GameObject cCount;
     public GameObject cProd;
+
     // Start is called before the first frame update
     void Start() {
         UpdateData();
@@ -32,6 +34,12 @@ public class HUDManager : MonoBehaviour {
     private void UpdateData() {
         int defLevelValue = GameManager.GetInstance().GetResources(Resources.ResourcesType.D).count;
         defLevel.GetComponent<Text>().text = defLevelValue.ToString();
+
+        if (defPay) {
+            int defPayValue = GameManager.GetInstance().GetDefCost();
+            defPay.GetComponent<Text>().text = defPayValue.ToString();
+        }
+
         int aCountValue = GameManager.GetInstance().GetResources(Resources.ResourcesType.A).count;
         aCount.GetComponent<Text>().text = aCountValue.ToString();
         int bCountValue = GameManager.GetInstance().GetResources(Resources.ResourcesType.B).count;

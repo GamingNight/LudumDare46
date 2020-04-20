@@ -3769,6 +3769,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   defLevel: {fileID: 2540072986585173102}
+  defPay: {fileID: 2720547917009967770}
   aCount: {fileID: 1202291172556236558}
   aProd: {fileID: 974562241035770846}
   bCount: {fileID: 7425066857823245921}

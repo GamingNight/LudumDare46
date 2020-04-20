@@ -66,6 +66,11 @@ public class GameManager : MonoBehaviour {
         }
     }
 
+    public int GetDefCost() {
+        ResourceCollectionCost collec = new ResourceCollectionCost(Resources.ResourcesType.D);
+        return collec.A.count;
+    }
+
     public bool CanGenerate() {
         ResourceCollectionHeartCost collec = new ResourceCollectionHeartCost();
         return resourcesConf.CanBuy(collec);
