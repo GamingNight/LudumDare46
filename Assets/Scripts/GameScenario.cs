@@ -8,7 +8,7 @@ public class GameScenario : MonoBehaviour {
 
 
     public enum StateName {
-        FIRST_TEST, CONGRATS_FIRST_TEST,
+        FIRST_TEST, CONGRATS_FIRST_TEST, INCREASE_DEFENSE
     }
 
     public GameObject tutoCanvas;
@@ -16,6 +16,11 @@ public class GameScenario : MonoBehaviour {
     private int currentState;
     private bool stateAccomplished;
     private GameObject[] tutoPanels;
+
+    private bool triggerTimer;
+    private float timerDuration;
+    private float currentTime;
+    private StateName stateAfterTimer;
 
     public static GameScenario GetInstance() {
 
@@ -50,20 +55,42 @@ public class GameScenario : MonoBehaviour {
 
     void Update() {
 
-        if (stateAccomplished) {
+        if (triggerTimer) {
+            if (currentTime >= timerDuration) {
+                ReachState(stateAfterTimer);
+                triggerTimer = false;
+            } else {
+                currentTime += Time.deltaTime;
+            }
+        }
+
+        if (stateAccomplished || !_TUTORIAL) {
             return;
         }
 
         if (currentState == 0) {
             tutoPanels[0].SetActive(true);
+            stateAccomplished = true;
         } else {
             tutoPanels[currentState - 1].SetActive(false);
             tutoPanels[currentState].SetActive(true);
+            if (currentState == 1) {
+                triggerTimer = true;
+                timerDuration = 4;
+                currentTime = 0;
+                stateAfterTimer = StateName.INCREASE_DEFENSE;
+            }
         }
         stateAccomplished = true;
         if (currentState == 8) {
             _TUTORIAL = false;
         }
+    }
+
+    public void SkipTutorial() {
+
+        Init();
+        _TUTORIAL = false;
     }
 
     public void ReachState(StateName stateName) {
@@ -74,6 +101,9 @@ public class GameScenario : MonoBehaviour {
                 break;
             case StateName.CONGRATS_FIRST_TEST:
                 currentState = 1;
+                break;
+            case StateName.INCREASE_DEFENSE:
+                currentState = 2;
                 break;
             default:
                 break;

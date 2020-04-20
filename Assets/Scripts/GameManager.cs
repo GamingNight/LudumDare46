@@ -1,7 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour {
 
@@ -45,8 +43,8 @@ public class GameManager : MonoBehaviour {
         OrganSettlementManager MyMan = gameObject.GetComponent<OrganSettlementManager>();
         List<GameObject> Obj2Unlist = new List<GameObject>();
         foreach (GameObject orgObj in MyMan.GetInstantiatedOrgans()) {
-           Organ org = orgObj.GetComponent<Organ>();
-           org.OnResetTurn();
+            Organ org = orgObj.GetComponent<Organ>();
+            org.OnResetTurn();
             if (org.GetBuildTurn() == roundCount) {
                 Refund(org.resourcesType);
                 LineDrawer.ClearOrganRelations(org.GetBuildTurn());
@@ -86,9 +84,14 @@ public class GameManager : MonoBehaviour {
     }
 
     public void BuyDef() {
-        if (Buy(Resources.ResourcesType.D)) {
-            Add(Resources.ResourcesType.D);
-            defOnTurn += 1;
+
+        if (GameScenario.IS_TUTORIAL) {
+
+        } else {
+            if (Buy(Resources.ResourcesType.D)) {
+                Add(Resources.ResourcesType.D);
+                defOnTurn += 1;
+            }
         }
     }
 
@@ -118,7 +121,7 @@ public class GameManager : MonoBehaviour {
 
     public bool BuyBoost() {
         ResourceCollectionBoostCost collec = new ResourceCollectionBoostCost();
-        bool res =  resourcesConf.Buy(collec);
+        bool res = resourcesConf.Buy(collec);
         return res;
     }
 
