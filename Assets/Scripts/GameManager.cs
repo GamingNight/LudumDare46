@@ -28,7 +28,7 @@ public class GameManager : MonoBehaviour {
     void Start() {
         defOnTurn = 0;
         roundCount = 0;
-        resourcesConf.A.Set(100, Resources.ResourcesType.A);
+        resourcesConf.A.Set(3, Resources.ResourcesType.A);
         resourcesConf.B.Set(0, Resources.ResourcesType.B);
         resourcesConf.C.Set(0, Resources.ResourcesType.C);
         resourcesConf.D.Set(0, Resources.ResourcesType.D);
