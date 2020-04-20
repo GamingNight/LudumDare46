@@ -32,7 +32,7 @@ public class MainOrgan : MonoBehaviour {
 
     public void LaunchCannotBuyAnimation() {
 
-        
+
     }
 
     private IEnumerator ChangeIncreaseButtonColor() {
@@ -43,8 +43,8 @@ public class MainOrgan : MonoBehaviour {
     }
 
     public void BuyDef() {
-        if (GameManager.GetInstance().CanBuyDef())
-        {
+
+        if (GameManager.GetInstance().CanBuyDef()) {
             GameManager.GetInstance().BuyDef();
         } else if (IncreseButton) {
             StartCoroutine(ChangeIncreaseButtonColor());

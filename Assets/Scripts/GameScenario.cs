@@ -8,7 +8,7 @@ public class GameScenario : MonoBehaviour {
 
 
     public enum StateName {
-        FIRST_TEST, CONGRATS_FIRST_TEST, INCREASE_DEFENSE
+        FIRST_TEST, CONGRATS_FIRST_TEST, INCREASE_DEFENSE, COST_BLUE, CLICK_MAP
     }
 
     public GameObject tutoCanvas;
@@ -47,10 +47,27 @@ public class GameScenario : MonoBehaviour {
         int i = 0;
         tutoPanels = new GameObject[tutoCanvas.transform.childCount];
         foreach (Transform t in tutoCanvas.transform) {
+            if (t.name.Contains("Tuto")) {
+                tutoPanels[i] = t.gameObject;
+                t.gameObject.SetActive(false);
+                i++;
+            }
+        }
+        tutoCanvas.transform.Find("FakeDefense").gameObject.SetActive(true);
+    }
+
+    public void SkipTutorial() {
+
+        _TUTORIAL = false;
+        currentState = 8;
+        int i = 0;
+        tutoPanels = new GameObject[tutoCanvas.transform.childCount];
+        foreach (Transform t in tutoCanvas.transform) {
             tutoPanels[i] = t.gameObject;
             t.gameObject.SetActive(false);
             i++;
         }
+        tutoCanvas.transform.Find("FakeDefense").gameObject.SetActive(false);
     }
 
     void Update() {
@@ -79,18 +96,18 @@ public class GameScenario : MonoBehaviour {
                 timerDuration = 4;
                 currentTime = 0;
                 stateAfterTimer = StateName.INCREASE_DEFENSE;
+            } else if (currentState == 3) {
+                HideFakeDefensePanel();
+                triggerTimer = true;
+                timerDuration = 4;
+                currentTime = 0;
+                stateAfterTimer = StateName.CLICK_MAP;
             }
         }
         stateAccomplished = true;
         if (currentState == 8) {
             _TUTORIAL = false;
         }
-    }
-
-    public void SkipTutorial() {
-
-        Init();
-        _TUTORIAL = false;
     }
 
     public void ReachState(StateName stateName) {
@@ -105,9 +122,19 @@ public class GameScenario : MonoBehaviour {
             case StateName.INCREASE_DEFENSE:
                 currentState = 2;
                 break;
+            case StateName.COST_BLUE:
+                currentState = 3;
+                break;
+            case StateName.CLICK_MAP:
+                currentState = 4;
+                break;
             default:
                 break;
         }
         stateAccomplished = false;
+    }
+
+    private void HideFakeDefensePanel() {
+        tutoCanvas.transform.Find("FakeDefense").gameObject.SetActive(false);
     }
 }

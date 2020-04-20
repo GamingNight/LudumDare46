@@ -95,14 +95,14 @@ public class GameManager : MonoBehaviour {
 
     public void BuyDef() {
 
-        //if (GameScenario.IS_TUTORIAL) {
-
-        //} else {
+        if (GameScenario.IS_TUTORIAL) {
+            GameScenario.GetInstance().ReachState(GameScenario.StateName.COST_BLUE);
+        } else {
             if (Buy(Resources.ResourcesType.D)) {
                 Add(Resources.ResourcesType.D);
                 defOnTurn += 1;
             }
-        //}
+        }
     }
 
     public int GetDefCost() {

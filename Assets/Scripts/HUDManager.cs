@@ -32,7 +32,7 @@ public class HUDManager : MonoBehaviour {
     }
 
     private void UpdateData() {
-        int defLevelValue = GameManager.GetInstance().GetResources(Resources.ResourcesType.D).count;
+        int defLevelValue = GameManager.GetInstance().GetResources(Resources.ResourcesType.D).count + 1;
         defLevel.GetComponent<Text>().text = defLevelValue.ToString();
 
         if (defPay) {
