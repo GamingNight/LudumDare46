@@ -6,6 +6,7 @@ public class MenuNavig : MonoBehaviour {
     public GameObject tutorialButton;
     public GameObject restartButton;
     public GameObject gameoverText;
+    public GameObject winText;
 
     public GameObject cursor;
     public GameObject gameManager;
@@ -49,7 +50,7 @@ public class MenuNavig : MonoBehaviour {
         startButton.SetActive(false);
         tutorialButton.SetActive(false);
         restartButton.SetActive(true);
-        gameoverText.SetActive(true);
+        winText.SetActive(true);
         welcomeText.SetActive(false);
     }
 
