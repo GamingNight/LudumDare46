@@ -24,10 +24,14 @@ public class Attackers {
         float d = 4f;
         // set gate depth
         float e = setRedGate;
+        // set gate depth
+        float g = 0.3f;
         //  attack power formula
         float res = a * Mathf.Pow(turn, b)+Mathf.Pow(2f,turn)*Mathf.Pow(turn/c,d);
         // transiton blue to red gate at turn 7
         res = res * Mathf.Min((e/3.5f/3.5f*(turn-3f)*(turn-10f)+1f),1);
+        // transiton red to green gate at turn 7
+        res = res * Mathf.Min((g / 2f / 3f * (turn - 7f) * (turn - 12f) + 1f), 1);
         Debug.Log("res="+res);
         float logres = Mathf.Max(0,4.5f * Mathf.Log10(Mathf.Max(res, 1f))-1);
         int logresint = (int)logres;
