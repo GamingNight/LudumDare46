@@ -21,6 +21,7 @@ public class Organ : MonoBehaviour {
 
     private bool startHasBeenCalled = false;
     private bool rewardx2 = false;
+    private bool BoostOnTurn = false;
 
     private Animator animator;
 
@@ -95,6 +96,17 @@ public class Organ : MonoBehaviour {
         // rewardx2 = false;
         // if (toggleButtonA) {
         //    toggleButtonA.GetComponent<Toggle>().isOn = false;
+        BoostOnTurn = false;
+    }
+
+    public void OnResetTurn() {
+        if (!BoostOnTurn)
+            return;
+
+        Toggle button = toggleButtonA.GetComponent<Toggle>();
+        bool status = button.isOn;
+        button.isOn = !status;
+        BoostOnTurn = false;
     }
 
     void OnMouseEnter() {
@@ -126,12 +138,14 @@ public class Organ : MonoBehaviour {
         if (status) {
             if (GameManager.GetInstance().BuyBoost()) {
                 rewardx2 = true;
+                BoostOnTurn = true;
             } else {
                 toggleButtonA.GetComponent<Toggle>().isOn = false;
             }
         } else if (rewardx2) {
             GameManager.GetInstance().RefundBoost();
             rewardx2 = false;
+            BoostOnTurn = false;
         }
 
         GameManager.GetInstance().UpdateSimulation();
