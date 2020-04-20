@@ -1,21 +1,27 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class OrganSettlementIcon : MonoBehaviour {
 
     private Image image;
     private Image imageSelected;
+    private Sprite wrongSprite;
     private bool isSelected;
     public bool IsSelected { get { return isSelected; } }
 
     void Start() {
+        ProceedImageAttribution();
+        isSelected = false;
+    }
+
+    private void ProceedImageAttribution() {
         image = GetComponent<Image>();
         foreach (Image i in GetComponentsInChildren<Image>()) {
             if (image != i) {
                 imageSelected = i;
             }
         }
-        isSelected = false;
     }
 
     public void PointerEnter() {
@@ -30,9 +36,23 @@ public class OrganSettlementIcon : MonoBehaviour {
         isSelected = false;
     }
 
-    public void UpdateSprites(Sprite main, Sprite selected) {
+    public void UpdateSprites(Sprite main, Sprite selected, Sprite wrong) {
+        ProceedImageAttribution();
+        image.sprite = main;
+        imageSelected.sprite = selected;
+        wrongSprite = wrong;
+    }
 
-        GetComponent<Image>().sprite = selected;
-        GetComponentInChildren<Image>().sprite = main;
+    public void LaunchCannotBuyAnimation() {
+
+        StartCoroutine(LaunchCannotBuyCoroutine());
+    }
+
+    private IEnumerator LaunchCannotBuyCoroutine() {
+
+        Sprite initSprite = image.sprite;
+        image.sprite = wrongSprite;
+        yield return new WaitForSeconds(0.5f);
+        image.sprite = initSprite;
     }
 }

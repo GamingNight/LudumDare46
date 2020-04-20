@@ -134,8 +134,8 @@ public class ResourceCollectionCost : ResourceCollection {
         }
     
         if (type == Resources.ResourcesType.C) {
-            A.count = 1;
-            B.count = 1;
+            A.count = 10;
+            B.count = 5;
             C.count = 0;
             D.count = 0;
         }

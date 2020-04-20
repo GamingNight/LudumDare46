@@ -82,6 +82,7 @@ public class OrganSettlementManager : MonoBehaviour {
                         CursorManager.GetInstance().DestroyStaticCursor();
                         mode = Mode.SETTLEMENT;
                     } else {
+                        selectedIcon.LaunchCannotBuyAnimation();
                         removeMenu = false;
                     }
                 } else {
@@ -169,7 +170,7 @@ public class OrganSettlementManager : MonoBehaviour {
             GameObject icon = Instantiate<GameObject>(iconPrefab);
             icon.transform.SetParent(canvas.transform, false);
             icon.GetComponent<Image>().sprite = organ.hudImage;
-            icon.GetComponent<OrganSettlementIcon>().UpdateSprites(organ.hudImage, organ.hudImageSelected);
+            icon.GetComponent<OrganSettlementIcon>().UpdateSprites(organ.hudImage, organ.hudImageSelected, organ.hudImageWrong);
             RectTransform rectTransform = (RectTransform)icon.transform;
             rectTransform.position = new Vector3(mouseWorldPosition.x, 0.1f, mouseWorldPosition.z);
             rectTransform.eulerAngles = new Vector3(90f, 0, 0);
