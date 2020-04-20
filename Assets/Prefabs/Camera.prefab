@@ -93,6 +93,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 3
   movementDectectionLimit: 0.85
+  xBoundaries: {x: -29, y: 29}
+  zBoundaries: {x: -45, y: 38}
   zoomBoundaries: {x: 5, y: 15}
   initPosition: {x: 0, y: 7, z: -1}
   zoomSpeed: 500

@@ -13,6 +13,9 @@ public class OrganSettlementManager : MonoBehaviour {
     public GameObject iconPrefab;
     public GameObject canvas;
     public GameObject organContainer;
+    public AudioClip openMenuClip;
+    public AudioClip closeMenuClip;
+    public AudioClip errorClip;
 
     private bool[] unlockedOrganTable;
     private Mode mode;
@@ -20,8 +23,10 @@ public class OrganSettlementManager : MonoBehaviour {
     private Dictionary<OrganSettlementIcon, Organ> iconMap;
     private Coroutine growIconCoroutine;
     private List<GameObject> organObjectList;
+    private AudioSource audioSource;
 
     void Start() {
+        audioSource = GetComponent<AudioSource>();
         Init();
     }
     public void SetMode(Mode value) {
@@ -74,6 +79,7 @@ public class OrganSettlementManager : MonoBehaviour {
                 if (MouseIsOverTheGround()) {
                     ShowOrganSettlementIcons(mouseWorldPosition);
                     CursorManager.GetInstance().TriggerSelectionMenuCursor();
+                    Play(openMenuClip);
                     mode = Mode.MENU;
                 }
             } else if (mode == Mode.MENU) {
@@ -84,13 +90,16 @@ public class OrganSettlementManager : MonoBehaviour {
                         organObjectList.Add(InstantiateOrgan(new Vector3(mouseWorldPosition.x, 1f, mouseWorldPosition.z), iconMap[selectedIcon]));
                         CursorManager.GetInstance().DestroyStaticCursor();
                         mode = Mode.SETTLEMENT;
+                        Play(closeMenuClip);
                     } else {
                         selectedIcon.LaunchCannotBuyAnimation();
                         removeMenu = false;
+                        Play(errorClip);
                     }
                 } else {
                     CursorManager.GetInstance().TriggerNavigationCursorFromSettlementManager();
                     mode = Mode.IDLE;
+                    Play(closeMenuClip);
                 }
                 if (removeMenu) {
                     List<OrganSettlementIcon> iconList = new List<OrganSettlementIcon>(iconMap.Keys);
@@ -251,5 +260,13 @@ public class OrganSettlementManager : MonoBehaviour {
 
     public void EnableMouse() {
         mode = previousMode;
+    }
+
+    private void Play(AudioClip clip) {
+        if (audioSource.isPlaying) {
+            audioSource.Stop();
+        }
+        audioSource.clip = clip;
+        audioSource.Play();
     }
 }
