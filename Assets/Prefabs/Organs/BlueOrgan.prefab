@@ -1480,6 +1480,7 @@ MonoBehaviour:
   resourcesType: 0
   toggleButtonA: {fileID: 8761796115496090188}
   shape3D: {fileID: 3415949647549642392}
+  boostedCube: {fileID: 4882237751909777087}
 --- !u!95 &-7050894568614397888
 Animator:
   serializedVersion: 3

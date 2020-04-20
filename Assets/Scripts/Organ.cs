@@ -13,6 +13,7 @@ public class Organ : MonoBehaviour {
     public Resources.ResourcesType resourcesType;
     public GameObject toggleButtonA;
     public GameObject shape3D;
+    public GameObject boostedCube;
 
     private Color initColor;
     private List<Color> initColors;
@@ -132,6 +133,12 @@ public class Organ : MonoBehaviour {
         isSelected = false;
     }
 
+    private void UpdateBoostedCube(bool status) {
+        if (boostedCube) {
+            boostedCube.SetActive(status);
+        }
+    }
+
     public void ToggleBoost() {
         Toggle button = toggleButtonA.GetComponent<Toggle>();
         bool status = button.isOn;
@@ -139,13 +146,16 @@ public class Organ : MonoBehaviour {
             if (GameManager.GetInstance().BuyBoost()) {
                 rewardx2 = true;
                 BoostOnTurn = true;
+                UpdateBoostedCube(true);
             } else {
                 toggleButtonA.GetComponent<Toggle>().isOn = false;
+                UpdateBoostedCube(false);
             }
         } else if (rewardx2) {
             GameManager.GetInstance().RefundBoost();
             rewardx2 = false;
             BoostOnTurn = false;
+            UpdateBoostedCube(false);
         }
 
         GameManager.GetInstance().UpdateSimulation();
