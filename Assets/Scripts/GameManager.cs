@@ -26,10 +26,10 @@ public class GameManager : MonoBehaviour {
 
     void Start() {
         roundCount = 0;
-        resourcesConf.A.Set(100, Resources.ResourcesType.A);
+        resourcesConf.A.Set(3, Resources.ResourcesType.A);
         resourcesConf.B.Set(0, Resources.ResourcesType.B);
         resourcesConf.C.Set(0, Resources.ResourcesType.C);
-        resourcesConf.D.Set(1, Resources.ResourcesType.D);
+        resourcesConf.D.Set(0, Resources.ResourcesType.D);
         UpdateSimulation();
     }
 
@@ -38,12 +38,13 @@ public class GameManager : MonoBehaviour {
         ResetSimulation();
     }
 
-    public void ResetTurn() {
+    private void ResetTurnFunction() {
         ResetSimulation();
         OrganSettlementManager MyMan = gameObject.GetComponent<OrganSettlementManager>();
         List<GameObject> Obj2Unlist = new List<GameObject>();
         foreach (GameObject orgObj in MyMan.GetInstantiatedOrgans()) {
            Organ org = orgObj.GetComponent<Organ>();
+           org.OnResetTurn();
             if (org.GetBuildTurn() == roundCount) {
                 Refund(org.resourcesType);
                 LineDrawer.ClearOrganRelations(org.GetBuildTurn());
@@ -58,6 +59,10 @@ public class GameManager : MonoBehaviour {
         }
     }
 
+    public void ResetTurn() {
+        ResetTurnFunction();
+        ResetTurnFunction();
+    }
 
     void ResetSimulation() {
         resourcesSimu.A.Set(0, Resources.ResourcesType.A);
@@ -108,6 +113,7 @@ public class GameManager : MonoBehaviour {
     }
 
     public void RefundBoost() {
+        Debug.Log("RefundBoost");
         ResourceCollectionBoostCost collec = new ResourceCollectionBoostCost();
         resourcesConf.Add(collec);
     }
