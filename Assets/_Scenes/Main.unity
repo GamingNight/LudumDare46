@@ -467,6 +467,16 @@ PrefabInstance:
       propertyPath: m_FontData.m_MaxSize
       value: 50
       objectReference: {fileID: 0}
+    - target: {fileID: 1619063841019905356, guid: 151a29f7b35e4f44596f24ab0289370d,
+        type: 3}
+      propertyPath: m_Name
+      value: ButtonA
+      objectReference: {fileID: 0}
+    - target: {fileID: 1882500889967768803, guid: 151a29f7b35e4f44596f24ab0289370d,
+        type: 3}
+      propertyPath: m_Name
+      value: ButtonD
+      objectReference: {fileID: 0}
     - target: {fileID: 4000295265127423096, guid: 151a29f7b35e4f44596f24ab0289370d,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target

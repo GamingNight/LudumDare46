@@ -59,11 +59,9 @@ public class MainOrgan : MonoBehaviour {
         if (!generateButtonDeactivated)
             return;
 
-        Button activated = generateButtonActivated.GetComponent<Button>();
-        Button deactivated = generateButtonDeactivated.GetComponent<Button>();
         bool canBuy = GameManager.GetInstance().CanGenerate();
-        activated.enabled = canBuy;
-        deactivated.enabled = (!canBuy);
+        generateButtonActivated.active = canBuy;
+        generateButtonDeactivated.active = (!canBuy);
     }
 
     public void OnGoToNextTurn() {
