@@ -25,6 +25,9 @@ public class Attackers {
         // transiton blue to orange gate at turn 7
         res = res * Mathf.Min((0.2f/3.5f/3.5f*(turn-3f)*(turn-10f)+1f),1);
         Debug.Log("res="+res);
+        float logres = Mathf.Max(0,4.5f * Mathf.Log10(Mathf.Max(res, 1f))-1);
+        int logresint = (int)logres;
+        Debug.Log("logres=" + logresint);
         int intres = (int)res;
         //intres = 0;
         return intres;
