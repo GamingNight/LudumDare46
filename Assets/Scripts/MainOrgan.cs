@@ -8,14 +8,14 @@ public class MainOrgan : MonoBehaviour {
     private Animator animator;
     private bool isSelected;
     public bool IsSelected { get { return isSelected; } }
-    public GameObject GenerateButtonActivated;
-    public GameObject GenerateButtonDeactivated;
+    public GameObject generateButtonActivated;
+    public GameObject generateButtonDeactivated;
 
     void Start() {
         collideWithOtherOrgan = false;
         animator = GetComponent<Animator>();
         isSelected = false;
-        updateGenerateButton();
+        UpdateGenerateButton();
     }
 
     void OnTriggerStay(Collider other) {
@@ -53,20 +53,20 @@ public class MainOrgan : MonoBehaviour {
         CursorManager.GetInstance().TriggerSelectionCursor();
     }
 
-    private void updateGenerateButton() {
-        if (!GenerateButtonActivated)
+    private void UpdateGenerateButton() {
+        if (!generateButtonActivated)
             return;
-        if (!GenerateButtonDeactivated)
+        if (!generateButtonDeactivated)
             return;
 
-        Button activated = GenerateButtonActivated.GetComponent<Button>();
-        Button deactivated = GenerateButtonDeactivated.GetComponent<Button>();
+        Button activated = generateButtonActivated.GetComponent<Button>();
+        Button deactivated = generateButtonDeactivated.GetComponent<Button>();
         bool canBuy = GameManager.GetInstance().CanGenerate();
         activated.enabled = canBuy;
         deactivated.enabled = (!canBuy);
     }
 
     public void OnGoToNextTurn() {
-        updateGenerateButton();
+        UpdateGenerateButton();
     }
 }

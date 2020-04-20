@@ -3657,8 +3657,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2a3e12543b2eac4cbf42aee80f325e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GenerateButtonActivated: {fileID: 6475755426477336929}
-  GenerateButtonDeactivated: {fileID: 2460103537915206342}
+  generateButtonActivated: {fileID: 2460103537915206342}
+  generateButtonDeactivated: {fileID: 2460103537915206342}
 --- !u!114 &2025596404245017370
 MonoBehaviour:
   m_ObjectHideFlags: 0
