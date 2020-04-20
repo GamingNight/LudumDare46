@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour {
     private Attackers attackersD = new Attackers(Resources.ResourcesType.D);
     public int roundCount;
     public GameObject organContainer;
+    private int defOnTurn = 0;
 
     void Awake() {
         if (INSTANCE == null) {
@@ -25,8 +26,9 @@ public class GameManager : MonoBehaviour {
     }
 
     void Start() {
+        defOnTurn = 0;
         roundCount = 0;
-        resourcesConf.A.Set(3, Resources.ResourcesType.A);
+        resourcesConf.A.Set(100, Resources.ResourcesType.A);
         resourcesConf.B.Set(0, Resources.ResourcesType.B);
         resourcesConf.C.Set(0, Resources.ResourcesType.C);
         resourcesConf.D.Set(0, Resources.ResourcesType.D);
@@ -57,11 +59,16 @@ public class GameManager : MonoBehaviour {
         foreach (GameObject orgObj in Obj2Unlist) {
             MyMan.GetInstantiatedOrgans().Remove(orgObj);
         }
+
     }
 
     public void ResetTurn() {
         ResetTurnFunction();
         ResetTurnFunction();
+        for (int i = 0; i < defOnTurn; i++) {
+            RefundDef();
+        }
+        defOnTurn = 0;
     }
 
     void ResetSimulation() {
@@ -73,14 +80,15 @@ public class GameManager : MonoBehaviour {
 
     public bool Buy(Resources.ResourcesType type) {
         ResourceCollectionCost collec = new ResourceCollectionCost(type);
-        bool toto = resourcesConf.Buy(collec);
+        bool res = resourcesConf.Buy(collec);
         DebugDisplay();
-        return toto;
+        return res;
     }
 
     public void BuyDef() {
-        if (GameManager.GetInstance().Buy(Resources.ResourcesType.D)) {
-            GameManager.GetInstance().Add(Resources.ResourcesType.D);
+        if (Buy(Resources.ResourcesType.D)) {
+            Add(Resources.ResourcesType.D);
+            defOnTurn += 1;
         }
     }
 
@@ -102,9 +110,16 @@ public class GameManager : MonoBehaviour {
         }
     }
 
+    public void RefundDef() {
+        resourcesConf.D.count = resourcesConf.D.count - 1;
+        ResourceCollectionCost collec = new ResourceCollectionCost(Resources.ResourcesType.D);
+        resourcesConf.Add(collec);
+    }
+
     public bool BuyBoost() {
         ResourceCollectionBoostCost collec = new ResourceCollectionBoostCost();
-        return resourcesConf.Buy(collec);
+        bool res =  resourcesConf.Buy(collec);
+        return res;
     }
 
     public void Refund(Resources.ResourcesType type) {
@@ -113,7 +128,6 @@ public class GameManager : MonoBehaviour {
     }
 
     public void RefundBoost() {
-        Debug.Log("RefundBoost");
         ResourceCollectionBoostCost collec = new ResourceCollectionBoostCost();
         resourcesConf.Add(collec);
     }
@@ -169,6 +183,7 @@ public class GameManager : MonoBehaviour {
             DebugDisplay();
             Debug.Log("tour " + roundCount);
         }
+        defOnTurn = 0;
         return res;
     }
 
