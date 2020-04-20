@@ -10,13 +10,12 @@ public class MoveCamera : MonoBehaviour {
     public float speed = 10;
     public float movementDectectionLimit = 0.9f;
     public Vector2 zoomBoundaries = new Vector2(6, 15);
+    public Vector3 initPosition = new Vector3(0, 7, -1);
     public float zoomSpeed = 15;
     private ScreenPart currentScreenPart;
-    private Vector3 initPosition;
 
     void Start() {
         currentScreenPart = ScreenPart.NONE;
-        initPosition = transform.position;
         Init();
     }
 
@@ -54,37 +53,35 @@ public class MoveCamera : MonoBehaviour {
             } else if (horizontalEn == 1 || horizontalFr == 1) {
                 currentScreenPart = ScreenPart.RIGHT;
             } else {
-                currentScreenPart = ScreenPart.NONE;
-            }
-        }
-
-        //Mouse
-        Vector3 mousePosition = Input.mousePosition;
-        float mouseXPercent = mousePosition.x / Screen.width;
-        float mouseYPercent = mousePosition.y / Screen.height;
-        if (mouseYPercent > movementDectectionLimit) {
-            if (mouseXPercent < (1 - movementDectectionLimit)) {
-                currentScreenPart = ScreenPart.UPLEFT;
-            } else if (mouseXPercent > movementDectectionLimit) {
-                currentScreenPart = ScreenPart.UPRIGHT;
-            } else {
-                currentScreenPart = ScreenPart.UP;
-            }
-        } else if (mouseYPercent < (1 - movementDectectionLimit)) {
-            if (mouseXPercent < (1 - movementDectectionLimit)) {
-                currentScreenPart = ScreenPart.DOWNLEFT;
-            } else if (mouseXPercent > movementDectectionLimit) {
-                currentScreenPart = ScreenPart.DOWNRIGHT;
-            } else {
-                currentScreenPart = ScreenPart.DOWN;
-            }
-        } else {
-            if (mouseXPercent < (1 - movementDectectionLimit)) {
-                currentScreenPart = ScreenPart.LEFT;
-            } else if (mouseXPercent > movementDectectionLimit) {
-                currentScreenPart = ScreenPart.RIGHT;
-            } else {
-                currentScreenPart = ScreenPart.NONE;
+                //Mouse
+                Vector3 mousePosition = Input.mousePosition;
+                float mouseXPercent = mousePosition.x / Screen.width;
+                float mouseYPercent = mousePosition.y / Screen.height;
+                if (mouseYPercent > movementDectectionLimit) {
+                    if (mouseXPercent < (1 - movementDectectionLimit)) {
+                        currentScreenPart = ScreenPart.UPLEFT;
+                    } else if (mouseXPercent > movementDectectionLimit) {
+                        currentScreenPart = ScreenPart.UPRIGHT;
+                    } else {
+                        currentScreenPart = ScreenPart.UP;
+                    }
+                } else if (mouseYPercent < (1 - movementDectectionLimit)) {
+                    if (mouseXPercent < (1 - movementDectectionLimit)) {
+                        currentScreenPart = ScreenPart.DOWNLEFT;
+                    } else if (mouseXPercent > movementDectectionLimit) {
+                        currentScreenPart = ScreenPart.DOWNRIGHT;
+                    } else {
+                        currentScreenPart = ScreenPart.DOWN;
+                    }
+                } else {
+                    if (mouseXPercent < (1 - movementDectectionLimit)) {
+                        currentScreenPart = ScreenPart.LEFT;
+                    } else if (mouseXPercent > movementDectectionLimit) {
+                        currentScreenPart = ScreenPart.RIGHT;
+                    } else {
+                        currentScreenPart = ScreenPart.NONE;
+                    }
+                }
             }
         }
 
