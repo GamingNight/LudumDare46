@@ -26,7 +26,7 @@ public class GameManager : MonoBehaviour {
 
     void Start() {
         roundCount = 0;
-        resourcesConf.A.Set(3, Resources.ResourcesType.A);
+        resourcesConf.A.Set(10, Resources.ResourcesType.A);
         resourcesConf.B.Set(0, Resources.ResourcesType.B);
         resourcesConf.C.Set(0, Resources.ResourcesType.C);
         resourcesConf.D.Set(1, Resources.ResourcesType.D);
@@ -39,10 +39,17 @@ public class GameManager : MonoBehaviour {
     }
 
     public void ResetTurn() {
+        // Debug.Log("ResetTurn : ");
         foreach (Organ org in organContainer.GetComponentsInChildren<Organ>()) {
-            Refund(org.resourcesType);
-            Destroy(org);
+            if (org.GetBuildTurn() == roundCount) {
+                // Debug.Log("Organ : " + org.name);
+                Refund(org.resourcesType);
+                LineDrawer.ClearOrganRelations(org.gameObject);
+                Destroy(org.gameObject);       
+            }
         }
+
+        // LineDrawer.ClearRelations();
         ResetSimulation();
     }
 
@@ -158,5 +165,12 @@ public class GameManager : MonoBehaviour {
 
     private void DebugDisplay() {
         Debug.Log("A = " + resourcesConf.A.count + " B = " + resourcesConf.B.count + " C = " + resourcesConf.C.count + " D = " + resourcesConf.D.count + " Attack = " + attackersD.GetPower(roundCount));
+    }
+
+    void Update() {
+
+        if (Input.GetMouseButtonDown(2)) {
+            ResetTurn();
+        }
     }
 }

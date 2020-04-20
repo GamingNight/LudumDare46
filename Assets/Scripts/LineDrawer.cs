@@ -93,4 +93,17 @@ public class LineDrawer : MonoBehaviour {
         }
         lineRelationList.Clear();
     }
+
+    public static void ClearOrganRelations(GameObject organ) {
+        if (lineRelationList == null) {
+            return;
+        }
+
+        foreach (LineRelation relation in lineRelationList) {
+            if ((relation.organ1 == organ) | (relation.organ2 == organ) ) {
+                Destroy(relation.lineRenderer);
+                lineRelationList.Remove(relation);
+            }
+        }
+    }
 }

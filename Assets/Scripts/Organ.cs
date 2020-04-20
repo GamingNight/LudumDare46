@@ -48,6 +48,9 @@ public class Organ : MonoBehaviour {
         buildTurn = GameManager.GetInstance().roundCount;
     }
 
+    public int GetBuildTurn() {
+        return buildTurn;
+    }
     public void SetToForbiddenColor() {
         if (GetComponent<SpriteRenderer>() != null) {
             GetComponent<SpriteRenderer>().color = forbiddenColor;
