@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class MainOrgan : MonoBehaviour {
 
@@ -41,7 +40,12 @@ public class MainOrgan : MonoBehaviour {
         if (animator != null) {
             animator.SetBool("selected", false);
         }
-        CursorManager.GetInstance().TriggerNavigationCursor();
+        CursorManager.GetInstance().TriggerNavigationCursorFromOrgan();
         isSelected = false;
+    }
+
+    void OnMouseOver() {
+
+        CursorManager.GetInstance().TriggerSelectionCursor();
     }
 }

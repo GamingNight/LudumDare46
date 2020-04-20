@@ -81,7 +81,7 @@ public class OrganSettlementManager : MonoBehaviour {
                         removeMenu = false;
                     }
                 } else {
-                    CursorManager.GetInstance().TriggerNavigationCursor();
+                    CursorManager.GetInstance().TriggerNavigationCursorFromSettlementManager();
                     mode = Mode.IDLE;
                 }
                 if (removeMenu) {
@@ -94,7 +94,7 @@ public class OrganSettlementManager : MonoBehaviour {
             } else if (mode == Mode.SETTLEMENT) {
                 if (!organObjectList[organObjectList.Count - 1].GetComponent<Organ>().CollideWithOtherOrgan) {
                     SetSpriteSortingLayerName(organObjectList[organObjectList.Count - 1], "Default");
-                    CursorManager.GetInstance().TriggerNavigationCursor();
+                    CursorManager.GetInstance().TriggerNavigationCursorFromSettlementManager();
                     mode = Mode.IDLE;
                 }
             }

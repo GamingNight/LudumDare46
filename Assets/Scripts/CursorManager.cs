@@ -13,6 +13,7 @@ public class CursorManager : MonoBehaviour {
     private Animator animator;
 
     private GameObject staticCursor;
+    private bool fromOrganSettlementManager;
 
     void Awake() {
 
@@ -23,6 +24,7 @@ public class CursorManager : MonoBehaviour {
 
     void Start() {
 
+        fromOrganSettlementManager = false;
         animator = GetComponent<Animator>();
         Init();
     }
@@ -51,19 +53,39 @@ public class CursorManager : MonoBehaviour {
         transform.position = new Vector3(mouseWorldPosition.x, 0.1f, mouseWorldPosition.z);
     }
 
+    //Called by an Organ whenever the cursor comes over it
     public void TriggerSelectionCursor() {
+
+        if (fromOrganSettlementManager) { //selection cursor is already active
+            return;
+        }
+        fromOrganSettlementManager = false;
         animator.SetBool("selectionIsActive", true);
     }
 
+    //Called by the OrganSettlementManager to trigger the "Select Menu" cursor
     public void TriggerSelectionMenuCursor() {
 
+        fromOrganSettlementManager = true;
         animator.SetBool("selectionIsActive", true);
         staticCursor = Instantiate<GameObject>(staticCursorPrefab);
         staticCursor.transform.position = transform.position;
     }
 
-    public void TriggerNavigationCursor() {
+    //Called by an Organ as the cursor moves away from it.
+    public void TriggerNavigationCursorFromOrgan() {
 
+        //Don't go back to the initial state if we are on a selection state from the OrganSettlementManager.
+        if (fromOrganSettlementManager) {
+            return;
+        }
+        animator.SetBool("selectionIsActive", false);
+    }
+
+    //Called by the OrganSettlementManager when the "Select Menu" is done.
+    public void TriggerNavigationCursorFromSettlementManager() {
+
+        fromOrganSettlementManager = false;
         animator.SetBool("selectionIsActive", false);
         DestroyStaticCursor();
     }

@@ -41,7 +41,7 @@ public class Organ : MonoBehaviour {
         isSelected = false;
         GameManager.GetInstance().UpdateSimulation();
         if (toggleButtonA) {
-            toggleButtonA.GetComponent<Toggle>().onValueChanged.AddListener(delegate { ToggleBoost(); });   
+            toggleButtonA.GetComponent<Toggle>().onValueChanged.AddListener(delegate { ToggleBoost(); });
         }
 
     }
@@ -105,12 +105,17 @@ public class Organ : MonoBehaviour {
         isSelected = true;
     }
 
+    void OnMouseOver() {
+
+        CursorManager.GetInstance().TriggerSelectionCursor();
+    }
+
     void OnMouseExit() {
 
         if (animator != null) {
             animator.SetBool("selected", false);
         }
-        CursorManager.GetInstance().TriggerNavigationCursor();
+        CursorManager.GetInstance().TriggerNavigationCursorFromOrgan();
         isSelected = false;
     }
 
@@ -139,8 +144,7 @@ public class Organ : MonoBehaviour {
     }
 
     void Update() {
-        if (isSelected & (resourcesType == Resources.ResourcesType.A))
-        {
+        if (isSelected & (resourcesType == Resources.ResourcesType.A)) {
 
             float scrollWheel = Input.GetAxis("Mouse ScrollWheel");
             bool scrolldown = (scrollWheel < 0f);
