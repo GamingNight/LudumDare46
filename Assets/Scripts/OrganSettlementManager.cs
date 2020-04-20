@@ -101,6 +101,9 @@ public class OrganSettlementManager : MonoBehaviour {
                     SetSpriteSortingLayerName(organObjectList[organObjectList.Count - 1], "Default");
                     CursorManager.GetInstance().TriggerNavigationCursorFromSettlementManager();
                     mode = Mode.IDLE;
+                    if (GameScenario.IS_TUTORIAL) {
+                        GameScenario.GetInstance().ReachState(GameScenario.StateName.CLICK_MAP);
+                    }
                 }
             }
         }

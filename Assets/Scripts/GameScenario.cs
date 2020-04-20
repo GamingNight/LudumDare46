@@ -8,7 +8,8 @@ public class GameScenario : MonoBehaviour {
 
 
     public enum StateName {
-        FIRST_TEST, CONGRATS_FIRST_TEST, INCREASE_DEFENSE, COST_BLUE, CLICK_MAP
+        FIRST_TEST, CONGRATS_FIRST_TEST, INCREASE_DEFENSE, COST_BLUE, RUNNING_OUT_OF_BLUE, CLICK_MAP, EXPLAIN_MAIN_ORGAN_COST, IT_S_YOUR_TURN, END_TUTO
+
     }
 
     public GameObject tutoCanvas;
@@ -90,7 +91,9 @@ public class GameScenario : MonoBehaviour {
             stateAccomplished = true;
         } else {
             tutoPanels[currentState - 1].SetActive(false);
-            tutoPanels[currentState].SetActive(true);
+            if (currentState < tutoPanels.Length - 1) {
+                tutoPanels[currentState].SetActive(true);
+            }
             if (currentState == 1) {
                 triggerTimer = true;
                 timerDuration = 4;
@@ -101,7 +104,22 @@ public class GameScenario : MonoBehaviour {
                 triggerTimer = true;
                 timerDuration = 4;
                 currentTime = 0;
-                stateAfterTimer = StateName.CLICK_MAP;
+                stateAfterTimer = StateName.RUNNING_OUT_OF_BLUE;
+            } else if (currentState == 5) {
+                triggerTimer = true;
+                timerDuration = 4;
+                currentTime = 0;
+                stateAfterTimer = StateName.EXPLAIN_MAIN_ORGAN_COST;
+            } else if (currentState == 6) {
+                triggerTimer = true;
+                timerDuration = 5;
+                currentTime = 0;
+                stateAfterTimer = StateName.IT_S_YOUR_TURN;
+            } else if (currentState == 7) {
+                triggerTimer = true;
+                timerDuration = 3;
+                currentTime = 0;
+                stateAfterTimer = StateName.END_TUTO;
             }
         }
         stateAccomplished = true;
@@ -125,8 +143,20 @@ public class GameScenario : MonoBehaviour {
             case StateName.COST_BLUE:
                 currentState = 3;
                 break;
-            case StateName.CLICK_MAP:
+            case StateName.RUNNING_OUT_OF_BLUE:
                 currentState = 4;
+                break;
+            case StateName.CLICK_MAP:
+                currentState = 5;
+                break;
+            case StateName.EXPLAIN_MAIN_ORGAN_COST:
+                currentState = 6;
+                break;
+            case StateName.IT_S_YOUR_TURN:
+                currentState = 7;
+                break;
+            case StateName.END_TUTO:
+                currentState = 8;
                 break;
             default:
                 break;
