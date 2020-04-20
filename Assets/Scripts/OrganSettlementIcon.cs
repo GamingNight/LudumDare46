@@ -10,6 +10,9 @@ public class OrganSettlementIcon : MonoBehaviour {
     private bool isSelected;
     public bool IsSelected { get { return isSelected; } }
 
+    private Coroutine cannotBuyCoroutine;
+    private Sprite initSprite;
+
     void Start() {
         ProceedImageAttribution();
         isSelected = false;
@@ -45,12 +48,17 @@ public class OrganSettlementIcon : MonoBehaviour {
 
     public void LaunchCannotBuyAnimation() {
 
-        StartCoroutine(LaunchCannotBuyCoroutine());
+        if (cannotBuyCoroutine != null) {
+            StopCoroutine(cannotBuyCoroutine);
+            image.sprite = initSprite;
+        }
+
+        cannotBuyCoroutine = StartCoroutine(LaunchCannotBuyCoroutine());
     }
 
     private IEnumerator LaunchCannotBuyCoroutine() {
 
-        Sprite initSprite = image.sprite;
+        initSprite = image.sprite;
         image.sprite = wrongSprite;
         yield return new WaitForSeconds(0.5f);
         image.sprite = initSprite;

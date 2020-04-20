@@ -445,6 +445,12 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1813574713}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &511494364 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4353881061367549346, guid: 151a29f7b35e4f44596f24ab0289370d,
+    type: 3}
+  m_PrefabInstance: {fileID: 958567010}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &565838357
 GameObject:
   m_ObjectHideFlags: 0
@@ -1179,6 +1185,11 @@ PrefabInstance:
       propertyPath: menuCanvas
       value: 
       objectReference: {fileID: 1365890469}
+    - target: {fileID: 2529212763164320976, guid: 151a29f7b35e4f44596f24ab0289370d,
+        type: 3}
+      propertyPath: increaseButton
+      value: 
+      objectReference: {fileID: 511494364}
     - target: {fileID: 4370279242491923414, guid: 151a29f7b35e4f44596f24ab0289370d,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
