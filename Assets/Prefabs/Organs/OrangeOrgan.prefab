@@ -777,6 +777,7 @@ MonoBehaviour:
   forbiddenColor: {r: 0, g: 0, b: 0, a: 0.53333336}
   resourcesType: 1
   toggleButtonA: {fileID: 0}
+  shape3D: {fileID: 504053893916869575}
 --- !u!95 &2090987819753685647
 Animator:
   serializedVersion: 3

@@ -11,6 +11,7 @@ public class Organ : MonoBehaviour {
     public Color forbiddenColor;
     public Resources.ResourcesType resourcesType;
     public GameObject toggleButtonA;
+    public GameObject shape3D;
 
     private Color initColor;
     private List<Color> initColors;
@@ -51,27 +52,21 @@ public class Organ : MonoBehaviour {
     public int GetBuildTurn() {
         return buildTurn;
     }
-    public void SetToForbiddenColor() {
-        if (GetComponent<SpriteRenderer>() != null) {
-            GetComponent<SpriteRenderer>().color = forbiddenColor;
-        } else {
-            foreach (SpriteRenderer renderer in GetComponentsInChildren<SpriteRenderer>()) {
-                renderer.color = forbiddenColor;
-            }
+    public void SetToForbiddenLook() {
+        foreach (SpriteRenderer renderer in GetComponentsInChildren<SpriteRenderer>()) {
+            renderer.color = forbiddenColor;
         }
+        shape3D.SetActive(false);
     }
 
-    public void RevertColor() {
+    public void RevertLook() {
         if (startHasBeenCalled) {
-            if (GetComponent<SpriteRenderer>() != null) {
-                GetComponent<SpriteRenderer>().color = initColor;
-            } else {
-                int i = 0;
-                foreach (SpriteRenderer renderer in GetComponentsInChildren<SpriteRenderer>()) {
-                    renderer.color = initColors[i];
-                    i++;
-                }
+            int i = 0;
+            foreach (SpriteRenderer renderer in GetComponentsInChildren<SpriteRenderer>()) {
+                renderer.color = initColors[i];
+                i++;
             }
+            shape3D.SetActive(true);
         }
     }
 

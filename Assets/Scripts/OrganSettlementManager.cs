@@ -106,9 +106,9 @@ public class OrganSettlementManager : MonoBehaviour {
             lastOrganInstantiated.transform.position = new Vector3(mouseWorldPosition.x, 1f, mouseWorldPosition.z);
             lastOrganInstantiated.transform.eulerAngles = new Vector3(90, 0, 0);
             if (lastOrganInstantiated.GetComponent<Organ>().CollideWithOtherOrgan) {
-                lastOrganInstantiated.GetComponent<Organ>().SetToForbiddenColor();
+                lastOrganInstantiated.GetComponent<Organ>().SetToForbiddenLook();
             } else {
-                lastOrganInstantiated.GetComponent<Organ>().RevertColor();
+                lastOrganInstantiated.GetComponent<Organ>().RevertLook();
             }
         }
     }
