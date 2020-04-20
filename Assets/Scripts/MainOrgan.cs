@@ -90,19 +90,37 @@ public class MainOrgan : MonoBehaviour {
 
     public void EndNextVirusSample() {
 
-        if (GameManager.GetInstance().GoToNextTurn()) {
-            nextTurnButton.GetComponentInChildren<Text>().text = "Success!";
-            nextTurnButton.GetComponentInChildren<Animator>().SetTrigger("success");
-            nextTurnButton.GetComponent<AudioSource>().Play();
+        if (GameScenario.IS_TUTORIAL) {
+            ShowSuccess();
         } else {
-            nextTurnButton.GetComponentInChildren<Text>().text = ">  Submit to next virus sample  <";
-            menuCanvas.SetActive(true);
-            menuCanvas.GetComponent<MenuNavig>().EndMenu();
+            if (GameManager.GetInstance().GoToNextTurn()) {
+                ShowSuccess();
+            } else {
+                TriggerEndGame();
+            }
         }
+
+    }
+
+    private void ShowSuccess() {
+        nextTurnButton.GetComponentInChildren<Text>().text = "Success!";
+        nextTurnButton.GetComponentInChildren<Animator>().SetTrigger("success");
+        nextTurnButton.GetComponent<AudioSource>().Play();
         Destroy(nextVirusAlarm);
     }
 
     public void EndSuccessVirusSample() {
         nextTurnButton.GetComponentInChildren<Text>().text = ">  Submit to next virus sample  <";
+        if (GameScenario.IS_TUTORIAL) {
+            GameScenario.GetInstance().ReachState(GameScenario.StateName.CONGRATS_FIRST_TEST);
+        }
     }
+
+    private void TriggerEndGame() {
+        nextTurnButton.GetComponentInChildren<Text>().text = ">  Submit to next virus sample  <";
+        menuCanvas.SetActive(true);
+        menuCanvas.GetComponent<MenuNavig>().EndMenu();
+        Destroy(nextVirusAlarm);
+    }
+
 }
