@@ -37,7 +37,7 @@ public class HUDManager : MonoBehaviour {
 
         if (defPay) {
             int defPayValue = GameManager.GetInstance().GetDefCost();
-            defPay.GetComponent<Text>().text = defPayValue.ToString();
+            defPay.GetComponent<Text>().text = "Inject " + defPayValue.ToString();
         }
 
         int aCountValue = GameManager.GetInstance().GetResources(Resources.ResourcesType.A).count;
