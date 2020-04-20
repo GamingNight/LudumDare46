@@ -42,14 +42,13 @@ public class GameManager : MonoBehaviour {
         // Debug.Log("ResetTurn : ");
         foreach (Organ org in organContainer.GetComponentsInChildren<Organ>()) {
             if (org.GetBuildTurn() == roundCount) {
-                // Debug.Log("Organ : " + org.name);
                 Refund(org.resourcesType);
                 LineDrawer.ClearOrganRelations(org.GetBuildTurn());
                 Destroy(org.gameObject);       
             }
         }
 
-        // LineDrawer.ClearRelations();
+
         ResetSimulation();
     }
 
