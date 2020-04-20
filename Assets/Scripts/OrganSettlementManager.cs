@@ -24,6 +24,9 @@ public class OrganSettlementManager : MonoBehaviour {
     void Start() {
         Init();
     }
+    public void SetMode(Mode value) {
+        mode = value;
+    }
 
     public List<GameObject> GetInstantiatedOrgans() {
         return organObjectList;
