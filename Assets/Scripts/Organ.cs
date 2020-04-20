@@ -122,35 +122,17 @@ public class Organ : MonoBehaviour {
     public void ToggleBoost() {
         Toggle button = toggleButtonA.GetComponent<Toggle>();
         bool status = button.isOn;
-        if (!status) {
+        if (status) {
             if (GameManager.GetInstance().BuyBoost()) {
                 rewardx2 = true;
             } else {
                 toggleButtonA.GetComponent<Toggle>().isOn = false;
             }
-        } else {
+        } else if (rewardx2) {
             GameManager.GetInstance().RefundBoost();
             rewardx2 = false;
         }
 
         GameManager.GetInstance().UpdateSimulation();
-    }
-
-    void BuyBoost() {
-        if (GameManager.GetInstance().BuyBoost()) {
-            rewardx2 = true;
-            GameManager.GetInstance().UpdateSimulation();
-        }
-    }
-
-    void Update() {
-        if (isSelected & (resourcesType == Resources.ResourcesType.A)) {
-
-            float scrollWheel = Input.GetAxis("Mouse ScrollWheel");
-            bool scrolldown = (scrollWheel < 0f);
-            if (scrolldown & !rewardx2) {
-                BuyBoost();
-            }
-        }
     }
 }
