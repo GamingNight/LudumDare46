@@ -110,6 +110,7 @@ GameObject:
   - component: {fileID: 372317373403433696}
   - component: {fileID: 372317373403433702}
   - component: {fileID: 248841481881982739}
+  - component: {fileID: -7782617212913318262}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -167,6 +168,9 @@ MonoBehaviour:
     type: 3}
   canvas: {fileID: 372317373372263838}
   organContainer: {fileID: 0}
+  openMenuClip: {fileID: 0}
+  closeMenuClip: {fileID: 0}
+  errorClip: {fileID: 0}
 --- !u!114 &248841481881982739
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -180,6 +184,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tutoCanvas: {fileID: 0}
+--- !u!114 &-7782617212913318262
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 372317373403433699}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b76add1aac85df41a29ad93dec4b7d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nav: {fileID: 0}
 --- !u!1 &8967928455854204220
 GameObject:
   m_ObjectHideFlags: 0

@@ -7,6 +7,7 @@ public class MenuNavig : MonoBehaviour {
     public GameObject restartButton;
     public GameObject gameoverText;
     public GameObject winText;
+    public GameObject pausePanel;
 
     public GameObject cursor;
     public GameObject gameManager;
@@ -35,6 +36,7 @@ public class MenuNavig : MonoBehaviour {
         gameoverText.SetActive(false);
         winText.SetActive(false);
         welcomeText.SetActive(true);
+        pausePanel.SetActive(false);
     }
 
     public void EndMenu() {
@@ -45,6 +47,7 @@ public class MenuNavig : MonoBehaviour {
         gameoverText.SetActive(true);
         winText.SetActive(false);
         welcomeText.SetActive(false);
+        pausePanel.SetActive(false);
     }
 
     public void WinMenu() {
@@ -55,6 +58,17 @@ public class MenuNavig : MonoBehaviour {
         gameoverText.SetActive(false);
         winText.SetActive(true);
         welcomeText.SetActive(false);
+        pausePanel.SetActive(false);
+    }
+
+    public void PauseMenu() {
+        startButton.SetActive(false);
+        tutorialButton.SetActive(false);
+        restartButton.SetActive(false);
+        gameoverText.SetActive(false);
+        winText.SetActive(false);
+        welcomeText.SetActive(false);
+        pausePanel.SetActive(true);
     }
 
     private void SetMainGameActive(bool b) {
@@ -69,6 +83,7 @@ public class MenuNavig : MonoBehaviour {
         cursor.GetComponent<CursorManager>().Init();
         gameManager.GetComponent<OrganSettlementManager>().Init();
         gameManager.GetComponent<GameManager>().Reset();
+        gameManager.GetComponent<PauseManager>().Init();
         if (withTuto) {
             gameManager.GetComponent<GameScenario>().Init();
         } else {
