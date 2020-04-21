@@ -67,6 +67,12 @@ public class OrganSettlementManager : MonoBehaviour {
         }
     }
 
+    public void OnResetTurn() {
+        if (mode == Mode.SETTLEMENT) {
+            mode = Mode.IDLE;
+        }
+    }
+
     void Update() {
 
         bool mouseButtonUp = Input.GetMouseButtonUp(0);
