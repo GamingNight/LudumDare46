@@ -54,6 +54,7 @@ public class GameScenario : MonoBehaviour {
             }
         }
         tutoCanvas.transform.Find("FakeDefense").gameObject.SetActive(true);
+        tutoCanvas.transform.Find("FakeDefenseCost").gameObject.SetActive(true);
     }
 
     public void SkipTutorial() {
@@ -68,6 +69,7 @@ public class GameScenario : MonoBehaviour {
             i++;
         }
         tutoCanvas.transform.Find("FakeDefense").gameObject.SetActive(false);
+        tutoCanvas.transform.Find("FakeDefenseCost").gameObject.SetActive(false);
     }
 
     void Update() {
@@ -99,7 +101,7 @@ public class GameScenario : MonoBehaviour {
                 currentTime = 0;
                 stateAfterTimer = INCREASE_DEFENSE;
             } else if (currentState == COST_BLUE) {
-                HideFakeDefensePanel();
+                HideFakeDefensePanels();
                 triggerTimer = true;
                 timerDuration = 5;
                 currentTime = 0;
@@ -136,7 +138,13 @@ public class GameScenario : MonoBehaviour {
         stateAccomplished = false;
     }
 
-    private void HideFakeDefensePanel() {
+    private void HideFakeDefensePanels() {
         tutoCanvas.transform.Find("FakeDefense").gameObject.SetActive(false);
+        tutoCanvas.transform.Find("FakeDefenseCost").gameObject.SetActive(false);
+    }
+
+    public int GetCurrentState() {
+
+        return currentState;
     }
 }

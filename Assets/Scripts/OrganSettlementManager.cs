@@ -82,7 +82,8 @@ public class OrganSettlementManager : MonoBehaviour {
                 StopCoroutine(growIconCoroutine);
             }
             if (mode == Mode.IDLE) {
-                if (MouseIsOverTheGround()) {
+                bool tutoAllows = !GameScenario.IS_TUTORIAL || GameScenario.GetInstance().GetCurrentState() >= GameScenario.RUNNING_OUT_OF_BLUE;
+                if (MouseIsOverTheGround() && tutoAllows) {
                     ShowOrganSettlementIcons(mouseWorldPosition);
                     CursorManager.GetInstance().TriggerSelectionMenuCursor();
                     Play(openMenuClip);
