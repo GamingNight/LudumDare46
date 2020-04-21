@@ -1035,6 +1035,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -7782617212913318262, guid: 9cc4d175fdb6c664eb5a74ff4ec68322,
+        type: 3}
+      propertyPath: nav
+      value: 
+      objectReference: {fileID: 1365890470}
     - target: {fileID: 248841481881982739, guid: 9cc4d175fdb6c664eb5a74ff4ec68322,
         type: 3}
       propertyPath: tutoCanvas
@@ -2869,6 +2874,18 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1365890468}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1365890470 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7709016186946698758, guid: 83d1d7e9bb2d82543b3ff6c8fa375f2c,
+    type: 3}
+  m_PrefabInstance: {fileID: 1365890468}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1365890469}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7180e92ffc02d964583b401e431fb9a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1529228636 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 372317373403433699, guid: 9cc4d175fdb6c664eb5a74ff4ec68322,
