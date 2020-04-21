@@ -1,14 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class PauseManager : MonoBehaviour
-{
-	private bool paused = false;
-	public MenuNavig nav;
+public class PauseManager : MonoBehaviour {
+    private bool paused = false;
+    public MenuNavig nav;
 
-    public void Init()
-    {
+    public void Init() {
         paused = false;
     }
 
@@ -16,11 +12,13 @@ public class PauseManager : MonoBehaviour
         Time.timeScale = 0;
         nav.gameObject.SetActive(true);
         nav.PauseMenu();
+        CursorManager.GetInstance().gameObject.SetActive(false);
     }
 
     private void ResumeGame() {
         Time.timeScale = 1;
         nav.gameObject.SetActive(false);
+        CursorManager.GetInstance().gameObject.SetActive(true);
     }
 
     // Update is called once per frame
