@@ -110,7 +110,11 @@ public class MainOrgan : MonoBehaviour {
 
         nextVirusAlarm = Instantiate<GameObject>(nextVirusAlarmPrefab);
 
-        nextTurnButton.GetComponentInChildren<Text>().text = "Testing virulence level " + (GameManager.GetInstance().GetTestLevel() + 1).ToString() + "";
+        int levelToDisplay = GameManager.GetInstance().GetTestLevel() + 1;
+        if (GameScenario.IS_TUTORIAL) {
+            levelToDisplay = 0;
+        }
+        nextTurnButton.GetComponentInChildren<Text>().text = "Testing virulence level " + levelToDisplay.ToString() + "";
         nextTurnButton.GetComponentInChildren<Animator>().SetTrigger("fillButton");
     }
 
