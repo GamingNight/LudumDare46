@@ -92,7 +92,7 @@ public class GameScenario : MonoBehaviour {
             stateAccomplished = true;
         } else {
             tutoPanels[currentState - 1].SetActive(false);
-            if (currentState < tutoPanels.Length - 1) {
+            if (currentState < END_TUTO) {
                 tutoPanels[currentState].SetActive(true);
             }
             if (currentState == CONGRATS_FIRST_TEST) {
