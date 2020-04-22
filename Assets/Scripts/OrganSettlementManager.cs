@@ -117,7 +117,12 @@ public class OrganSettlementManager : MonoBehaviour {
                 }
             } else if (mode == Mode.SETTLEMENT) {
                 GameObject lastOrgan = organObjectList[organObjectList.Count - 1];
-                if (!lastOrgan.GetComponent<Organ>().CollideWithOtherOrgan) {
+                bool status = lastOrgan.GetComponent<Organ>().CollideWithOtherOrgan;
+                MasterNodeManager masternode = lastOrgan.GetComponent<MasterNodeManager>();
+                if (masternode != null) {
+                    status = status | masternode.GetCollideWithOtherOrgan();
+                }
+                if (!status) {
                     SetSpriteSortingLayerName(lastOrgan, "Default");
                     CursorManager.GetInstance().TriggerNavigationCursorFromSettlementManager();
                     mode = Mode.IDLE;
