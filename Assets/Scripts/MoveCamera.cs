@@ -16,6 +16,8 @@ public class MoveCamera : MonoBehaviour {
     public float zoomSpeed = 15;
     private ScreenPart currentScreenPart;
 
+    private float customSpeed = 0;
+
     void Start() {
         currentScreenPart = ScreenPart.NONE;
         Init();
@@ -87,11 +89,14 @@ public class MoveCamera : MonoBehaviour {
             }
         }
 
-        Move();
-
         float scrollWheel = Input.GetAxis("Mouse ScrollWheel");
         float newPosY = transform.position.y + scrollWheel * Time.deltaTime * zoomSpeed * -1;
         newPosY = Mathf.Min(Mathf.Max(newPosY, zoomBoundaries.x), zoomBoundaries.y);
+        // More the zoom is far, more the speed is
+        customSpeed = Mathf.Max(speed, newPosY);
+
+        Move();
+
         transform.position = new Vector3(transform.position.x, newPosY, transform.position.z);
     }
 
@@ -101,15 +106,15 @@ public class MoveCamera : MonoBehaviour {
         float posZ = transform.position.z;
 
         if (currentScreenPart == ScreenPart.UP || currentScreenPart == ScreenPart.UPRIGHT || currentScreenPart == ScreenPart.UPLEFT) {
-            posZ += speed * Time.deltaTime;
+            posZ += customSpeed * Time.deltaTime;
         } else if (currentScreenPart == ScreenPart.DOWN || currentScreenPart == ScreenPart.DOWNRIGHT || currentScreenPart == ScreenPart.DOWNLEFT) {
-            posZ -= speed * Time.deltaTime;
+            posZ -= customSpeed * Time.deltaTime;
         }
 
         if (currentScreenPart == ScreenPart.RIGHT || currentScreenPart == ScreenPart.UPRIGHT || currentScreenPart == ScreenPart.DOWNRIGHT) {
-            posX += speed * Time.deltaTime;
+            posX += customSpeed * Time.deltaTime;
         } else if (currentScreenPart == ScreenPart.LEFT || currentScreenPart == ScreenPart.DOWNLEFT || currentScreenPart == ScreenPart.UPLEFT) {
-            posX -= speed * Time.deltaTime;
+            posX -= customSpeed * Time.deltaTime;
         }
 
         posX = Mathf.Max(xBoundaries.x, Mathf.Min(xBoundaries.y, posX));

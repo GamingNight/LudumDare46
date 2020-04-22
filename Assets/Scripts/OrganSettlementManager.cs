@@ -116,13 +116,15 @@ public class OrganSettlementManager : MonoBehaviour {
                     iconMap.Clear();
                 }
             } else if (mode == Mode.SETTLEMENT) {
-                if (!organObjectList[organObjectList.Count - 1].GetComponent<Organ>().CollideWithOtherOrgan) {
-                    SetSpriteSortingLayerName(organObjectList[organObjectList.Count - 1], "Default");
+                GameObject lastOrgan = organObjectList[organObjectList.Count - 1];
+                if (!lastOrgan.GetComponent<Organ>().CollideWithOtherOrgan) {
+                    SetSpriteSortingLayerName(lastOrgan, "Default");
                     CursorManager.GetInstance().TriggerNavigationCursorFromSettlementManager();
                     mode = Mode.IDLE;
                     if (GameScenario.IS_TUTORIAL) {
                         GameScenario.GetInstance().ReachState(GameScenario.CLICK_MAP);
                     }
+                    ConvertContainer2Children(lastOrgan);
                 } else {
                     Play(errorClip);
                 }
@@ -134,7 +136,12 @@ public class OrganSettlementManager : MonoBehaviour {
             GameObject lastOrganInstantiated = organObjectList[organObjectList.Count - 1];
             lastOrganInstantiated.transform.position = new Vector3(mouseWorldPosition.x, 1f, mouseWorldPosition.z);
             lastOrganInstantiated.transform.eulerAngles = new Vector3(90, 0, 0);
-            if (lastOrganInstantiated.GetComponent<Organ>().CollideWithOtherOrgan) {
+            bool status = lastOrganInstantiated.GetComponent<Organ>().CollideWithOtherOrgan;
+            MasterNodeManager masternode = lastOrganInstantiated.GetComponent<MasterNodeManager>();
+            if (masternode != null) {
+                status = status | masternode.GetCollideWithOtherOrgan();
+            }
+            if (status) {
                 lastOrganInstantiated.GetComponent<Organ>().SetToForbiddenLook();
             } else {
                 lastOrganInstantiated.GetComponent<Organ>().RevertLook();
@@ -233,6 +240,15 @@ public class OrganSettlementManager : MonoBehaviour {
         organ.transform.position = position;
         SetSpriteSortingLayerName(organ, "OrganToBeSettled");
         return organ;
+    }
+
+    private void ConvertContainer2Children(GameObject lastOrgan) {
+        MasterNodeManager masterNode = lastOrgan.GetComponent<MasterNodeManager>();
+        if (masterNode == null)
+        {
+            return;
+        }
+        masterNode.ConvertContainer2Children(organObjectList);
     }
 
     private void SetSpriteSortingLayerName(GameObject organ, string name) {

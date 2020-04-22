@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour {
     private Attackers attackersD = new Attackers(Resources.ResourcesType.D);
     public int roundCount;
     public GameObject organContainer;
+    public bool displayLevel = false;
     private int defOnTurn = 0;
 
     void Awake() {
@@ -188,7 +189,10 @@ public class GameManager : MonoBehaviour {
         if (res) {
             LaunchReward();
             LaunchPreparation();
-            foreach (Organ org in organContainer.GetComponentsInChildren<Organ>()) {
+            OrganSettlementManager MyMan = gameObject.GetComponent<OrganSettlementManager>();
+            List<GameObject> Obj2Unlist = new List<GameObject>();
+            foreach (GameObject orgObj in MyMan.GetInstantiatedOrgans()) {
+                Organ org = orgObj.GetComponent<Organ>();
                 org.OnGoToNextTurn();
             }
             foreach (MainOrgan mOrg in organContainer.GetComponentsInChildren<MainOrgan>()) {

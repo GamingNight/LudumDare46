@@ -76,12 +76,20 @@ public class Organ : MonoBehaviour {
     void OnTriggerStay(Collider other) {
         if (other.gameObject.tag == "Organ") {
             collideWithOtherOrgan = true;
+            MasterNodeManager masternode = gameObject.GetComponentInParent<MasterNodeManager>();
+            if (masternode != null) {
+                masternode.UpdateCollideWith(gameObject, true);
+            }
         }
     }
 
     void OnTriggerExit(Collider other) {
         if (other.gameObject.tag == "Organ") {
             collideWithOtherOrgan = false;
+            MasterNodeManager masternode = gameObject.GetComponentInParent<MasterNodeManager>();
+            if (masternode != null) {
+                masternode.UpdateCollideWith(gameObject, false);
+            }
         }
     }
 
@@ -94,9 +102,6 @@ public class Organ : MonoBehaviour {
     }
 
     public void OnGoToNextTurn() {
-        // rewardx2 = false;
-        // if (toggleButtonA) {
-        //    toggleButtonA.GetComponent<Toggle>().isOn = false;
         BoostOnTurn = false;
     }
 

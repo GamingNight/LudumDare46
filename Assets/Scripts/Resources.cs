@@ -3,7 +3,7 @@
 public class Resources {
 
     public enum ResourcesType {
-        A, B, C, D
+        A, B, C, D, MASTERNODE
     }
 
     public ResourcesType type = ResourcesType.A;
@@ -113,6 +113,13 @@ public class ResourceCollectionReward : ResourceCollection {
             C.count = 0;
             D.count = 1;
         }
+
+        if (type == Resources.ResourcesType.MASTERNODE) {
+            A.count = 14;
+            B.count = 0;
+            C.count = 0;
+            D.count = 0;
+        }
     }
 }
 
@@ -143,6 +150,13 @@ public class ResourceCollectionCost : ResourceCollection {
         if (type == Resources.ResourcesType.D) {
             int currentD = GameManager.GetInstance().GetResources(Resources.ResourcesType.D).count;
             A.count = (int) (Mathf.Pow(10, ((currentD+1)/4.5f)) * (Mathf.Pow(10, (1/4.5f)) - 1));
+            B.count = 0;
+            C.count = 0;
+            D.count = 0;
+        }
+
+        if (type == Resources.ResourcesType.MASTERNODE) {
+            A.count = 21;
             B.count = 0;
             C.count = 0;
             D.count = 0;
