@@ -1045,6 +1045,11 @@ PrefabInstance:
       propertyPath: tutoCanvas
       value: 
       objectReference: {fileID: 801835735}
+    - target: {fileID: 248841481881982739, guid: 9cc4d175fdb6c664eb5a74ff4ec68322,
+        type: 3}
+      propertyPath: mainOrgan
+      value: 
+      objectReference: {fileID: 1655608379}
     - target: {fileID: 372317373372263837, guid: 9cc4d175fdb6c664eb5a74ff4ec68322,
         type: 3}
       propertyPath: m_Camera
@@ -1055,6 +1060,11 @@ PrefabInstance:
       propertyPath: organContainer
       value: 
       objectReference: {fileID: 958567011}
+    - target: {fileID: 372317373403433696, guid: 9cc4d175fdb6c664eb5a74ff4ec68322,
+        type: 3}
+      propertyPath: displayLevel
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 372317373403433697, guid: 9cc4d175fdb6c664eb5a74ff4ec68322,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1119,6 +1129,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 372317373403433702, guid: 9cc4d175fdb6c664eb5a74ff4ec68322,
+        type: 3}
+      propertyPath: organPrefabs.Array.size
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 372317373403433702, guid: 9cc4d175fdb6c664eb5a74ff4ec68322,
         type: 3}

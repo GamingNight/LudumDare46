@@ -17,6 +17,7 @@ public class GameScenario : MonoBehaviour {
     public static readonly int END_TUTO = 8;
 
     public GameObject tutoCanvas;
+    public MainOrgan mainOrgan;
 
     private int currentState;
     private bool stateAccomplished;
@@ -126,6 +127,7 @@ public class GameScenario : MonoBehaviour {
         stateAccomplished = true;
         if (currentState == 8) {
             _TUTORIAL = false;
+            mainOrgan.UpdateNextTurnLabel();
         }
     }
 

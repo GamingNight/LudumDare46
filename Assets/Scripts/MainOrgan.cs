@@ -27,7 +27,7 @@ public class MainOrgan : MonoBehaviour {
         animator = GetComponent<Animator>();
         isSelected = false;
         UpdateGenerateButton();
-        nextTurnButton.GetComponentInChildren<Text>().text = NextTurnLabel();
+        UpdateNextTurnLabel();
     }
 
     private IEnumerator ChangeIncreaseButtonColor() {
@@ -140,27 +140,27 @@ public class MainOrgan : MonoBehaviour {
         Destroy(nextVirusAlarm);
     }
 
-    private string NextTurnLabel() {
+    public void UpdateNextTurnLabel() {
         string label = ">  Submit to next virus sample  <";
         if (GameManager.GetInstance().displayLevel) {
             int levelToDisplay = GameManager.GetInstance().GetTestLevel() + 1;
             if (GameScenario.IS_TUTORIAL) {
                 levelToDisplay = 0;
             }
-            label = ">  Next virus sample level " + levelToDisplay.ToString() + " <";
+            label = ">  Submit to virus sample level " + levelToDisplay.ToString() + " <";
         }
-        return label;
+        nextTurnButton.GetComponentInChildren<Text>().text = label;
     }
 
     public void EndSuccessVirusSample() {
-        nextTurnButton.GetComponentInChildren<Text>().text = NextTurnLabel();
+        UpdateNextTurnLabel();
         if (GameScenario.IS_TUTORIAL) {
             GameScenario.GetInstance().ReachState(GameScenario.CONGRATS_FIRST_TEST);
         }
     }
 
     private void TriggerEndGame() {
-        nextTurnButton.GetComponentInChildren<Text>().text = NextTurnLabel();
+        UpdateNextTurnLabel();
         menuCanvas.SetActive(true);
         menuCanvas.GetComponent<MenuNavig>().EndMenu();
         Destroy(nextVirusAlarm);
@@ -174,7 +174,7 @@ public class MainOrgan : MonoBehaviour {
     }
 
     private void TriggerWin() {
-        nextTurnButton.GetComponentInChildren<Text>().text = NextTurnLabel();
+        UpdateNextTurnLabel();
         menuCanvas.SetActive(true);
         menuCanvas.GetComponent<MenuNavig>().WinMenu();
         Destroy(nextVirusAlarm);
