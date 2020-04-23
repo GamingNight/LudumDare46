@@ -91,5 +91,6 @@ public class MenuNavig : MonoBehaviour {
         }
         LineDrawer.ClearRelations();
         Camera.main.GetComponent<MoveCamera>().Init();
+        organContainer.GetComponentInChildren<MainOrgan>().UpdateNextTurnLabel();
     }
 }
